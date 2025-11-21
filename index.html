@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>コーヒー計算機 V2.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+
+  <meta name="theme-color" content="#e8dfd8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=M+PLUS+Rounded+1c:wght@400;700&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== リセット & ベース ===== */
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --font-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", sans-serif;
+      --font-digital: "Share Tech Mono", monospace; /* For timer */
+      font-family: var(--font-base);
+      
+      --accent: #f97316;
+      --accent-soft: rgba(249,115,22,0.12);
+      --accent-soft-border: rgba(249,115,22,0.45);
+      --summary-strong: #ea580c;
+      
+      --glow-text: none;
+      --glow-box: none;
+      
+      --roast-light: #d4a373;
+      --roast-medium: #a06845;
+      --roast-meddark: #6d4c41;
+      --roast-dark: #3e2723;
+
+      --trans-speed: 0.3s;
+      
+      --radius-card: 32px;
+      --radius-btn: 12px;
+      --radius-pill: 99px;
+      
+      --bg-pattern: none;
+      --bg-size: auto;
+    }
+
+    /* =========================================
+       レイアウト基本設定
+       ========================================= */
+    html {
+      background-color: var(--bg-solid);
+      transition: background-color var(--trans-speed);
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: transparent;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px 100px; /* 下部に余白 */
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #bg-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; 
+      z-index: -999; 
+      background-color: var(--bg-solid);
+      background-image: var(--bg-gradient);
+      background-size: var(--bg-size, auto);
+      background-repeat: repeat;
+      transition: background var(--trans-speed);
+      pointer-events: none;
+    }
+
+    /* =========================================
+       テーマ定義
+       ========================================= */
+
+    /* 1. Minimal */
+    :root {
+      --bg-solid: #e8dfd8; 
+      --bg-gradient: linear-gradient(180deg, #e8dfd8 0%, #dfd3ca 100%);
+      --card-bg: #fbf8f6;
+      --text-main: #4b3621;
+      --text-sub: #856e5b;
+      --border-subtle: #dcd0c5;
+      --shadow-card: 0 15px 35px -5px rgba(75, 54, 33, 0.08);
+      --field-bg: #f3ece7;
+      --steps-bg: #f3ece7;
+      --steps-border: #dcd0c5;
+      --btn-theme-bg: #fbf8f6;
+      --btn-theme-text: #5d4037;
+      --btn-theme-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    body.dark-mode {
+      --bg-solid: #231e1b;
+      --bg-gradient: linear-gradient(180deg, #231e1b 0%, #1a1614 100%);
+      --card-bg: #2f2926;
+      --text-main: #ede0d4;
+      --text-sub: #a89f99;
+      --border-subtle: #423a36;
+      --shadow-card: 0 20px 40px rgba(0,0,0,0.4);
+      --field-bg: #1a1614;
+      --steps-bg: #1a1614;
+      --steps-border: #423a36;
+      --btn-theme-bg: #3e3632;
+      --btn-theme-text: #ede0d4;
+    }
+
+    /* 2. Modest */
+    body.theme-modest {
+      --bg-solid: #f3f4f6;
+      --bg-gradient: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%);
+      --card-bg: #ffffff;
+      --text-main: #1f2937;
+      --text-sub: #6b7280;
+      --border-subtle: #e5e7eb;
+      --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.05);
+      --field-bg: #f9fafb;
+      --steps-bg: #fffbeb;
+      --steps-border: #fde68a;
+      --btn-theme-bg: #ffffff;
+      --btn-theme-text: #374151;
+    }
+    body.theme-modest.dark-mode {
+      --bg-solid: #0f172a;
+      --bg-gradient: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+      --card-bg: rgba(30, 41, 59, 0.6);
+      --text-main: #f3f4f6;
+      --text-sub: #9ca3af;
+      --border-subtle: rgba(255,255,255,0.1);
+      --shadow-card: 0 20px 40px -5px rgba(0,0,0,0.5);
+      --field-bg: rgba(15,23,42, 0.5);
+      --steps-bg: rgba(15,23,42, 0.7);
+      --steps-border: #334155;
+      --btn-theme-bg: #1e293b;
+      --btn-theme-text: #e2e8f0;
+    }
+
+    /* 3. Coffee */
+    body.theme-coffee {
+      --bg-solid: #261e1b;
+      --bg-gradient: linear-gradient(180deg, #261e1b 0%, #1f1816 100%);
+      --card-bg: #2e2522;
+      --text-main: #e7e5e4;
+      --text-sub: #a8a29e;
+      --border-subtle: #57534e;
+      --shadow-card: 0 20px 50px rgba(0,0,0,0.5);
+      --field-bg: #1a1513;
+      --steps-bg: #1a1513;
+      --steps-border: #57534e;
+      --btn-theme-bg: #44403c;
+      --btn-theme-text: #e7e5e4;
+    }
+    body.theme-coffee.dark-mode {
+      --bg-solid: #000000;
+      --bg-gradient: linear-gradient(180deg, #000000 0%, #0c0a09 100%);
+      --card-bg: #141211;
+      --border-subtle: #333;
+    }
+
+    /* 4. Neon */
+    body.theme-neon {
+      --bg-solid: #f0f4f8;
+      --bg-gradient: linear-gradient(180deg, #f0f4f8 0%, #e2e8f0 100%);
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --text-main: #0f172a;
+      --text-sub: #64748b;
+      --border-subtle: #e2e8f0;
+      --shadow-card: 0 10px 40px rgba(0,0,0,0.1);
+      --field-bg: #ffffff;
+      --steps-bg: #ffffff;
+      --steps-border: #cbd5e1;
+      --btn-theme-bg: #ffffff;
+      --btn-theme-text: #0f172a;
+      --roast-light: #f59e0b;
+      --roast-medium: #ea580c;
+      --roast-meddark: #b91c1c;
+      --roast-dark: #7f1d1d;
+    }
+    body.theme-neon.dark-mode {
+      --bg-solid: #050508;
+      --bg-gradient: linear-gradient(180deg, #050508 0%, #020204 100%);
+      --card-bg: rgba(15, 17, 26, 0.9);
+      --text-main: #f1f5f9;
+      --text-sub: #94a3b8;
+      --border-subtle: rgba(255,255,255,0.1);
+      --shadow-card: 0 20px 50px rgba(0,0,0,0.8);
+      --field-bg: rgba(0, 0, 0, 0.5);
+      --steps-bg: rgba(0, 0, 0, 0.6);
+      --steps-border: rgba(255,255,255,0.15);
+      --btn-theme-bg: #1e293b;
+      --btn-theme-text: #f1f5f9;
+      --roast-light: #fbbf24;
+      --roast-medium: #fb923c;
+      --roast-meddark: #f87171;
+      --roast-dark: #ef4444;
+    }
+
+    /* 5. Blueprint */
+    body.theme-blueprint {
+      --bg-solid: #003399;
+      --bg-gradient: 
+        linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px),
+        linear-gradient(#003399, #003399);
+      --bg-size: 20px 20px;
+      --card-bg: #003399;
+      --text-main: #ffffff;
+      --text-sub: #abc4ff;
+      --border-subtle: #ffffff;
+      --shadow-card: 10px 10px 0px rgba(0,0,0,0.2);
+      --field-bg: rgba(0,0,0,0.1);
+      --steps-bg: rgba(0,0,0,0.1);
+      --steps-border: #ffffff;
+      --btn-theme-bg: #002266;
+      --btn-theme-text: #ffffff;
+      --radius-card: 0px;
+      --radius-btn: 0px;
+      --radius-pill: 0px;
+      font-family: "Courier New", Courier, monospace;
+      letter-spacing: 0.05em;
+    }
+    body.theme-blueprint.dark-mode {
+      --bg-solid: #1a1a1a;
+      --bg-gradient: 
+        linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px),
+        linear-gradient(#1a1a1a, #1a1a1a);
+      --card-bg: #1a1a1a;
+      --text-main: #00ff00;
+      --text-sub: #00cc00;
+      --border-subtle: #00ff00;
+      --shadow-card: 8px 8px 0px rgba(0,50,0,0.5);
+      --field-bg: #000000;
+      --steps-bg: #000000;
+      --steps-border: #00ff00;
+      --btn-theme-bg: #000000;
+      --btn-theme-text: #00ff00;
+    }
+
+    /* 6. Arcade */
+    body.theme-arcade {
+      --bg-solid: #fff0f5;
+      --bg-gradient: 
+        radial-gradient(#ff69b4 2px, transparent 2px),
+        radial-gradient(#ff69b4 2px, transparent 2px);
+      --bg-size: 20px 20px;
+      --card-bg: #ffffff;
+      --text-main: #2d2d2d;
+      --text-sub: #555555;
+      --border-subtle: #000000;
+      --shadow-card: 8px 8px 0px #000000;
+      --field-bg: #ffffff;
+      --steps-bg: #f0f0f0;
+      --steps-border: #000000;
+      --btn-theme-bg: #ffffff;
+      --btn-theme-text: #000000;
+      --radius-card: 8px;
+      --radius-btn: 4px;
+      --radius-pill: 8px;
+      --font-digital: "VT323", monospace;
+      font-family: "VT323", monospace;
+      font-size: 18px;
+      --trans-speed: 0s;
+    }
+    body.theme-arcade.dark-mode {
+      --bg-solid: #202020;
+      --bg-gradient: 
+        radial-gradient(#444 2px, transparent 2px),
+        radial-gradient(#444 2px, transparent 2px);
+      --card-bg: #2d2d2d;
+      --text-main: #ffffff;
+      --text-sub: #cccccc;
+      --border-subtle: #ffffff;
+      --shadow-card: 8px 8px 0px #000000;
+      --field-bg: #000000;
+      --steps-bg: #404040;
+      --steps-border: #ffffff;
+      --btn-theme-bg: #000000;
+      --btn-theme-text: #ffffff;
+    }
+
+    /* 7. Lovely */
+    body.theme-lovely {
+      --bg-solid: #fff0f3; 
+      --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #e6e6fa 100%);
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --text-main: #5d4b5d;
+      --text-sub: #9c8a9c;
+      --border-subtle: #ffffff;
+      --shadow-card: 0 10px 30px rgba(255, 105, 180, 0.15);
+      --field-bg: #ffffff;
+      --steps-bg: #ffffff;
+      --steps-border: #ffb7b2;
+      --btn-theme-bg: #ffffff;
+      --btn-theme-text: #ff69b4;
+      --radius-card: 32px;
+      --radius-btn: 20px;
+      --radius-pill: 99px;
+      font-family: "Kiwi Maru", "M PLUS Rounded 1c", var(--font-base);
+    }
+    body.theme-lovely.dark-mode {
+      --bg-solid: #2a1d2e;
+      --bg-gradient: linear-gradient(135deg, #2a1d2e 0%, #1a0d20 100%);
+      --card-bg: #3e2a42; 
+      --text-main: #ffd1dc; 
+      --text-sub: #e6c0e6;
+      --border-subtle: #704875;
+      --shadow-card: 0 15px 40px rgba(0,0,0,0.4);
+      --field-bg: #2a1d2e;
+      --steps-bg: #2a1d2e;
+      --steps-border: #ff8da1; 
+      --btn-theme-bg: #503555;
+      --btn-theme-text: #ffd1dc;
+    }
+
+    /* 8. Cyberpunk */
+    body.theme-cyberpunk {
+      --bg-solid: #050010;
+      --bg-gradient: 
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 255, 255, 0.03) 2px,
+          rgba(0, 255, 255, 0.03) 4px
+        ),
+        linear-gradient(180deg, #0a0015 0%, #000000 100%);
+      --bg-size: auto;
+      --card-bg: rgba(15, 10, 25, 0.95);
+      --text-main: #e0ffff;
+      --text-sub: #00e5ff; 
+      --border-subtle: #ff00ff; 
+      --shadow-card: 0 0 20px rgba(255, 0, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1);
+      --field-bg: rgba(0, 20, 40, 0.8);
+      --steps-bg: rgba(20, 0, 40, 0.8);
+      --steps-border: #00e5ff;
+      --btn-theme-bg: #000000;
+      --btn-theme-text: #00e5ff;
+      --radius-card: 4px;
+      --radius-btn: 0px;
+      --radius-pill: 0px;
+      --glow-text: 2px 0 #ff00ff, -2px 0 #00e5ff;
+      --glow-box: 0 0 10px #ff00ff;
+      font-family: "Share Tech Mono", monospace;
+      letter-spacing: 0.05em;
+    }
+    body.theme-cyberpunk.dark-mode {
+      --bg-solid: #000000;
+      --card-bg: #050505;
+      --shadow-card: 0 0 30px rgba(255, 0, 255, 0.15);
+    }
+
+    /* ===== アクセントカラー (HOT/ICE) ===== */
+    
+    body.hot-mode {
+      --accent: #f97316;
+      --accent-soft: rgba(249,115,22,0.12);
+      --accent-soft-border: rgba(249,115,22,0.45);
+      --summary-strong: #ea580c;
+    }
+    body.ice-mode {
+      --accent: #0ea5e9;
+      --accent-soft: rgba(14,165,233,0.12);
+      --accent-soft-border: rgba(14,165,233,0.45);
+      --summary-strong: #0284c7;
+    }
+
+    /* テーマ別上書き */
+    body.theme-neon.hot-mode { --accent: #ff5500; --accent-soft: rgba(255, 85, 0, 0.15); --accent-soft-border: #ff5500; --summary-strong: #ff5500; --glow-text: 0 0 10px rgba(255, 85, 0, 0.6); --glow-box: 0 0 15px rgba(255, 85, 0, 0.25); --border-subtle: rgba(255, 85, 0, 0.3); }
+    body.theme-neon.ice-mode { --accent: #00ddff; --accent-soft: rgba(0, 221, 255, 0.15); --accent-soft-border: #00ddff; --summary-strong: #00ddff; --glow-text: 0 0 10px rgba(0, 221, 255, 0.6); --glow-box: 0 0 15px rgba(0, 221, 255, 0.25); --border-subtle: rgba(0, 221, 255, 0.3); }
+    
+    body.theme-blueprint.hot-mode { --accent: #ffffff; --accent-soft: rgba(255,255,255,0.1); --accent-soft-border: #ffffff; --summary-strong: #ffcc00; }
+    body.theme-blueprint.ice-mode { --accent: #ffffff; --accent-soft: rgba(255,255,255,0.1); --accent-soft-border: #ffffff; --summary-strong: #66ccff; }
+    body.theme-blueprint.dark-mode.hot-mode { --accent: #00ff00; --accent-soft: rgba(0,255,0,0.1); --accent-soft-border: #00ff00; --summary-strong: #ffff00; }
+    body.theme-blueprint.dark-mode.ice-mode { --summary-strong: #00ffff; }
+
+    body.theme-arcade.hot-mode { --accent: #ff4500; --accent-soft: #ffe4e1; --accent-soft-border: #000000; --summary-strong: #ff4500; }
+    body.theme-arcade.ice-mode { --accent: #1e90ff; --accent-soft: #e0ffff; --accent-soft-border: #000000; --summary-strong: #1e90ff; }
+    body.theme-arcade.dark-mode.hot-mode { --accent: #ff6347; --accent-soft: #333; }
+    body.theme-arcade.dark-mode.ice-mode { --accent: #00bfff; --accent-soft: #333; }
+
+    body.theme-lovely.hot-mode { --accent: #ff8da1; --accent-soft: #fff0f5; --accent-soft-border: #ffc0cb; --summary-strong: #ff6b81; }
+    body.theme-lovely.ice-mode { --accent: #93a5cf; --accent-soft: #f0f4ff; --accent-soft-border: #bccce8; --summary-strong: #7388b9; }
+    body.theme-lovely.dark-mode.hot-mode { --accent: #ff9eb5; --accent-soft: rgba(255, 133, 162, 0.2); --accent-soft-border: #ff6b81; --summary-strong: #ff9eb5; }
+    body.theme-lovely.dark-mode.ice-mode { --accent: #aaccff; --accent-soft: rgba(147, 165, 207, 0.2); --accent-soft-border: #93a5cf; --summary-strong: #aaccff; }
+
+    body.theme-cyberpunk.hot-mode { --accent: #ff0055; --accent-soft: rgba(255, 0, 85, 0.2); --accent-soft-border: #ff0055; --summary-strong: #ffff00; --glow-text: 2px 0 #ff0055, -2px 0 #ffff00; --glow-box: 0 0 15px #ff0055; }
+    body.theme-cyberpunk.ice-mode { --accent: #00ffff; --accent-soft: rgba(0, 255, 255, 0.2); --accent-soft-border: #00ffff; --summary-strong: #ffffff; --glow-text: 2px 0 #00ffff, -2px 0 #ff00ff; --glow-box: 0 0 15px #00ffff; }
+
+
+    /* ===== UI コンポーネント ===== */
+
+    .app { width: 100%; max-width: 440px; position: relative; }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--radius-card);
+      padding: 28px 24px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-card);
+      transition: all var(--trans-speed);
+    }
+    /* カード個別テーマ調整 */
+    body.theme-neon .card { box-shadow: var(--shadow-card), var(--glow-box); }
+    body.theme-blueprint .card { backdrop-filter: none; -webkit-backdrop-filter: none; }
+    body.theme-arcade .card { backdrop-filter: none; -webkit-backdrop-filter: none; border-width: 4px; }
+    body.theme-lovely .card { border: 3px solid #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+    body.theme-lovely.dark-mode .card { border: 2px solid var(--accent); }
+    body.theme-cyberpunk .card { border: 1px solid var(--border-subtle); clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
+
+    /* Header */
+    .app-header { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; position: relative; padding-right: 40px; }
+    .title-main { font-size: 1.2rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-sub); text-shadow: var(--glow-text); opacity: 0.8; }
+    .title-bar { width: 50px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--accent), transparent); margin-bottom: 8px; box-shadow: var(--glow-box); transition: background var(--trans-speed); }
+    .app-subtitle { font-size: 1.5rem; font-weight: 800; line-height: 1.2; color: var(--text-main); text-shadow: var(--glow-text); }
+    /* Header Theme Overrides */
+    body.theme-blueprint .title-bar { height: 2px; background: var(--accent); }
+    body.theme-arcade .title-bar { background: var(--accent); border: 2px solid #000; height: 8px; border-radius: 0; box-shadow: 2px 2px 0 #000; }
+    body.theme-lovely .title-bar { height: 6px; border-radius: 99px; background: var(--accent); }
+    body.theme-lovely .app-subtitle { font-weight: 700; letter-spacing: 0.05em; }
+    body.theme-cyberpunk .title-bar { width: 100px; height: 2px; background: var(--accent); box-shadow: var(--glow-box); }
+    body.theme-cyberpunk .section-title { text-transform: uppercase; color: var(--accent); text-shadow: var(--glow-text); }
+
+    /* Mode Toggle */
+    .mode-toggle-btn { position: absolute; top: 0; right: 0; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border-subtle); background: var(--field-bg); color: var(--text-sub); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .mode-toggle-btn:active { transform: scale(0.92); }
+    body.theme-neon .mode-toggle-btn { box-shadow: var(--glow-box); border-color: var(--accent-soft-border); color: var(--accent); }
+    body.theme-blueprint .mode-toggle-btn { border-radius: 0; border: 2px solid var(--border-subtle); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); }
+    body.theme-arcade .mode-toggle-btn { border-radius: 4px; border: 2px solid var(--border-subtle); box-shadow: 4px 4px 0 #000; }
+    body.theme-arcade .mode-toggle-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
+    body.theme-lovely .mode-toggle-btn { background: var(--card-bg); border: 2px solid var(--accent); color: var(--accent); }
+    body.theme-cyberpunk .mode-toggle-btn { border-radius: 0; border: 1px solid var(--accent); background: #000; color: var(--accent); box-shadow: var(--glow-box); }
+    .mode-icon { width: 18px; height: 18px; fill: currentColor; }
+
+    /* UI Elements */
+    .section-title { font-size: 0.9rem; color: var(--text-sub); font-weight: 600; margin: 26px 0 10px; display: flex; align-items: center; gap: 8px; }
+    body.theme-blueprint .section-title { text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px dashed var(--border-subtle); padding-bottom: 4px; }
+
+    .inline-badge { padding: 3px 8px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); font-size: 0.7rem; font-weight: 700; border: 1px solid var(--accent-soft-border); box-shadow: var(--glow-box); text-shadow: var(--glow-text); transition: all var(--trans-speed); }
+    body.theme-blueprint .inline-badge { border-radius: 0; border: 1px solid var(--accent); }
+    body.theme-arcade .inline-badge { border: 2px solid #000; border-radius: 4px; box-shadow: 2px 2px 0 #000; }
+    body.theme-lovely .inline-badge { border-radius: 99px; background: var(--card-bg); border: 1px solid var(--accent); }
+    body.theme-cyberpunk .inline-badge { border-radius: 0; background: #000; border: 1px solid var(--accent); }
+
+    /* Toggles */
+    .toggle-group { display: inline-flex; width: 100%; border-radius: 16px; background: var(--field-bg); padding: 4px; border: 1px solid var(--border-subtle); gap: 4px; transition: background var(--trans-speed); }
+    .toggle-btn { flex: 1; border: 1px solid transparent; background: transparent; color: var(--text-sub); padding: 12px; font-size: 0.9rem; font-weight: 600; border-radius: var(--radius-btn); cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
+    .toggle-btn.active { background: var(--card-bg); color: var(--accent); border-color: var(--accent-soft-border); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    #inputModeGroup .toggle-btn.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-soft-border); }
+    /* Theme Toggle Overrides */
+    body.theme-blueprint .toggle-group { border-radius: 0; border: 2px solid var(--border-subtle); padding: 0; gap: 0; }
+    body.theme-blueprint .toggle-btn { border: none; border-right: 1px solid var(--border-subtle); }
+    body.theme-blueprint .toggle-btn:last-child { border-right: none; }
+    body.theme-blueprint .toggle-btn.active { background: var(--accent); color: var(--bg-solid); border-radius: 0; box-shadow: none; font-weight: 900; }
+    body.theme-arcade .toggle-group { border: 2px solid #000; border-radius: 8px; background: transparent; box-shadow: 4px 4px 0 #000; gap: 0; padding: 0; }
+    body.theme-arcade .toggle-btn { border: none; border-right: 2px solid #000; border-radius: 0; }
+    body.theme-arcade .toggle-btn:last-child { border-right: none; }
+    body.theme-arcade .toggle-btn.active { background: var(--accent); color: #ffffff; box-shadow: inset 2px 2px 0 rgba(0,0,0,0.3); }
+    body.theme-lovely .toggle-group { background: var(--card-bg); border: 2px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    body.theme-lovely.dark-mode .toggle-group { border-color: var(--border-subtle); }
+    body.theme-lovely .toggle-btn.active { background: var(--accent); color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transform: scale(0.95); }
+    body.theme-cyberpunk .toggle-group { border-radius: 0; border: 1px solid var(--border-subtle); background: rgba(0,0,0,0.5); gap: 2px; }
+    body.theme-cyberpunk .toggle-btn { border-radius: 0; }
+    body.theme-cyberpunk .toggle-btn.active { background: var(--accent); color: #000; box-shadow: var(--glow-box); text-shadow: none; }
+
+    /* Roast Buttons */
+    #roastGroup .toggle-btn[data-roast="light"].active { color: var(--roast-light); border-color: var(--roast-light); background: rgba(255,255,255,0.05); }
+    #roastGroup .toggle-btn[data-roast="medium"].active { color: var(--roast-medium); border-color: var(--roast-medium); background: rgba(255,255,255,0.05); }
+    #roastGroup .toggle-btn[data-roast="meddark"].active { color: var(--roast-meddark); border-color: var(--roast-meddark); background: rgba(255,255,255,0.05); }
+    #roastGroup .toggle-btn[data-roast="dark"].active { color: var(--roast-dark); border-color: var(--roast-dark); background: rgba(255,255,255,0.05); }
+    body.theme-blueprint #roastGroup .toggle-btn.active { background: transparent; text-decoration: underline; }
+    body.theme-arcade #roastGroup .toggle-btn.active { background: var(--accent); color: #fff; box-shadow: inset 2px 2px 0 rgba(0,0,0,0.3); }
+    body.theme-lovely #roastGroup .toggle-btn.active { background: var(--card-bg); border: 2px solid currentColor; color: var(--text-main); }
+    body.theme-cyberpunk #roastGroup .toggle-btn.active { background: #000; box-shadow: var(--glow-box); }
+
+    /* Selects */
+    .select-wrapper { position: relative; margin-bottom: 8px; }
+    select { width: 100%; appearance: none; -webkit-appearance: none; background: var(--field-bg); color: var(--text-main); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 16px 16px; font-size: 1rem; outline: none; transition: border-color 0.2s, background var(--trans-speed); }
+    select:focus { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent-soft); }
+    .select-arrow { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--text-sub); font-size: 0.7rem; }
+    .hint { font-size: 0.75rem; color: var(--text-sub); margin-top: 8px; margin-left: 4px; opacity: 0.8; }
+    /* Select Theme Overrides */
+    body.theme-blueprint select { border-radius: 0; border: 2px solid var(--border-subtle); }
+    body.theme-arcade select { border: 2px solid #000; border-radius: 4px; box-shadow: 4px 4px 0 #000; }
+    body.theme-arcade select:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
+    body.theme-lovely select { background: var(--card-bg); border: 2px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+    body.theme-lovely select:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+    body.theme-lovely.dark-mode select { border-color: var(--border-subtle); }
+    body.theme-cyberpunk select { border-radius: 0; background: #000; border: 1px solid var(--border-subtle); box-shadow: var(--glow-box); }
+
+    /* Summary & Steps */
+    .summary { margin-top: 28px; padding: 24px; border-radius: 24px; background: var(--accent-soft); border: 1px solid var(--accent-soft-border); display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden; transition: all var(--trans-speed); }
+    .summary-row { display: flex; justify-content: space-between; align-items: center; }
+    .summary-label { font-size: 0.95rem; color: var(--text-main); font-weight: 500; opacity: 0.9; }
+    .summary-value { font-size: 1.5rem; font-weight: 800; color: var(--summary-strong); font-variant-numeric: tabular-nums; text-shadow: var(--glow-text); }
+    .summary-temp { font-size: 1.2rem; font-weight: 700; color: var(--summary-strong); text-shadow: var(--glow-text); }
+    .summary-temp.placeholder { font-size: 0.95rem; font-weight: 400; opacity: 0.6; font-style: italic; }
+    /* Theme overrides for boxes */
+    body.theme-neon .summary, body.theme-neon .steps-card { box-shadow: var(--glow-box); }
+    body.theme-blueprint .summary, body.theme-blueprint .steps-card { border-radius: 0; border: 2px solid var(--accent); background: transparent; }
+    body.theme-arcade .summary, body.theme-arcade .steps-card { border: 2px solid #000; border-radius: 8px; box-shadow: 6px 6px 0 #000; }
+    body.theme-lovely .summary { background: var(--card-bg); border: 2px dashed var(--accent); }
+    body.theme-cyberpunk .summary { border-radius: 0; border: 1px solid var(--accent); background: rgba(0,0,0,0.6); box-shadow: var(--glow-box); }
+
+    .steps-card { background: var(--steps-bg); border: 1px solid var(--steps-border); border-radius: 24px; padding: 8px 0; overflow: hidden; transition: all var(--trans-speed); }
+    body.theme-lovely .steps-card { background: var(--card-bg); border: 1px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    body.theme-lovely.dark-mode .steps-card { border-color: var(--border-subtle); }
+    body.theme-cyberpunk .steps-card { border-radius: 0; border: 1px solid var(--accent); background: rgba(0,0,0,0.8); }
+
+    .step-row { padding: 16px 24px; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: flex-start; }
+    body.dark-mode .step-row { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    body.theme-blueprint .step-row { border-bottom: 1px solid var(--border-subtle); }
+    body.theme-arcade .step-row { border-bottom: 2px dashed #000; }
+    body.theme-lovely .step-row { border-bottom: 1px dashed var(--steps-border); }
+    body.theme-cyberpunk .step-row { border-bottom: 1px solid var(--border-subtle); }
+    .step-row:last-child { border-bottom: none; }
+    .step-info { flex: 1; }
+    .step-name { font-weight: 700; color: var(--text-main); font-size: 1rem; margin-bottom: 4px; text-shadow: var(--glow-text); }
+    .step-sub { font-size: 0.8rem; color: var(--text-sub); line-height: 1.4; }
+    .step-amount { text-align: right; min-width: 90px; }
+    .step-acc-label { font-size: 0.7rem; color: var(--text-sub); display: block; margin-bottom: 2px; }
+    .step-acc-value { font-size: 1.2rem; font-weight: 700; color: var(--text-main); display: block; font-variant-numeric: tabular-nums; text-shadow: var(--glow-text); }
+    .placeholder { padding: 30px 20px; text-align: left; font-size: 0.9rem; color: var(--text-sub); }
+
+    /* Memo */
+    .note { position: relative; margin-top: 24px; padding: 18px 20px; border-radius: 20px; background: var(--card-bg); border: 1px solid var(--border-subtle); overflow: hidden; transition: all var(--trans-speed); }
+    body.theme-neon .note { box-shadow: var(--glow-box); }
+    body.theme-blueprint .note { border-radius: 0; border: 2px solid var(--border-subtle); }
+    body.theme-arcade .note { border: 2px solid #000; border-radius: 8px; box-shadow: 6px 6px 0 #000; }
+    body.theme-lovely .note { background: var(--card-bg); border: 1px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    body.theme-lovely.dark-mode .note { border-color: var(--border-subtle); }
+    body.theme-cyberpunk .note { border-radius: 0; border: 1px solid var(--accent); background: #000; box-shadow: var(--glow-box); }
+    .note::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, var(--accent), transparent); }
+    body.theme-blueprint .note::before { width: 10px; background: repeating-linear-gradient(45deg, var(--accent), var(--accent) 10px, transparent 10px, transparent 20px); }
+    body.theme-arcade .note::before { border-right: 2px solid #000; background: var(--accent); }
+    body.theme-lovely .note::before { background: var(--accent); width: 6px; border-radius: 4px; top: 8px; bottom: 8px; left: 6px; }
+    .note-label { font-size: 0.75rem; letter-spacing: 0.1em; font-weight: 800; color: var(--text-sub); margin-bottom: 8px; display: block; text-transform: uppercase; }
+    .note-body { font-size: 0.85rem; line-height: 1.6; color: var(--text-main); }
+    body.theme-lovely .note-body { padding-left: 4px; }
+
+    /* Theme Switcher */
+    .theme-floater { margin-top: 40px; display: flex; justify-content: center; }
+    .theme-btn-design { position: relative; display: flex; align-items: center; gap: 10px; background: var(--btn-theme-bg); color: var(--btn-theme-text); padding: 14px 28px; border-radius: var(--radius-pill); box-shadow: var(--btn-theme-shadow); border: 1px solid var(--border-subtle); font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s; }
+    .theme-btn-design:active { transform: scale(0.96); }
+    body.theme-neon .theme-btn-design { border-color: var(--accent); box-shadow: var(--glow-box); text-shadow: var(--glow-text); }
+    body.theme-blueprint .theme-btn-design { border-radius: 0; border: 2px solid var(--border-subtle); box-shadow: 4px 4px 0 rgba(0,0,0,0.2); }
+    body.theme-arcade .theme-btn-design { border: 2px solid #000; border-radius: 8px; box-shadow: 4px 4px 0 #000; }
+    body.theme-arcade .theme-btn-design:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
+    body.theme-lovely .theme-btn-design { background: var(--card-bg); border: 2px solid var(--accent); color: var(--accent); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    body.theme-cyberpunk .theme-btn-design { border-radius: 0; background: #000; border: 1px solid var(--accent); color: var(--accent); box-shadow: var(--glow-box); }
+    .theme-icon { width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--summary-strong)); border: 2px solid rgba(255,255,255,0.4); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    body.theme-arcade .theme-icon { border: 2px solid #000; box-shadow: none; }
+    body.theme-lovely .theme-icon { border: 2px solid #fff; background: var(--accent); }
+    #themeSelect { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; appearance: none; }
+
+    /* =========================================
+       Timer Section Styles (New V2.0)
+       ========================================= */
+    .timer-card {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      transition: all var(--trans-speed);
+    }
+    /* Theme overrides for timer */
+    body.theme-neon .timer-card { box-shadow: var(--shadow-card), var(--glow-box); }
+    body.theme-blueprint .timer-card { border-radius: 0; border: 2px solid var(--border-subtle); }
+    body.theme-arcade .timer-card { border: 2px solid #000; border-radius: 8px; box-shadow: 6px 6px 0 #000; }
+    body.theme-lovely .timer-card { border: 3px solid #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+    body.theme-lovely.dark-mode .timer-card { border: 2px solid var(--accent); }
+    body.theme-cyberpunk .timer-card { border-radius: 0; border: 1px solid var(--accent); box-shadow: var(--glow-box); clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
+
+    .timer-display {
+      font-family: var(--font-digital);
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-shadow: var(--glow-text);
+      margin-bottom: 8px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    body.theme-lovely .timer-display { font-family: "M PLUS Rounded 1c", sans-serif; letter-spacing: 0.05em; }
+
+    .timer-status {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      min-height: 1.5em;
+    }
+
+    .timer-controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .timer-btn {
+      border: none;
+      padding: 12px 24px;
+      border-radius: var(--radius-btn);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-width: 80px;
+    }
+    .btn-start { background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .btn-stop { background: var(--field-bg); color: var(--text-sub); border: 1px solid var(--border-subtle); }
+    
+    /* Timer button theme adjustments */
+    body.theme-neon .btn-start { box-shadow: 0 0 15px var(--accent); color: #000; }
+    body.theme-blueprint .timer-btn { border-radius: 0; box-shadow: 4px 4px 0 rgba(0,0,0,0.2); border: 2px solid transparent; }
+    body.theme-blueprint .btn-stop { border-color: var(--border-subtle); }
+    body.theme-arcade .timer-btn { border-radius: 4px; border: 2px solid #000; box-shadow: 4px 4px 0 #000; }
+    body.theme-arcade .timer-btn:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 #000; }
+    body.theme-lovely .btn-start { border-radius: 99px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    body.theme-lovely .btn-stop { border-radius: 99px; }
+    body.theme-cyberpunk .timer-btn { border-radius: 0; box-shadow: var(--glow-box); border: 1px solid var(--accent); }
+    body.theme-cyberpunk .btn-start { background: var(--accent); color: #000; }
+    body.theme-cyberpunk .btn-stop { background: #000; color: var(--accent); }
+
+  </style>
+</head>
+<body class="hot-mode">
+  
+  <div id="bg-layer"></div>
+
+  <div class="app">
+    <div class="card">
+
+      <div class="app-header">
+        <div class="title-main">HAND DRIP CALCULATOR</div>
+        <div class="title-bar"></div>
+        <div class="app-subtitle">失敗しないコーヒーレシピ</div>
+
+        <button class="mode-toggle-btn" id="modeToggleBtn" aria-label="ダークモード切替">
+          <svg class="mode-icon" viewBox="0 0 24 24">
+            <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="section-title">入力方法</div>
+      <div class="toggle-group" id="inputModeGroup">
+        <button class="toggle-btn active" data-mode="cups">杯数で指定</button>
+        <button class="toggle-btn" data-mode="water">湯量(ml)で指定</button>
+      </div>
+
+      <div class="section-title">作りたい量</div>
+
+      <div id="row-cups" class="select-wrapper">
+        <select id="cupsSelect">
+          <option value="" selected disabled>何杯分作りますか？</option>
+          <option value="1">1 杯</option>
+          <option value="2">2 杯</option>
+          <option value="3">3 杯</option>
+          <option value="4">4 杯</option>
+          <option value="5">5 杯</option>
+          <option value="6">6 杯</option>
+          <option value="7">7 杯</option>
+          <option value="8">8 杯</option>
+          <option value="9">9 杯</option>
+          <option value="10">10 杯</option>
+        </select>
+        <div class="select-arrow">▼</div>
+      </div>
+
+      <div id="row-water" class="select-wrapper" style="display:none;">
+        <select id="waterSelect">
+          <option value="" selected disabled>何ml作りますか？</option>
+        </select>
+        <div class="select-arrow">▼</div>
+      </div>
+      
+      <div class="hint" id="hintText">※ 1杯 = 150ml として計算</div>
+
+      <div class="section-title">豆の焙煎度合い</div>
+      <div class="toggle-group" id="roastGroup">
+        <button class="toggle-btn" data-roast="light">浅煎り</button>
+        <button class="toggle-btn" data-roast="medium">中煎り</button>
+        <button class="toggle-btn" data-roast="meddark">中深煎り</button>
+        <button class="toggle-btn" data-roast="dark">深煎り</button>
+      </div>
+
+      <div class="section-title">スタイル</div>
+      <div class="toggle-group" id="styleGroup">
+        <button class="toggle-btn active" data-style="hot">ホット</button>
+        <button class="toggle-btn" data-style="ice">アイス</button>
+      </div>
+
+      <div class="summary" id="summaryBox">
+        <div class="summary-row">
+          <span class="summary-label">豆量</span>
+          <span class="summary-value" id="sumBeans">-- g</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">抽出に使うお湯</span>
+          <span class="summary-value" id="sumWater">-- ml</span>
+        </div>
+        <div class="summary-row" id="iceRow" style="display:none;">
+          <span class="summary-label">氷の目安</span>
+          <span class="summary-value" id="sumIce"></span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">湯温の目安</span>
+          <span class="summary-temp placeholder" id="sumTemp">焙煎度を選択</span>
+        </div>
+      </div>
+
+      <div class="section-title">
+        注湯ステップ
+        <span class="inline-badge">むらし＋3回注ぎ</span>
+      </div>
+
+      <div class="steps-card" id="stepsBox">
+        <div class="placeholder">
+          杯数または湯量を選択すると、ここにステップが表示されます。
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="note-label">MEMO</span>
+        <div class="note-body">
+          アイスは豆量1.5倍、湯量半分、お湯と同量の氷を目安。ロック氷ではなく家庭用冷蔵庫の氷の場合は、溶けやすく薄くなるため氷少なめがベター。
+        </div>
+      </div>
+
+      <div class="section-title">ドリップタイマー</div>
+      <div class="timer-card">
+        <div class="timer-display" id="timerDisplay">00:00</div>
+        <div class="timer-status" id="timerStatus">待機中</div>
+        <div class="timer-controls">
+          <button class="timer-btn btn-start" id="startBtn">START</button>
+          <button class="timer-btn btn-stop" id="resetBtn">RESET</button>
+        </div>
+      </div>
+
+      <div class="theme-floater">
+        <div class="theme-btn-design">
+          <div class="theme-icon"></div>
+          <span id="themeLabelText">テーマ変更</span>
+          <select id="themeSelect">
+            <option value="minimal">Minimal</option>
+            <option value="modest">Modest</option>
+            <option value="coffee">Coffee</option>
+            <option value="neon">Neon</option>
+            <option value="blueprint">Blueprint</option>
+            <option value="arcade">Arcade</option>
+            <option value="lovely">Lovely</option>
+            <option value="cyberpunk">Cyberpunk</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    /* --- 1. 計算ロジック --- */
+    const basePoints = [
+      { water: 150, beans: 10 },
+      { water: 300, beans: 20 },
+      { water: 450, beans: 28 },
+      { water: 600, beans: 36 },
+      { water: 750, beans: 44 }
+    ];
+    const waterPerCup = 150;
+
+    const cupsSelect  = document.getElementById("cupsSelect");
+    const waterSelect = document.getElementById("waterSelect");
+    const rowCups     = document.getElementById("row-cups");
+    const rowWater    = document.getElementById("row-water");
+    const hintText    = document.getElementById("hintText");
+
+    const sumBeans = document.getElementById("sumBeans");
+    const sumWater = document.getElementById("sumWater");
+    const sumIce   = document.getElementById("sumIce");
+    const iceRow   = document.getElementById("iceRow");
+    const sumTemp  = document.getElementById("sumTemp");
+
+    const stepsBox = document.getElementById("stepsBox");
+    const themeSelect = document.getElementById("themeSelect");
+    const themeLabelText = document.getElementById("themeLabelText");
+
+    let inputMode = "cups";
+    let styleMode = "hot";
+    let roastMode = "";
+
+    const roastTempMap = {
+      light:   "90〜92℃",
+      medium:  "86〜88℃",
+      meddark: "84〜86℃",
+      dark:    "82〜84℃"
+    };
+    
+    const themeNameMap = {
+      minimal: "Minimal",
+      modest: "Modest",
+      coffee: "Coffee",
+      neon: "Neon",
+      blueprint: "Blueprint",
+      arcade: "Arcade",
+      lovely: "Lovely",
+      cyberpunk: "Cyberpunk"
+    };
+
+    function roundToHalf(v) { return Math.round(v * 2) / 2; }
+    function formatNumber(v) {
+      if (Math.abs(v - Math.round(v)) < 0.001) return String(Math.round(v));
+      return v.toFixed(1);
+    }
+    function roundUpTo10ml(v) { return Math.ceil(v / 10) * 10; }
+
+    (function fillWaterOptions() {
+      for (let v = 150; v <= 1000; v += 10) {
+        const opt = document.createElement("option");
+        opt.value = v;
+        opt.textContent = v + " ml";
+        waterSelect.appendChild(opt);
+      }
+    })();
+
+    function interpolateBeans(water) {
+      const pts = basePoints;
+      const n = pts.length;
+      if (water <= pts[0].water) {
+        const p0 = pts[0], p1 = pts[1];
+        const t = (water - p0.water) / (p1.water - p0.water);
+        return p0.beans + (p1.beans - p0.beans) * t;
+      }
+      if (water >= pts[n - 1].water) {
+        const p0 = pts[n - 2], p1 = pts[n - 1];
+        const t = (water - p0.water) / (p1.water - p0.water);
+        return p0.beans + (p1.beans - p0.beans) * t;
+      }
+      for (let i = 1; i < n; i++) {
+        const p0 = pts[i - 1], p1 = pts[i];
+        if (water >= p0.water && water <= p1.water) {
+          const t = (water - p0.water) / (p1.water - p0.water);
+          return p0.beans + (p1.beans - p0.beans) * t;
+        }
+      }
+      return pts[n - 1].beans;
+    }
+
+    function calculate() {
+      let totalWater;
+      let cupsApprox;
+
+      if (inputMode === "cups") {
+        const val = cupsSelect.value;
+        if (!val) return null;
+        cupsApprox = parseInt(val, 10);
+        totalWater = cupsApprox * waterPerCup;
+      } else {
+        const val = waterSelect.value;
+        if (!val) return null;
+        totalWater = parseInt(val, 10);
+        cupsApprox = totalWater / waterPerCup;
+      }
+
+      let baseBeans = interpolateBeans(totalWater);
+      baseBeans = roundToHalf(baseBeans);
+
+      let brewWater = totalWater;
+      let beans = baseBeans;
+      let ice = 0;
+
+      if (styleMode === "ice") {
+        beans = baseBeans * 1.5;
+        beans = roundToHalf(beans);
+        brewWater = totalWater / 2;
+        ice = brewWater;
+      }
+
+      brewWater = Math.round(brewWater);
+
+      let bloom = beans * 1.5;
+      bloom = roundUpTo10ml(bloom);
+      if (bloom > brewWater) bloom = brewWater;
+
+      let remaining = brewWater - bloom;
+      let pours = [];
+
+      if (remaining > 0) {
+        const baseEach = Math.floor(remaining / 3 / 10) * 10;
+        let p1 = baseEach;
+        let p2 = baseEach;
+        let p3 = baseEach;
+
+        let used = p1 + p2 + p3;
+        let rem = remaining - used;
+
+        if (rem > 0) {
+          p2 += rem;
+        }
+
+        let acc = bloom;
+        const arr = [p1, p2, p3];
+        for (let i = 0; i < arr.length; i++) {
+          acc += arr[i];
+          pours.push({
+            name: (i + 1) + "投目",
+            pour: arr[i],
+            total: acc
+          });
+        }
+      }
+
+      return {
+        totalWater: Math.round(totalWater),
+        cupsApprox,
+        beans,
+        brewWater,
+        ice: Math.round(ice),
+        bloom,
+        pours
+      };
+    }
+
+    function updateView() {
+      const hasBase =
+        (inputMode === "cups"  && cupsSelect.value) ||
+        (inputMode === "water" && waterSelect.value);
+
+      if (!hasBase) {
+        sumBeans.textContent = "-- g";
+        sumWater.textContent = "-- ml";
+        sumIce.textContent   = "";
+        iceRow.style.display = "none";
+        sumTemp.textContent  = "焙煎度を選択";
+        sumTemp.classList.add("placeholder");
+
+        stepsBox.innerHTML =
+          '<div class="placeholder">杯数または湯量を選択すると、ここにステップが表示されます。</div>';
+        return;
+      }
+
+      const data = calculate();
+      if (!data) return;
+
+      sumBeans.textContent = formatNumber(data.beans) + " g";
+      sumWater.textContent = data.brewWater + " ml";
+
+      if (styleMode === "ice") {
+        iceRow.style.display = "flex";
+        sumIce.textContent = data.ice + " g";
+      } else {
+        iceRow.style.display = "none";
+        sumIce.textContent = "";
+      }
+
+      if (!roastMode) {
+        sumTemp.textContent = "焙煎度を選択";
+        sumTemp.classList.add("placeholder");
+      } else {
+        sumTemp.textContent = roastTempMap[roastMode] || "";
+        sumTemp.classList.remove("placeholder");
+      }
+
+      let html = `
+        <div class="step-row">
+          <div class="step-info">
+            <div class="step-name">蒸らし</div>
+            <div class="step-sub">※投入後30秒程待つ。</div>
+          </div>
+          <div class="step-amount">
+            <span class="step-acc-label">積算量</span>
+            <span class="step-acc-value">${data.bloom} ml</span>
+            <span class="step-sub">（今回 ${data.bloom} ml）</span>
+          </div>
+        </div>
+      `;
+
+      data.pours.forEach((p, idx) => {
+        const isLast = idx === data.pours.length - 1;
+        const noteText = isLast
+          ? "※2分30秒程で落ち切るように。"
+          : "";
+
+        html += `
+          <div class="step-row">
+            <div class="step-info">
+              <div class="step-name">${p.name}</div>
+              ${noteText ? `<div class="step-sub">${noteText}</div>` : ""}
+            </div>
+            <div class="step-amount">
+              <span class="step-acc-label">積算量</span>
+              <span class="step-acc-value">${p.total} ml</span>
+              <span class="step-sub">（今回 +${p.pour} ml）</span>
+            </div>
+          </div>
+        `;
+      });
+
+      stepsBox.innerHTML = html;
+    }
+
+    cupsSelect.addEventListener("change", updateView);
+    waterSelect.addEventListener("change", updateView);
+
+    /* --- 2. UI操作イベント --- */
+
+    document.querySelectorAll("#inputModeGroup .toggle-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#inputModeGroup .toggle-btn")
+          .forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        inputMode = btn.dataset.mode;
+
+        if (inputMode === "cups") {
+          rowCups.style.display = "block";
+          rowWater.style.display = "none";
+          hintText.style.display = "block";
+        } else {
+          rowCups.style.display = "none";
+          rowWater.style.display = "block";
+          hintText.style.display = "none";
+        }
+        updateView();
+      });
+    });
+
+    document.querySelectorAll("#styleGroup .toggle-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#styleGroup .toggle-btn")
+          .forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        styleMode = btn.dataset.style;
+
+        document.body.classList.remove("hot-mode", "ice-mode");
+        document.body.classList.add(styleMode + "-mode");
+
+        updateView();
+      });
+    });
+
+    document.querySelectorAll("#roastGroup .toggle-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const already = btn.classList.contains("active");
+        document.querySelectorAll("#roastGroup .toggle-btn")
+          .forEach(b => b.classList.remove("active"));
+        if (!already) {
+          btn.classList.add("active");
+          roastMode = btn.dataset.roast;
+        } else {
+          roastMode = "";
+        }
+        updateView();
+      });
+    });
+
+    /* --- 3. テーマ切り替え & ダークモード制御 & ステータスバー --- */
+
+    const modeToggleBtn = document.getElementById('modeToggleBtn');
+    let isDarkMode = false;
+
+    // ステータスバーの色定義
+    const statusBarColors = {
+      minimal:   { light: "#e8dfd8", dark: "#231e1b" },
+      modest:    { light: "#f3f4f6", dark: "#0f172a" },
+      coffee:    { light: "#261e1b", dark: "#000000" },
+      neon:      { light: "#f0f4f8", dark: "#050508" },
+      blueprint: { light: "#003399", dark: "#1a1a1a" },
+      arcade:    { light: "#fff0f5", dark: "#202020" },
+      lovely:    { light: "#fff0f3", dark: "#2a1d2e" },
+      cyberpunk: { light: "#000000", dark: "#000000" }
+    };
+
+    function updateStatusBar() {
+      const themeKey = themeSelect.value;
+      const colorMap = statusBarColors[themeKey] || statusBarColors.minimal;
+      const color = isDarkMode ? colorMap.dark : colorMap.light;
+      
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) {
+        meta.setAttribute("content", color);
+      }
+      // HTML全体の背景色も変える (バウンス領域対策)
+      document.documentElement.style.backgroundColor = color;
+    }
+
+    function applyTheme(key) {
+      document.body.classList.remove(
+        "theme-modest", "theme-coffee", "theme-neon", "theme-blueprint", "theme-arcade", "theme-lovely", "theme-cyberpunk"
+      );
+      if (key !== "minimal") {
+        document.body.classList.add("theme-" + key);
+      }
+      themeLabelText.textContent = "テーマ: " + (themeNameMap[key] || "Minimal");
+      updateStatusBar();
+    }
+
+    themeSelect.addEventListener("change", (e) => {
+      applyTheme(e.target.value);
+      updateView();
+    });
+
+    const iconMoon = `<path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />`;
+    const iconSun  = `<circle cx="12" cy="12" r="4" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1M5.6 5.6l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />`;
+
+    function updateModeIcon() {
+      const svg = modeToggleBtn.querySelector('svg');
+      if (isDarkMode) {
+        svg.innerHTML = iconMoon;
+        svg.style.fill = "currentColor";
+        svg.style.stroke = "none";
+      } else {
+        svg.innerHTML = iconSun;
+        svg.style.fill = "none";
+        svg.style.stroke = "currentColor";
+        svg.style.strokeWidth = "2";
+        svg.style.strokeLinecap = "round";
+        svg.style.strokeLinejoin = "round";
+      }
+    }
+
+    function toggleDarkMode() {
+      isDarkMode = !isDarkMode;
+      if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+      updateModeIcon();
+      updateStatusBar();
+    }
+
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      isDarkMode = true;
+      document.body.classList.add('dark-mode');
+    }
+    updateModeIcon();
+
+    modeToggleBtn.addEventListener('click', toggleDarkMode);
+
+    /* --- 4. V2.0 TIMER LOGIC --- */
+    let timerInterval = null;
+    let startTime = 0;
+    let elapsedTime = 0;
+    let isRunning = false;
+    
+    // Web Audio API Context
+    let audioCtx = null;
+
+    function playBeep() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(880, audioCtx.currentTime); // High pitch A5
+      oscillator.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.1);
+      
+      gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      
+      oscillator.start();
+      oscillator.stop(audioCtx.currentTime + 0.1);
+    }
+
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timerStatus = document.getElementById('timerStatus');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function updateTimerUI() {
+      const totalSeconds = Math.floor(elapsedTime / 1000);
+      const mm = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+      const ss = String(totalSeconds % 60).padStart(2, '0');
+      timerDisplay.textContent = `${mm}:${ss}`;
+
+      // Logic for Status Text & Alerts
+      // 0-45s: Bloom
+      // 45s: 1st Pour
+      // 45+35 = 80s: 2nd Pour
+      // 80+35 = 115s: 3rd Pour
+      
+      if (totalSeconds < 45) {
+        timerStatus.textContent = "蒸らし (Bloom)";
+      } else if (totalSeconds === 45) {
+        timerStatus.textContent = "1投目！ (Pour 1)";
+        // Trigger sound only once at the exact second change
+        if (elapsedTime % 1000 < 100) playBeep(); 
+      } else if (totalSeconds < 80) {
+        timerStatus.textContent = "1投目抽出中...";
+      } else if (totalSeconds === 80) {
+        timerStatus.textContent = "2投目！ (Pour 2)";
+        if (elapsedTime % 1000 < 100) playBeep();
+      } else if (totalSeconds < 115) {
+        timerStatus.textContent = "2投目抽出中...";
+      } else if (totalSeconds === 115) {
+        timerStatus.textContent = "3投目！ (Pour 3)";
+        if (elapsedTime % 1000 < 100) playBeep();
+      } else {
+        timerStatus.textContent = "3投目〜落ち切りまで";
+      }
+    }
+
+    startBtn.addEventListener('click', () => {
+      if (isRunning) {
+        // Stop behavior
+        clearInterval(timerInterval);
+        isRunning = false;
+        startBtn.textContent = "RESUME";
+      } else {
+        // Start behavior
+        // Initialize Audio Context on user gesture
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        
+        startTime = Date.now() - elapsedTime;
+        timerInterval = setInterval(() => {
+          elapsedTime = Date.now() - startTime;
+          updateTimerUI();
+        }, 100);
+        isRunning = true;
+        startBtn.textContent = "STOP";
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      clearInterval(timerInterval);
+      isRunning = false;
+      elapsedTime = 0;
+      startBtn.textContent = "START";
+      timerDisplay.textContent = "00:00";
+      timerStatus.textContent = "待機中";
+    });
+
+
+    /* --- Init --- */
+    document.body.classList.add("hot-mode");
+    applyTheme(themeSelect.value); 
+    updateView();
+  </script>
+</body>
+</html>
