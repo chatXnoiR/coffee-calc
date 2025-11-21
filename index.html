@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>コーヒー計算機 V2.0</title>
+  <title>コーヒー計算機 V3.0</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 
   <meta name="theme-color" content="#e8dfd8">
@@ -48,9 +48,6 @@
       --bg-size: auto;
     }
 
-    /* =========================================
-       Layout & Background
-       ========================================= */
     html {
       background-color: var(--bg-solid);
       transition: background-color var(--trans-speed);
@@ -88,7 +85,7 @@
     }
 
     /* =========================================
-       Themes
+       Theme Definitions
        ========================================= */
 
     /* 1. Minimal */
@@ -292,10 +289,16 @@
     body.theme-cyberpunk .step-row { border-bottom: 1px solid var(--border-subtle); }
     .step-row:last-child { border-bottom: none; }
     
-    /* --- V2.0: Active Step Highlight --- */
+    /* --- V3.0: Breathing Active Highlight --- */
+    @keyframes pulse-highlight {
+      0% { background-color: var(--accent-soft); }
+      50% { background-color: var(--card-bg); }
+      100% { background-color: var(--accent-soft); }
+    }
     .step-row.active-step {
       background: var(--accent-soft);
       position: relative;
+      animation: pulse-highlight 3s infinite ease-in-out;
     }
     .step-row.active-step .step-name {
       color: var(--accent);
@@ -309,13 +312,8 @@
       width: 4px;
       background: var(--accent);
     }
-    body.theme-lovely .step-row.active-step::before {
-      width: 6px;
-      border-radius: 0 4px 4px 0;
-    }
-    body.theme-cyberpunk .step-row.active-step {
-      box-shadow: inset 0 0 15px var(--accent-soft);
-    }
+    body.theme-lovely .step-row.active-step::before { width: 6px; border-radius: 0 4px 4px 0; }
+    body.theme-cyberpunk .step-row.active-step { box-shadow: inset 0 0 15px var(--accent-soft); animation: none; /* Cyberpunk has static glow */ }
 
     .step-info { flex: 1; }
     .step-name { font-weight: 700; color: var(--text-main); font-size: 1rem; margin-bottom: 4px; text-shadow: var(--glow-text); }
@@ -355,18 +353,24 @@
     #themeSelect { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; appearance: none; }
 
     /* =========================================
-       Timer Section & Visual Progress
+       V3.0: Liquid Wave Timer
        ========================================= */
     .timer-card {
       margin-top: 24px;
-      padding: 20px;
+      padding: 0; /* Padding removed to allow liquid to touch edges */
       border-radius: 24px;
       background: var(--card-bg);
       border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-card);
       text-align: center;
       transition: all var(--trans-speed);
-      position: relative; /* for absolute centering of text */
+      position: relative;
+      overflow: hidden; /* Essential for liquid containment */
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     body.theme-neon .timer-card { box-shadow: var(--shadow-card), var(--glow-box); }
     body.theme-blueprint .timer-card { border-radius: 0; border: 2px solid var(--border-subtle); }
@@ -375,71 +379,66 @@
     body.theme-lovely.dark-mode .timer-card { border: 2px solid var(--accent); }
     body.theme-cyberpunk .timer-card { border-radius: 0; border: 1px solid var(--accent); box-shadow: var(--glow-box); clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
 
-    /* Progress Ring Container */
-    .timer-circle-container {
-      position: relative;
-      width: 160px;
-      height: 160px;
-      margin: 0 auto 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* The SVG Ring */
-    .timer-ring-svg {
+    /* Liquid Container */
+    .liquid-container {
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      transform: rotate(-90deg); /* Start from top */
+      height: 0%; /* Animates from 0% to 100% */
+      background: var(--accent);
+      opacity: 0.15;
+      transition: height 0.5s ease-in-out;
+      z-index: 0;
     }
-    .timer-ring-bg {
-      fill: none;
-      stroke: var(--border-subtle);
-      stroke-width: 6;
+    /* Wave Effect */
+    .liquid-wave {
+      position: absolute;
+      top: -50px; /* Position above the liquid block */
+      left: 50%;
+      width: 200%;
+      height: 200%;
+      border-radius: 40%;
+      background: var(--accent);
+      opacity: 0.4; /* Slightly more opaque than the block */
+      transform: translateX(-50%) rotate(0deg);
+      animation: wave 10s infinite linear;
+      z-index: 0;
     }
-    .timer-ring-progress {
-      fill: none;
-      stroke: var(--accent);
-      stroke-width: 6;
-      stroke-linecap: round;
-      stroke-dasharray: 440; /* Approx circumference of r=70 (2*PI*70=439.8) */
-      stroke-dashoffset: 440; /* Full empty initially */
-      transition: stroke-dashoffset 0.1s linear;
+    @keyframes wave {
+      from { transform: translateX(-50%) rotate(0deg); }
+      to { transform: translateX(-50%) rotate(360deg); }
     }
-    /* Design tweaks for progress ring per theme */
-    body.theme-cyberpunk .timer-ring-progress { stroke-width: 8; filter: drop-shadow(0 0 5px var(--accent)); }
-    body.theme-lovely .timer-ring-progress { stroke-width: 8; stroke-linecap: round; }
-    body.theme-blueprint .timer-ring-progress { stroke-width: 4; }
 
-    /* Centered Time Text */
-    .timer-text-wrapper {
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    /* Content Wrapper (Sits on top of liquid) */
+    .timer-content-wrapper {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      width: 100%;
     }
 
     .timer-display {
       font-family: var(--font-digital);
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: 700;
       color: var(--accent);
       text-shadow: var(--glow-text);
       line-height: 1;
       font-variant-numeric: tabular-nums;
+      margin-bottom: 8px;
+      /* Blend mode to ensure readability over liquid */
+      mix-blend-mode: multiply; 
     }
+    body.dark-mode .timer-display { mix-blend-mode: screen; }
     body.theme-lovely .timer-display { font-family: "M PLUS Rounded 1c", sans-serif; letter-spacing: 0.05em; }
 
     .timer-status {
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text-main);
       margin-bottom: 16px;
-      min-height: 1.2em;
+      min-height: 1.5em;
     }
 
     .timer-controls {
@@ -457,6 +456,8 @@
       cursor: pointer;
       transition: all 0.2s;
       min-width: 80px;
+      position: relative;
+      z-index: 3; /* Ensure clickable */
     }
     .btn-start { background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .btn-stop { background: var(--field-bg); color: var(--text-sub); border: 1px solid var(--border-subtle); }
@@ -573,22 +574,18 @@
 
       <div class="section-title">ドリップタイマー</div>
       <div class="timer-card">
-        
-        <div class="timer-circle-container">
-          <svg class="timer-ring-svg" viewBox="0 0 160 160">
-            <circle class="timer-ring-bg" cx="80" cy="80" r="70"></circle>
-            <circle class="timer-ring-progress" id="timerProgress" cx="80" cy="80" r="70"></circle>
-          </svg>
-          <div class="timer-text-wrapper">
-            <div class="timer-display" id="timerDisplay">00:00</div>
-          </div>
+        <div class="liquid-container" id="liquidContainer">
+          <div class="liquid-wave"></div>
         </div>
 
-        <div class="timer-status" id="timerStatus">お湯投入と同時にスタート</div>
-        
-        <div class="timer-controls">
-          <button class="timer-btn btn-start" id="startBtn">START</button>
-          <button class="timer-btn btn-stop" id="resetBtn">RESET</button>
+        <div class="timer-content-wrapper">
+          <div class="timer-display" id="timerDisplay">00:00</div>
+          <div class="timer-status" id="timerStatus">お湯投入と同時にスタート</div>
+          
+          <div class="timer-controls">
+            <button class="timer-btn btn-start" id="startBtn">START</button>
+            <button class="timer-btn btn-stop" id="resetBtn">RESET</button>
+          </div>
         </div>
       </div>
 
@@ -822,7 +819,6 @@
         sumTemp.classList.remove("placeholder");
       }
 
-      // Update Steps HTML with IDs for Timer Highlighting
       let html = `
         <div class="step-row" id="step-bloom">
           <div class="step-info">
@@ -843,7 +839,6 @@
           ? "※2分30秒程で落ち切るように。"
           : "";
         
-        // Generate ID: step-1, step-2, step-3
         const stepId = "step-" + (idx + 1);
 
         html += `
@@ -1000,13 +995,12 @@
 
     modeToggleBtn.addEventListener('click', toggleDarkMode);
 
-    /* --- 4. V2.0 TIMER LOGIC (Visual Ring & Highlight) --- */
+    /* --- 4. V3.0 TIMER LOGIC (Liquid & Breathing) --- */
     let timerInterval = null;
     let startTime = 0;
     let elapsedTime = 0;
     let isRunning = false;
     
-    // Audio
     let audioCtx = null;
     function playBeep() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1028,22 +1022,17 @@
     const timerStatus = document.getElementById('timerStatus');
     const startBtn = document.getElementById('startBtn');
     const resetBtn = document.getElementById('resetBtn');
-    const timerProgress = document.getElementById('timerProgress');
+    const liquidContainer = document.getElementById('liquidContainer');
 
-    // Ring properties: r=70 -> Circumference = 2*PI*70 = ~440
-    const CIRCUMFERENCE = 440;
-
+    // Visual progress: Height %
     function setProgress(percent) {
-      const offset = CIRCUMFERENCE - (percent / 100) * CIRCUMFERENCE;
-      timerProgress.style.strokeDashoffset = offset;
+      liquidContainer.style.height = percent + "%";
     }
 
     function highlightStep(stepId) {
-      // Clear all active
       document.querySelectorAll('.step-row').forEach(row => {
         row.classList.remove('active-step');
       });
-      // Activate current
       if(stepId) {
         const row = document.getElementById(stepId);
         if(row) row.classList.add('active-step');
@@ -1056,28 +1045,20 @@
       const ss = String(totalSeconds % 60).padStart(2, '0');
       timerDisplay.textContent = `${mm}:${ss}`;
 
-      // Phase Logic
-      // Bloom: 0-45s (45s duration)
-      // Pour 1: 45-80s (35s duration)
-      // Pour 2: 80-115s (35s duration)
-      // Pour 3: 115+ (Until done)
-      
       let progress = 0;
       let currentStepId = "";
 
       if (totalSeconds < 45) {
         timerStatus.textContent = "蒸らし (Bloom)";
-        // Progress 0 to 45s
         progress = (elapsedTime / 45000) * 100;
         currentStepId = "step-bloom";
       } else if (totalSeconds === 45) {
         timerStatus.textContent = "1投目！ (Pour 1)";
-        progress = 0; // Reset visually for next phase
+        progress = 0;
         currentStepId = "step-1";
         if (elapsedTime % 1000 < 100) playBeep();
       } else if (totalSeconds < 80) {
         timerStatus.textContent = "1投目抽出中...";
-        // Progress 45s to 80s (35s span)
         progress = ((elapsedTime - 45000) / 35000) * 100;
         currentStepId = "step-1";
       } else if (totalSeconds === 80) {
@@ -1096,7 +1077,7 @@
         if (elapsedTime % 1000 < 100) playBeep();
       } else {
         timerStatus.textContent = "3投目〜落ち切りまで";
-        progress = 100; // Full
+        progress = 100;
         currentStepId = "step-3";
       }
       
@@ -1116,7 +1097,7 @@
         timerInterval = setInterval(() => {
           elapsedTime = Date.now() - startTime;
           updateTimerUI();
-        }, 50); // Smooth animation
+        }, 50);
         isRunning = true;
         startBtn.textContent = "STOP";
       }
@@ -1129,8 +1110,8 @@
       startBtn.textContent = "START";
       timerDisplay.textContent = "00:00";
       timerStatus.textContent = "お湯投入と同時にスタート";
-      setProgress(0); // Reset Ring
-      highlightStep(null); // Clear highlight
+      setProgress(0);
+      highlightStep(null);
     });
 
 
