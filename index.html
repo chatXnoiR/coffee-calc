@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>コーヒー計算機 V3.0</title>
+  <title>コーヒー計算機 V3.1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 
   <meta name="theme-color" content="#e8dfd8">
@@ -85,73 +85,51 @@
     }
 
     /* =========================================
-       Theme Definitions
+       Theme Definitions (Simplified for length)
        ========================================= */
-
+    
     /* 1. Minimal */
     :root {
-      --bg-solid: #e8dfd8; 
-      --bg-gradient: linear-gradient(180deg, #e8dfd8 0%, #dfd3ca 100%);
-      --card-bg: #fbf8f6;
-      --text-main: #4b3621;
-      --text-sub: #856e5b;
-      --border-subtle: #dcd0c5;
+      --bg-solid: #e8dfd8; --bg-gradient: linear-gradient(180deg, #e8dfd8 0%, #dfd3ca 100%);
+      --card-bg: #fbf8f6; --text-main: #4b3621; --text-sub: #856e5b; --border-subtle: #dcd0c5;
       --shadow-card: 0 15px 35px -5px rgba(75, 54, 33, 0.08);
-      --field-bg: #f3ece7;
-      --steps-bg: #f3ece7;
-      --steps-border: #dcd0c5;
-      --btn-theme-bg: #fbf8f6;
-      --btn-theme-text: #5d4037;
-      --btn-theme-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --field-bg: #f3ece7; --steps-bg: #f3ece7; --steps-border: #dcd0c5;
+      --btn-theme-bg: #fbf8f6; --btn-theme-text: #5d4037; --btn-theme-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
     body.dark-mode {
-      --bg-solid: #231e1b;
-      --bg-gradient: linear-gradient(180deg, #231e1b 0%, #1a1614 100%);
-      --card-bg: #2f2926;
-      --text-main: #ede0d4;
-      --text-sub: #a89f99;
-      --border-subtle: #423a36;
-      --shadow-card: 0 20px 40px rgba(0,0,0,0.4);
-      --field-bg: #1a1614;
-      --steps-bg: #1a1614;
-      --steps-border: #423a36;
-      --btn-theme-bg: #3e3632;
-      --btn-theme-text: #ede0d4;
+      --bg-solid: #231e1b; --bg-gradient: linear-gradient(180deg, #231e1b 0%, #1a1614 100%);
+      --card-bg: #2f2926; --text-main: #ede0d4; --text-sub: #a89f99; --border-subtle: #423a36;
+      --shadow-card: 0 20px 40px rgba(0,0,0,0.4); --field-bg: #1a1614; --steps-bg: #1a1614; --steps-border: #423a36;
+      --btn-theme-bg: #3e3632; --btn-theme-text: #ede0d4;
     }
 
-    /* 2. Modest */
+    /* Other themes inherited from V3.0 (kept compact here) */
     body.theme-modest { --bg-solid: #f3f4f6; --bg-gradient: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%); --card-bg: #ffffff; --text-main: #1f2937; --text-sub: #6b7280; --border-subtle: #e5e7eb; --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.05); --field-bg: #f9fafb; --steps-bg: #fffbeb; --steps-border: #fde68a; --btn-theme-bg: #ffffff; --btn-theme-text: #374151; }
     body.theme-modest.dark-mode { --bg-solid: #0f172a; --bg-gradient: linear-gradient(180deg, #0f172a 0%, #020617 100%); --card-bg: rgba(30, 41, 59, 0.6); --text-main: #f3f4f6; --text-sub: #9ca3af; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 40px -5px rgba(0,0,0,0.5); --field-bg: rgba(15,23,42, 0.5); --steps-bg: rgba(15,23,42, 0.7); --steps-border: #334155; --btn-theme-bg: #1e293b; --btn-theme-text: #e2e8f0; }
 
-    /* 3. Coffee */
     body.theme-coffee { --bg-solid: #261e1b; --bg-gradient: linear-gradient(180deg, #261e1b 0%, #1f1816 100%); --card-bg: #2e2522; --text-main: #e7e5e4; --text-sub: #a8a29e; --border-subtle: #57534e; --shadow-card: 0 20px 50px rgba(0,0,0,0.5); --field-bg: #1a1513; --steps-bg: #1a1513; --steps-border: #57534e; --btn-theme-bg: #44403c; --btn-theme-text: #e7e5e4; }
     body.theme-coffee.dark-mode { --bg-solid: #000000; --bg-gradient: linear-gradient(180deg, #000000 0%, #0c0a09 100%); --card-bg: #141211; --border-subtle: #333; }
 
-    /* 4. Neon */
     body.theme-neon { --bg-solid: #f0f4f8; --bg-gradient: linear-gradient(180deg, #f0f4f8 0%, #e2e8f0 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #0f172a; --text-sub: #64748b; --border-subtle: #e2e8f0; --shadow-card: 0 10px 40px rgba(0,0,0,0.1); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #cbd5e1; --btn-theme-bg: #ffffff; --btn-theme-text: #0f172a; --roast-light: #f59e0b; --roast-medium: #ea580c; --roast-meddark: #b91c1c; --roast-dark: #7f1d1d; }
     body.theme-neon.dark-mode { --bg-solid: #050508; --bg-gradient: linear-gradient(180deg, #050508 0%, #020204 100%); --card-bg: rgba(15, 17, 26, 0.9); --text-main: #f1f5f9; --text-sub: #94a3b8; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 50px rgba(0,0,0,0.8); --field-bg: rgba(0, 0, 0, 0.5); --steps-bg: rgba(0, 0, 0, 0.6); --steps-border: rgba(255,255,255,0.15); --btn-theme-bg: #1e293b; --btn-theme-text: #f1f5f9; --roast-light: #fbbf24; --roast-medium: #fb923c; --roast-meddark: #f87171; --roast-dark: #ef4444; }
 
-    /* 5. Blueprint */
     body.theme-blueprint { --bg-solid: #003399; --bg-gradient: linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(#003399, #003399); --bg-size: 20px 20px; --card-bg: #003399; --text-main: #ffffff; --text-sub: #abc4ff; --border-subtle: #ffffff; --shadow-card: 10px 10px 0px rgba(0,0,0,0.2); --field-bg: rgba(0,0,0,0.1); --steps-bg: rgba(0,0,0,0.1); --steps-border: #ffffff; --btn-theme-bg: #002266; --btn-theme-text: #ffffff; --radius-card: 0px; --radius-btn: 0px; --radius-pill: 0px; font-family: "Courier New", Courier, monospace; letter-spacing: 0.05em; }
     body.theme-blueprint.dark-mode { --bg-solid: #1a1a1a; --bg-gradient: linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(#1a1a1a, #1a1a1a); --card-bg: #1a1a1a; --text-main: #00ff00; --text-sub: #00cc00; --border-subtle: #00ff00; --shadow-card: 8px 8px 0px rgba(0,50,0,0.5); --field-bg: #000000; --steps-bg: #000000; --steps-border: #00ff00; --btn-theme-bg: #000000; --btn-theme-text: #00ff00; }
 
-    /* 6. Arcade */
     body.theme-arcade { --bg-solid: #fff0f5; --bg-gradient: radial-gradient(#ff69b4 2px, transparent 2px), radial-gradient(#ff69b4 2px, transparent 2px); --bg-size: 20px 20px; --card-bg: #ffffff; --text-main: #2d2d2d; --text-sub: #555555; --border-subtle: #000000; --shadow-card: 8px 8px 0px #000000; --field-bg: #ffffff; --steps-bg: #f0f0f0; --steps-border: #000000; --btn-theme-bg: #ffffff; --btn-theme-text: #000000; --radius-card: 8px; --radius-btn: 4px; --radius-pill: 8px; --font-digital: "VT323", monospace; font-family: "VT323", monospace; font-size: 18px; --trans-speed: 0s; }
     body.theme-arcade.dark-mode { --bg-solid: #202020; --bg-gradient: radial-gradient(#444 2px, transparent 2px), radial-gradient(#444 2px, transparent 2px); --card-bg: #2d2d2d; --text-main: #ffffff; --text-sub: #cccccc; --border-subtle: #ffffff; --shadow-card: 8px 8px 0px #000000; --field-bg: #000000; --steps-bg: #404040; --steps-border: #ffffff; --btn-theme-bg: #000000; --btn-theme-text: #ffffff; }
 
-    /* 7. Lovely */
     body.theme-lovely { --bg-solid: #fff0f3; --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #e6e6fa 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #5d4b5d; --text-sub: #9c8a9c; --border-subtle: #ffffff; --shadow-card: 0 10px 30px rgba(255, 105, 180, 0.15); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #ffb7b2; --btn-theme-bg: #ffffff; --btn-theme-text: #ff69b4; --radius-card: 32px; --radius-btn: 20px; --radius-pill: 99px; font-family: "Kiwi Maru", "M PLUS Rounded 1c", var(--font-base); }
     body.theme-lovely.dark-mode { --bg-solid: #2a1d2e; --bg-gradient: linear-gradient(135deg, #2a1d2e 0%, #1a0d20 100%); --card-bg: #3e2a42; --text-main: #ffd1dc; --text-sub: #e6c0e6; --border-subtle: #704875; --shadow-card: 0 15px 40px rgba(0,0,0,0.4); --field-bg: #2a1d2e; --steps-bg: #2a1d2e; --steps-border: #ff8da1; --btn-theme-bg: #503555; --btn-theme-text: #ffd1dc; }
 
-    /* 8. Cyberpunk */
     body.theme-cyberpunk { --bg-solid: #050010; --bg-gradient: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px), linear-gradient(180deg, #0a0015 0%, #000000 100%); --bg-size: auto; --card-bg: rgba(15, 10, 25, 0.95); --text-main: #e0ffff; --text-sub: #00e5ff; --border-subtle: #ff00ff; --shadow-card: 0 0 20px rgba(255, 0, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1); --field-bg: rgba(0, 20, 40, 0.8); --steps-bg: rgba(20, 0, 40, 0.8); --steps-border: #00e5ff; --btn-theme-bg: #000000; --btn-theme-text: #00e5ff; --radius-card: 4px; --radius-btn: 0px; --radius-pill: 0px; --glow-text: 2px 0 #ff00ff, -2px 0 #00e5ff; --glow-box: 0 0 10px #ff00ff; font-family: "Share Tech Mono", monospace; letter-spacing: 0.05em; }
     body.theme-cyberpunk.dark-mode { --bg-solid: #000000; --card-bg: #050505; --shadow-card: 0 0 30px rgba(255, 0, 255, 0.15); }
 
-    /* ===== Accents ===== */
+    /* Accents */
     body.hot-mode { --accent: #f97316; --accent-soft: rgba(249,115,22,0.12); --accent-soft-border: rgba(249,115,22,0.45); --summary-strong: #ea580c; }
     body.ice-mode { --accent: #0ea5e9; --accent-soft: rgba(14,165,233,0.12); --accent-soft-border: rgba(14,165,233,0.45); --summary-strong: #0284c7; }
 
-    /* Theme Accents */
+    /* Theme Accent Overrides (Same as V3.0) */
     body.theme-neon.hot-mode { --accent: #ff5500; --accent-soft: rgba(255, 85, 0, 0.15); --accent-soft-border: #ff5500; --summary-strong: #ff5500; --glow-text: 0 0 10px rgba(255, 85, 0, 0.6); --glow-box: 0 0 15px rgba(255, 85, 0, 0.25); --border-subtle: rgba(255, 85, 0, 0.3); }
     body.theme-neon.ice-mode { --accent: #00ddff; --accent-soft: rgba(0, 221, 255, 0.15); --accent-soft-border: #00ddff; --summary-strong: #00ddff; --glow-text: 0 0 10px rgba(0, 221, 255, 0.6); --glow-box: 0 0 15px rgba(0, 221, 255, 0.25); --border-subtle: rgba(0, 221, 255, 0.3); }
     body.theme-blueprint.hot-mode { --accent: #ffffff; --accent-soft: rgba(255,255,255,0.1); --accent-soft-border: #ffffff; --summary-strong: #ffcc00; }
@@ -169,9 +147,10 @@
     body.theme-cyberpunk.hot-mode { --accent: #ff0055; --accent-soft: rgba(255, 0, 85, 0.2); --accent-soft-border: #ff0055; --summary-strong: #ffff00; --glow-text: 2px 0 #ff0055, -2px 0 #ffff00; --glow-box: 0 0 15px #ff0055; }
     body.theme-cyberpunk.ice-mode { --accent: #00ffff; --accent-soft: rgba(0, 255, 255, 0.2); --accent-soft-border: #00ffff; --summary-strong: #ffffff; --glow-text: 2px 0 #00ffff, -2px 0 #ff00ff; --glow-box: 0 0 15px #00ffff; }
 
-    /* ===== UI Components ===== */
+    /* ===== Common UI Parts ===== */
     .app { width: 100%; max-width: 440px; position: relative; }
     .card { background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: var(--radius-card); padding: 28px 24px; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card); transition: all var(--trans-speed); }
+    /* Card theme specifics */
     body.theme-neon .card { box-shadow: var(--shadow-card), var(--glow-box); }
     body.theme-blueprint .card { backdrop-filter: none; -webkit-backdrop-filter: none; }
     body.theme-arcade .card { backdrop-filter: none; -webkit-backdrop-filter: none; border-width: 4px; }
@@ -179,6 +158,7 @@
     body.theme-lovely.dark-mode .card { border: 2px solid var(--accent); }
     body.theme-cyberpunk .card { border: 1px solid var(--border-subtle); clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
 
+    /* Controls, Titles, etc. */
     .app-header { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; position: relative; padding-right: 40px; }
     .title-main { font-size: 1.2rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-sub); text-shadow: var(--glow-text); opacity: 0.8; }
     .title-bar { width: 50px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--accent), transparent); margin-bottom: 8px; box-shadow: var(--glow-box); transition: background var(--trans-speed); }
@@ -289,7 +269,7 @@
     body.theme-cyberpunk .step-row { border-bottom: 1px solid var(--border-subtle); }
     .step-row:last-child { border-bottom: none; }
     
-    /* --- V3.0: Breathing Active Highlight --- */
+    /* Breathing Active Highlight */
     @keyframes pulse-highlight {
       0% { background-color: var(--accent-soft); }
       50% { background-color: var(--card-bg); }
@@ -300,20 +280,10 @@
       position: relative;
       animation: pulse-highlight 3s infinite ease-in-out;
     }
-    .step-row.active-step .step-name {
-      color: var(--accent);
-    }
-    .step-row.active-step::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: var(--accent);
-    }
+    .step-row.active-step .step-name { color: var(--accent); }
+    .step-row.active-step::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
     body.theme-lovely .step-row.active-step::before { width: 6px; border-radius: 0 4px 4px 0; }
-    body.theme-cyberpunk .step-row.active-step { box-shadow: inset 0 0 15px var(--accent-soft); animation: none; /* Cyberpunk has static glow */ }
+    body.theme-cyberpunk .step-row.active-step { box-shadow: inset 0 0 15px var(--accent-soft); animation: none; }
 
     .step-info { flex: 1; }
     .step-name { font-weight: 700; color: var(--text-main); font-size: 1rem; margin-bottom: 4px; text-shadow: var(--glow-text); }
@@ -353,64 +323,79 @@
     #themeSelect { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; appearance: none; }
 
     /* =========================================
-       V3.0: Liquid Wave Timer
+       V3.1: Liquid Wave Timer (Updated)
        ========================================= */
+    
+    /* サーバー型形状の定義 */
     .timer-card {
       margin-top: 24px;
-      padding: 0; /* Padding removed to allow liquid to touch edges */
-      border-radius: 24px;
+      padding: 0;
+      /* サーバー型: 上が丸く、下は広く */
+      border-radius: 20px 20px 50px 50px; 
       background: var(--card-bg);
       border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-card);
       text-align: center;
       transition: all var(--trans-speed);
       position: relative;
-      overflow: hidden; /* Essential for liquid containment */
-      min-height: 200px;
+      overflow: hidden; 
+      min-height: 220px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
     }
-    body.theme-neon .timer-card { box-shadow: var(--shadow-card), var(--glow-box); }
-    body.theme-blueprint .timer-card { border-radius: 0; border: 2px solid var(--border-subtle); }
-    body.theme-arcade .timer-card { border: 2px solid #000; border-radius: 8px; box-shadow: 6px 6px 0 #000; }
-    body.theme-lovely .timer-card { border: 3px solid #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
-    body.theme-lovely.dark-mode .timer-card { border: 2px solid var(--accent); }
-    body.theme-cyberpunk .timer-card { border-radius: 0; border: 1px solid var(--accent); box-shadow: var(--glow-box); clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
+    /* テーマごとの微調整 */
+    body.theme-blueprint .timer-card { border-radius: 0; }
+    body.theme-arcade .timer-card { border-radius: 8px; }
+    body.theme-cyberpunk .timer-card { border-radius: 0; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
 
-    /* Liquid Container */
-    .liquid-container {
+    /* Liquid Box */
+    .liquid-box {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 0%; /* Animates from 0% to 100% */
-      background: var(--accent);
-      opacity: 0.15;
-      transition: height 0.5s ease-in-out;
+      height: 0%; /* JS Controls this */
+      background: var(--accent-soft);
       z-index: 0;
-    }
-    /* Wave Effect */
-    .liquid-wave {
-      position: absolute;
-      top: -50px; /* Position above the liquid block */
-      left: 50%;
-      width: 200%;
-      height: 200%;
-      border-radius: 40%;
-      background: var(--accent);
-      opacity: 0.4; /* Slightly more opaque than the block */
-      transform: translateX(-50%) rotate(0deg);
-      animation: wave 10s infinite linear;
-      z-index: 0;
-    }
-    @keyframes wave {
-      from { transform: translateX(-50%) rotate(0deg); }
-      to { transform: translateX(-50%) rotate(360deg); }
+      transition: height 0.3s linear; /* Smooth fill */
     }
 
-    /* Content Wrapper (Sits on top of liquid) */
+    /* Waves: Translating Background Method (More fluid) */
+    .liquid-wave {
+      position: absolute;
+      top: -15px; /* Wave height offset */
+      left: 0;
+      width: 100%;
+      height: 15px;
+      /* Simple CSS wave shape using gradient or svg url recommended. 
+         Here we use a CSS radial gradient trick for a simple wave pattern */
+      background-image: radial-gradient(circle at 10px -5px, transparent 12px, var(--accent-soft) 13px);
+      background-size: 20px 20px; /* Wave frequency */
+      animation: wave-move 1s linear infinite;
+      opacity: 1;
+    }
+    
+    /* Second overlapping wave for depth */
+    .liquid-wave::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 0;
+      width: 100%;
+      height: 15px;
+      background-image: radial-gradient(circle at 10px -5px, transparent 12px, var(--accent) 13px);
+      background-size: 20px 20px;
+      opacity: 0.3;
+      animation: wave-move 1.5s linear infinite reverse;
+    }
+
+    @keyframes wave-move {
+      from { background-position-x: 0px; }
+      to { background-position-x: 40px; }
+    }
+
     .timer-content-wrapper {
       position: relative;
       z-index: 2;
@@ -427,10 +412,10 @@
       line-height: 1;
       font-variant-numeric: tabular-nums;
       margin-bottom: 8px;
-      /* Blend mode to ensure readability over liquid */
-      mix-blend-mode: multiply; 
+      /* Ensure readability */
+      filter: drop-shadow(0 2px 0 var(--card-bg));
     }
-    body.dark-mode .timer-display { mix-blend-mode: screen; }
+    body.dark-mode .timer-display { text-shadow: 0 2px 4px rgba(0,0,0,0.5); filter: none; }
     body.theme-lovely .timer-display { font-family: "M PLUS Rounded 1c", sans-serif; letter-spacing: 0.05em; }
 
     .timer-status {
@@ -439,6 +424,7 @@
       color: var(--text-main);
       margin-bottom: 16px;
       min-height: 1.5em;
+      text-shadow: 0 1px 2px var(--card-bg);
     }
 
     .timer-controls {
@@ -457,7 +443,7 @@
       transition: all 0.2s;
       min-width: 80px;
       position: relative;
-      z-index: 3; /* Ensure clickable */
+      z-index: 3;
     }
     .btn-start { background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .btn-stop { background: var(--field-bg); color: var(--text-sub); border: 1px solid var(--border-subtle); }
@@ -574,7 +560,8 @@
 
       <div class="section-title">ドリップタイマー</div>
       <div class="timer-card">
-        <div class="liquid-container" id="liquidContainer">
+        
+        <div class="liquid-box" id="liquidBox">
           <div class="liquid-wave"></div>
         </div>
 
@@ -995,7 +982,7 @@
 
     modeToggleBtn.addEventListener('click', toggleDarkMode);
 
-    /* --- 4. V3.0 TIMER LOGIC (Liquid & Breathing) --- */
+    /* --- 4. V3.1 TIMER LOGIC (Sync Fluid) --- */
     let timerInterval = null;
     let startTime = 0;
     let elapsedTime = 0;
@@ -1022,11 +1009,11 @@
     const timerStatus = document.getElementById('timerStatus');
     const startBtn = document.getElementById('startBtn');
     const resetBtn = document.getElementById('resetBtn');
-    const liquidContainer = document.getElementById('liquidContainer');
+    const liquidBox = document.getElementById('liquidBox');
 
-    // Visual progress: Height %
-    function setProgress(percent) {
-      liquidContainer.style.height = percent + "%";
+    // Visual progress: Height % of the liquid box
+    function setLiquidHeight(percent) {
+      liquidBox.style.height = percent + "%";
     }
 
     function highlightStep(stepId) {
@@ -1048,17 +1035,20 @@
       let progress = 0;
       let currentStepId = "";
 
+      // Logic Sync with V3.1 Liquid
       if (totalSeconds < 45) {
         timerStatus.textContent = "蒸らし (Bloom)";
+        // 0s -> 0%, 45s -> 100%
         progress = (elapsedTime / 45000) * 100;
         currentStepId = "step-bloom";
       } else if (totalSeconds === 45) {
         timerStatus.textContent = "1投目！ (Pour 1)";
-        progress = 0;
+        progress = 0; // Reset to bottom for next pour
         currentStepId = "step-1";
         if (elapsedTime % 1000 < 100) playBeep();
       } else if (totalSeconds < 80) {
         timerStatus.textContent = "1投目抽出中...";
+        // 45s -> 0%, 80s -> 100% (Duration 35s)
         progress = ((elapsedTime - 45000) / 35000) * 100;
         currentStepId = "step-1";
       } else if (totalSeconds === 80) {
@@ -1068,6 +1058,7 @@
         if (elapsedTime % 1000 < 100) playBeep();
       } else if (totalSeconds < 115) {
         timerStatus.textContent = "2投目抽出中...";
+        // 80s -> 0%, 115s -> 100% (Duration 35s)
         progress = ((elapsedTime - 80000) / 35000) * 100;
         currentStepId = "step-2";
       } else if (totalSeconds === 115) {
@@ -1077,12 +1068,12 @@
         if (elapsedTime % 1000 < 100) playBeep();
       } else {
         timerStatus.textContent = "3投目〜落ち切りまで";
-        progress = 100;
+        progress = 100; // Stay full
         currentStepId = "step-3";
       }
       
       if (progress > 100) progress = 100;
-      setProgress(progress);
+      setLiquidHeight(progress);
       highlightStep(currentStepId);
     }
 
@@ -1110,7 +1101,7 @@
       startBtn.textContent = "START";
       timerDisplay.textContent = "00:00";
       timerStatus.textContent = "お湯投入と同時にスタート";
-      setProgress(0);
+      setLiquidHeight(0);
       highlightStep(null);
     });
 
