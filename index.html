@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>コーヒー計算機 V3.1</title>
+  <title>コーヒー計算機 V4.0</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 
   <meta name="theme-color" content="#e8dfd8">
@@ -85,10 +85,10 @@
     }
 
     /* =========================================
-       Theme Definitions (Simplified for length)
+       Theme Definitions (Compact)
        ========================================= */
     
-    /* 1. Minimal */
+    /* Minimal */
     :root {
       --bg-solid: #e8dfd8; --bg-gradient: linear-gradient(180deg, #e8dfd8 0%, #dfd3ca 100%);
       --card-bg: #fbf8f6; --text-main: #4b3621; --text-sub: #856e5b; --border-subtle: #dcd0c5;
@@ -103,33 +103,39 @@
       --btn-theme-bg: #3e3632; --btn-theme-text: #ede0d4;
     }
 
-    /* Other themes inherited from V3.0 (kept compact here) */
+    /* Modest */
     body.theme-modest { --bg-solid: #f3f4f6; --bg-gradient: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%); --card-bg: #ffffff; --text-main: #1f2937; --text-sub: #6b7280; --border-subtle: #e5e7eb; --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.05); --field-bg: #f9fafb; --steps-bg: #fffbeb; --steps-border: #fde68a; --btn-theme-bg: #ffffff; --btn-theme-text: #374151; }
     body.theme-modest.dark-mode { --bg-solid: #0f172a; --bg-gradient: linear-gradient(180deg, #0f172a 0%, #020617 100%); --card-bg: rgba(30, 41, 59, 0.6); --text-main: #f3f4f6; --text-sub: #9ca3af; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 40px -5px rgba(0,0,0,0.5); --field-bg: rgba(15,23,42, 0.5); --steps-bg: rgba(15,23,42, 0.7); --steps-border: #334155; --btn-theme-bg: #1e293b; --btn-theme-text: #e2e8f0; }
 
+    /* Coffee */
     body.theme-coffee { --bg-solid: #261e1b; --bg-gradient: linear-gradient(180deg, #261e1b 0%, #1f1816 100%); --card-bg: #2e2522; --text-main: #e7e5e4; --text-sub: #a8a29e; --border-subtle: #57534e; --shadow-card: 0 20px 50px rgba(0,0,0,0.5); --field-bg: #1a1513; --steps-bg: #1a1513; --steps-border: #57534e; --btn-theme-bg: #44403c; --btn-theme-text: #e7e5e4; }
     body.theme-coffee.dark-mode { --bg-solid: #000000; --bg-gradient: linear-gradient(180deg, #000000 0%, #0c0a09 100%); --card-bg: #141211; --border-subtle: #333; }
 
+    /* Neon */
     body.theme-neon { --bg-solid: #f0f4f8; --bg-gradient: linear-gradient(180deg, #f0f4f8 0%, #e2e8f0 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #0f172a; --text-sub: #64748b; --border-subtle: #e2e8f0; --shadow-card: 0 10px 40px rgba(0,0,0,0.1); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #cbd5e1; --btn-theme-bg: #ffffff; --btn-theme-text: #0f172a; --roast-light: #f59e0b; --roast-medium: #ea580c; --roast-meddark: #b91c1c; --roast-dark: #7f1d1d; }
     body.theme-neon.dark-mode { --bg-solid: #050508; --bg-gradient: linear-gradient(180deg, #050508 0%, #020204 100%); --card-bg: rgba(15, 17, 26, 0.9); --text-main: #f1f5f9; --text-sub: #94a3b8; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 50px rgba(0,0,0,0.8); --field-bg: rgba(0, 0, 0, 0.5); --steps-bg: rgba(0, 0, 0, 0.6); --steps-border: rgba(255,255,255,0.15); --btn-theme-bg: #1e293b; --btn-theme-text: #f1f5f9; --roast-light: #fbbf24; --roast-medium: #fb923c; --roast-meddark: #f87171; --roast-dark: #ef4444; }
 
+    /* Blueprint */
     body.theme-blueprint { --bg-solid: #003399; --bg-gradient: linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(#003399, #003399); --bg-size: 20px 20px; --card-bg: #003399; --text-main: #ffffff; --text-sub: #abc4ff; --border-subtle: #ffffff; --shadow-card: 10px 10px 0px rgba(0,0,0,0.2); --field-bg: rgba(0,0,0,0.1); --steps-bg: rgba(0,0,0,0.1); --steps-border: #ffffff; --btn-theme-bg: #002266; --btn-theme-text: #ffffff; --radius-card: 0px; --radius-btn: 0px; --radius-pill: 0px; font-family: "Courier New", Courier, monospace; letter-spacing: 0.05em; }
     body.theme-blueprint.dark-mode { --bg-solid: #1a1a1a; --bg-gradient: linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(#1a1a1a, #1a1a1a); --card-bg: #1a1a1a; --text-main: #00ff00; --text-sub: #00cc00; --border-subtle: #00ff00; --shadow-card: 8px 8px 0px rgba(0,50,0,0.5); --field-bg: #000000; --steps-bg: #000000; --steps-border: #00ff00; --btn-theme-bg: #000000; --btn-theme-text: #00ff00; }
 
+    /* Arcade */
     body.theme-arcade { --bg-solid: #fff0f5; --bg-gradient: radial-gradient(#ff69b4 2px, transparent 2px), radial-gradient(#ff69b4 2px, transparent 2px); --bg-size: 20px 20px; --card-bg: #ffffff; --text-main: #2d2d2d; --text-sub: #555555; --border-subtle: #000000; --shadow-card: 8px 8px 0px #000000; --field-bg: #ffffff; --steps-bg: #f0f0f0; --steps-border: #000000; --btn-theme-bg: #ffffff; --btn-theme-text: #000000; --radius-card: 8px; --radius-btn: 4px; --radius-pill: 8px; --font-digital: "VT323", monospace; font-family: "VT323", monospace; font-size: 18px; --trans-speed: 0s; }
     body.theme-arcade.dark-mode { --bg-solid: #202020; --bg-gradient: radial-gradient(#444 2px, transparent 2px), radial-gradient(#444 2px, transparent 2px); --card-bg: #2d2d2d; --text-main: #ffffff; --text-sub: #cccccc; --border-subtle: #ffffff; --shadow-card: 8px 8px 0px #000000; --field-bg: #000000; --steps-bg: #404040; --steps-border: #ffffff; --btn-theme-bg: #000000; --btn-theme-text: #ffffff; }
 
+    /* Lovely */
     body.theme-lovely { --bg-solid: #fff0f3; --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #e6e6fa 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #5d4b5d; --text-sub: #9c8a9c; --border-subtle: #ffffff; --shadow-card: 0 10px 30px rgba(255, 105, 180, 0.15); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #ffb7b2; --btn-theme-bg: #ffffff; --btn-theme-text: #ff69b4; --radius-card: 32px; --radius-btn: 20px; --radius-pill: 99px; font-family: "Kiwi Maru", "M PLUS Rounded 1c", var(--font-base); }
     body.theme-lovely.dark-mode { --bg-solid: #2a1d2e; --bg-gradient: linear-gradient(135deg, #2a1d2e 0%, #1a0d20 100%); --card-bg: #3e2a42; --text-main: #ffd1dc; --text-sub: #e6c0e6; --border-subtle: #704875; --shadow-card: 0 15px 40px rgba(0,0,0,0.4); --field-bg: #2a1d2e; --steps-bg: #2a1d2e; --steps-border: #ff8da1; --btn-theme-bg: #503555; --btn-theme-text: #ffd1dc; }
 
+    /* Cyberpunk */
     body.theme-cyberpunk { --bg-solid: #050010; --bg-gradient: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px), linear-gradient(180deg, #0a0015 0%, #000000 100%); --bg-size: auto; --card-bg: rgba(15, 10, 25, 0.95); --text-main: #e0ffff; --text-sub: #00e5ff; --border-subtle: #ff00ff; --shadow-card: 0 0 20px rgba(255, 0, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1); --field-bg: rgba(0, 20, 40, 0.8); --steps-bg: rgba(20, 0, 40, 0.8); --steps-border: #00e5ff; --btn-theme-bg: #000000; --btn-theme-text: #00e5ff; --radius-card: 4px; --radius-btn: 0px; --radius-pill: 0px; --glow-text: 2px 0 #ff00ff, -2px 0 #00e5ff; --glow-box: 0 0 10px #ff00ff; font-family: "Share Tech Mono", monospace; letter-spacing: 0.05em; }
     body.theme-cyberpunk.dark-mode { --bg-solid: #000000; --card-bg: #050505; --shadow-card: 0 0 30px rgba(255, 0, 255, 0.15); }
 
-    /* Accents */
+    /* ===== Accents ===== */
     body.hot-mode { --accent: #f97316; --accent-soft: rgba(249,115,22,0.12); --accent-soft-border: rgba(249,115,22,0.45); --summary-strong: #ea580c; }
     body.ice-mode { --accent: #0ea5e9; --accent-soft: rgba(14,165,233,0.12); --accent-soft-border: rgba(14,165,233,0.45); --summary-strong: #0284c7; }
 
-    /* Theme Accent Overrides (Same as V3.0) */
+    /* Theme Specific Overrides */
     body.theme-neon.hot-mode { --accent: #ff5500; --accent-soft: rgba(255, 85, 0, 0.15); --accent-soft-border: #ff5500; --summary-strong: #ff5500; --glow-text: 0 0 10px rgba(255, 85, 0, 0.6); --glow-box: 0 0 15px rgba(255, 85, 0, 0.25); --border-subtle: rgba(255, 85, 0, 0.3); }
     body.theme-neon.ice-mode { --accent: #00ddff; --accent-soft: rgba(0, 221, 255, 0.15); --accent-soft-border: #00ddff; --summary-strong: #00ddff; --glow-text: 0 0 10px rgba(0, 221, 255, 0.6); --glow-box: 0 0 15px rgba(0, 221, 255, 0.25); --border-subtle: rgba(0, 221, 255, 0.3); }
     body.theme-blueprint.hot-mode { --accent: #ffffff; --accent-soft: rgba(255,255,255,0.1); --accent-soft-border: #ffffff; --summary-strong: #ffcc00; }
@@ -147,10 +153,9 @@
     body.theme-cyberpunk.hot-mode { --accent: #ff0055; --accent-soft: rgba(255, 0, 85, 0.2); --accent-soft-border: #ff0055; --summary-strong: #ffff00; --glow-text: 2px 0 #ff0055, -2px 0 #ffff00; --glow-box: 0 0 15px #ff0055; }
     body.theme-cyberpunk.ice-mode { --accent: #00ffff; --accent-soft: rgba(0, 255, 255, 0.2); --accent-soft-border: #00ffff; --summary-strong: #ffffff; --glow-text: 2px 0 #00ffff, -2px 0 #ff00ff; --glow-box: 0 0 15px #00ffff; }
 
-    /* ===== Common UI Parts ===== */
+    /* ===== UI Components ===== */
     .app { width: 100%; max-width: 440px; position: relative; }
     .card { background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: var(--radius-card); padding: 28px 24px; border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card); transition: all var(--trans-speed); }
-    /* Card theme specifics */
     body.theme-neon .card { box-shadow: var(--shadow-card), var(--glow-box); }
     body.theme-blueprint .card { backdrop-filter: none; -webkit-backdrop-filter: none; }
     body.theme-arcade .card { backdrop-filter: none; -webkit-backdrop-filter: none; border-width: 4px; }
@@ -158,7 +163,6 @@
     body.theme-lovely.dark-mode .card { border: 2px solid var(--accent); }
     body.theme-cyberpunk .card { border: 1px solid var(--border-subtle); clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
 
-    /* Controls, Titles, etc. */
     .app-header { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; position: relative; padding-right: 40px; }
     .title-main { font-size: 1.2rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-sub); text-shadow: var(--glow-text); opacity: 0.8; }
     .title-bar { width: 50px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--accent), transparent); margin-bottom: 8px; box-shadow: var(--glow-box); transition: background var(--trans-speed); }
@@ -269,17 +273,12 @@
     body.theme-cyberpunk .step-row { border-bottom: 1px solid var(--border-subtle); }
     .step-row:last-child { border-bottom: none; }
     
-    /* Breathing Active Highlight */
     @keyframes pulse-highlight {
       0% { background-color: var(--accent-soft); }
       50% { background-color: var(--card-bg); }
       100% { background-color: var(--accent-soft); }
     }
-    .step-row.active-step {
-      background: var(--accent-soft);
-      position: relative;
-      animation: pulse-highlight 3s infinite ease-in-out;
-    }
+    .step-row.active-step { background: var(--accent-soft); position: relative; animation: pulse-highlight 3s infinite ease-in-out; }
     .step-row.active-step .step-name { color: var(--accent); }
     .step-row.active-step::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
     body.theme-lovely .step-row.active-step::before { width: 6px; border-radius: 0 4px 4px 0; }
@@ -323,114 +322,165 @@
     #themeSelect { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; appearance: none; }
 
     /* =========================================
-       V3.1: Liquid Wave Timer (Updated)
+       V4.0: Carafe & Organic Liquid
        ========================================= */
     
-    /* サーバー型形状の定義 */
-    .timer-card {
-      margin-top: 24px;
-      padding: 0;
-      /* サーバー型: 上が丸く、下は広く */
-      border-radius: 20px 20px 50px 50px; 
-      background: var(--card-bg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-card);
-      text-align: center;
-      transition: all var(--trans-speed);
+    /* The "Glass" Container */
+    .carafe-wrapper {
       position: relative;
-      overflow: hidden; 
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      margin-top: 30px;
+      width: 100%;
+      max-width: 240px;
+      height: 240px;
+      margin-left: auto;
+      margin-right: auto;
+      /* Handle positioning context */
     }
-    /* テーマごとの微調整 */
-    body.theme-blueprint .timer-card { border-radius: 0; }
-    body.theme-arcade .timer-card { border-radius: 8px; }
-    body.theme-cyberpunk .timer-card { border-radius: 0; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
 
-    /* Liquid Box */
-    .liquid-box {
+    /* The Handle (Pseudo-element or separate div) */
+    .carafe-handle {
+      position: absolute;
+      top: 30px;
+      right: -25px;
+      width: 50px;
+      height: 100px;
+      border: 6px solid var(--text-sub);
+      border-left: none; /* Attach to glass */
+      border-radius: 0 30px 30px 0;
+      z-index: 0;
+    }
+    body.theme-cyberpunk .carafe-handle { border-color: var(--border-subtle); border-style: solid; box-shadow: var(--glow-box); }
+    body.theme-arcade .carafe-handle { border: 6px solid #000; border-left: none; }
+
+    /* The Server Body */
+    .carafe-body {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.1); /* Glass tint */
+      border: 2px solid var(--border-subtle);
+      /* Coffee Server Shape: Tapered top, wide bottom */
+      border-radius: 20px 20px 50px 50px;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    body.theme-cyberpunk .carafe-body { border: 1px solid var(--accent); box-shadow: var(--glow-box); border-radius: 0; clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px); }
+    body.theme-arcade .carafe-body { border: 4px solid #000; border-radius: 12px; }
+    body.theme-lovely .carafe-body { border: 4px solid #fff; background: rgba(255,255,255,0.5); }
+
+    /* Markers (Dotted lines) */
+    .carafe-marker {
+      position: absolute;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      border-top: 2px dashed var(--text-sub);
+      opacity: 0.5;
+      z-index: 5;
+    }
+    .marker-bloom { bottom: 30%; } /* 45/150 */
+    .marker-pour1 { bottom: 53%; } /* 80/150 */
+    .marker-pour2 { bottom: 76%; } /* 115/150 */
+    .marker-finish { top: 0; width: 100%; left: 0; border-top: 3px solid var(--accent); opacity: 0.8; }
+
+    /* Organic Liquid Animation */
+    .liquid {
       position: absolute;
       bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 0%; /* JS Controls this */
-      background: var(--accent-soft);
-      z-index: 0;
-      transition: height 0.3s linear; /* Smooth fill */
+      left: 50%;
+      width: 200%; /* Wider than container for rotation coverage */
+      height: 200%;
+      background: var(--accent);
+      opacity: 0.8;
+      border-radius: 40%; /* Soft blob shape */
+      transform: translate(-50%, 100%) rotate(0deg); /* Start hidden below */
+      /* We animate the 'bottom' via JS for fill level */
+      transition: transform 0.2s linear, background-color 0.5s; 
+      z-index: 2;
     }
-
-    /* Waves: Translating Background Method (More fluid) */
-    .liquid-wave {
-      position: absolute;
-      top: -15px; /* Wave height offset */
-      left: 0;
-      width: 100%;
-      height: 15px;
-      /* Simple CSS wave shape using gradient or svg url recommended. 
-         Here we use a CSS radial gradient trick for a simple wave pattern */
-      background-image: radial-gradient(circle at 10px -5px, transparent 12px, var(--accent-soft) 13px);
-      background-size: 20px 20px; /* Wave frequency */
-      animation: wave-move 1s linear infinite;
-      opacity: 1;
-    }
-    
-    /* Second overlapping wave for depth */
-    .liquid-wave::after {
+    /* The rotating wave effect */
+    .liquid::before, .liquid::after {
       content: "";
       position: absolute;
-      top: 2px;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      border-radius: 45%;
+      background: rgba(255,255,255,0.2); /* Shine/Highlight */
+      animation: rotate-liquid 6s linear infinite;
+    }
+    .liquid::after {
+      border-radius: 40%;
+      background: rgba(255,255,255,0.1);
+      animation: rotate-liquid 10s linear infinite reverse;
+    }
+
+    @keyframes rotate-liquid {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Over-extraction State */
+    .liquid.over-extracted {
+      background: #5c1c1c !important; /* Burnt color */
+      animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both infinite;
+    }
+    body.theme-cyberpunk .liquid.over-extracted { background: #ff0000 !important; box-shadow: 0 0 30px #ff0000; }
+    
+    @keyframes shake {
+      10%, 90% { transform: translate(-51%, var(--current-level)) rotate(1deg); }
+      20%, 80% { transform: translate(-49%, var(--current-level)) rotate(-1deg); }
+      30%, 50%, 70% { transform: translate(-52%, var(--current-level)) rotate(2deg); }
+      40%, 60% { transform: translate(-48%, var(--current-level)) rotate(-2deg); }
+    }
+
+    /* Timer Text Overlay */
+    .timer-overlay {
+      position: absolute;
+      top: 0;
       left: 0;
       width: 100%;
-      height: 15px;
-      background-image: radial-gradient(circle at 10px -5px, transparent 12px, var(--accent) 13px);
-      background-size: 20px 20px;
-      opacity: 0.3;
-      animation: wave-move 1.5s linear infinite reverse;
-    }
-
-    @keyframes wave-move {
-      from { background-position-x: 0px; }
-      to { background-position-x: 40px; }
-    }
-
-    .timer-content-wrapper {
-      position: relative;
-      z-index: 2;
-      padding: 20px;
-      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      pointer-events: none;
     }
 
     .timer-display {
       font-family: var(--font-digital);
-      font-size: 3.5rem;
+      font-size: 3rem;
       font-weight: 700;
-      color: var(--accent);
-      text-shadow: var(--glow-text);
+      color: var(--text-main); /* Adaptive color */
+      text-shadow: 0 2px 4px rgba(255,255,255,0.8); /* Outline effect for readability */
       line-height: 1;
       font-variant-numeric: tabular-nums;
-      margin-bottom: 8px;
-      /* Ensure readability */
-      filter: drop-shadow(0 2px 0 var(--card-bg));
+      margin-bottom: 4px;
+      mix-blend-mode: difference; /* High contrast against liquid */
+      color: #fff; /* Difference mode works best with white */
     }
-    body.dark-mode .timer-display { text-shadow: 0 2px 4px rgba(0,0,0,0.5); filter: none; }
     body.theme-lovely .timer-display { font-family: "M PLUS Rounded 1c", sans-serif; letter-spacing: 0.05em; }
 
     .timer-status {
-      font-size: 1rem;
+      font-size: 0.85rem;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 16px;
-      min-height: 1.5em;
-      text-shadow: 0 1px 2px var(--card-bg);
+      padding: 4px 8px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 12px;
+      backdrop-filter: blur(4px);
     }
+    body.dark-mode .timer-status { background: rgba(0,0,0,0.6); color: #fff; }
 
     .timer-controls {
       display: flex;
       gap: 12px;
       justify-content: center;
+      margin-top: 12px;
     }
 
     .timer-btn {
@@ -472,11 +522,8 @@
         <div class="title-main">HAND DRIP CALCULATOR</div>
         <div class="title-bar"></div>
         <div class="app-subtitle">失敗しないコーヒーレシピ</div>
-
         <button class="mode-toggle-btn" id="modeToggleBtn" aria-label="ダークモード切替">
-          <svg class="mode-icon" viewBox="0 0 24 24">
-            <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
-          </svg>
+          <svg class="mode-icon" viewBox="0 0 24 24"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>
         </button>
       </div>
 
@@ -487,7 +534,6 @@
       </div>
 
       <div class="section-title">作りたい量</div>
-
       <div id="row-cups" class="select-wrapper">
         <select id="cupsSelect">
           <option value="" selected disabled>何杯分作りますか？</option>
@@ -504,14 +550,12 @@
         </select>
         <div class="select-arrow">▼</div>
       </div>
-
       <div id="row-water" class="select-wrapper" style="display:none;">
         <select id="waterSelect">
           <option value="" selected disabled>何ml作りますか？</option>
         </select>
         <div class="select-arrow">▼</div>
       </div>
-      
       <div class="hint" id="hintText">※ 1杯 = 150ml として計算</div>
 
       <div class="section-title">豆の焙煎度合い</div>
@@ -529,51 +573,36 @@
       </div>
 
       <div class="summary" id="summaryBox">
-        <div class="summary-row">
-          <span class="summary-label">豆量</span>
-          <span class="summary-value" id="sumBeans">-- g</span>
-        </div>
-        <div class="summary-row">
-          <span class="summary-label">抽出に使うお湯</span>
-          <span class="summary-value" id="sumWater">-- ml</span>
-        </div>
-        <div class="summary-row" id="iceRow" style="display:none;">
-          <span class="summary-label">氷の目安</span>
-          <span class="summary-value" id="sumIce"></span>
-        </div>
-        <div class="summary-row">
-          <span class="summary-label">湯温の目安</span>
-          <span class="summary-temp placeholder" id="sumTemp">焙煎度を選択</span>
-        </div>
+        <div class="summary-row"><span class="summary-label">豆量</span><span class="summary-value" id="sumBeans">-- g</span></div>
+        <div class="summary-row"><span class="summary-label">抽出に使うお湯</span><span class="summary-value" id="sumWater">-- ml</span></div>
+        <div class="summary-row" id="iceRow" style="display:none;"><span class="summary-label">氷の目安</span><span class="summary-value" id="sumIce"></span></div>
+        <div class="summary-row"><span class="summary-label">湯温の目安</span><span class="summary-temp placeholder" id="sumTemp">焙煎度を選択</span></div>
       </div>
 
-      <div class="section-title">
-        注湯ステップ
-        <span class="inline-badge">むらし＋3回注ぎ</span>
-      </div>
-
+      <div class="section-title">注湯ステップ <span class="inline-badge">むらし＋3回注ぎ</span></div>
       <div class="steps-card" id="stepsBox">
-        <div class="placeholder">
-          杯数または湯量を選択すると、ここにステップが表示されます。
-        </div>
+        <div class="placeholder">杯数または湯量を選択すると、ここにステップが表示されます。</div>
       </div>
 
       <div class="section-title">ドリップタイマー</div>
-      <div class="timer-card">
-        
-        <div class="liquid-box" id="liquidBox">
-          <div class="liquid-wave"></div>
-        </div>
-
-        <div class="timer-content-wrapper">
-          <div class="timer-display" id="timerDisplay">00:00</div>
-          <div class="timer-status" id="timerStatus">お湯投入と同時にスタート</div>
-          
-          <div class="timer-controls">
-            <button class="timer-btn btn-start" id="startBtn">START</button>
-            <button class="timer-btn btn-stop" id="resetBtn">RESET</button>
+      <div class="carafe-wrapper">
+        <div class="carafe-handle"></div>
+        <div class="carafe-body">
+          <div class="liquid" id="liquid"></div>
+          <div class="carafe-marker marker-bloom"></div>
+          <div class="carafe-marker marker-pour1"></div>
+          <div class="carafe-marker marker-pour2"></div>
+          <div class="carafe-marker marker-finish"></div>
+          <div class="timer-overlay">
+            <div class="timer-display" id="timerDisplay">00:00</div>
+            <div class="timer-status" id="timerStatus">お湯投入と同時にスタート</div>
           </div>
         </div>
+      </div>
+      
+      <div class="timer-controls">
+        <button class="timer-btn btn-start" id="startBtn">START</button>
+        <button class="timer-btn btn-stop" id="resetBtn">RESET</button>
       </div>
 
       <div class="note">
@@ -604,512 +633,98 @@
   </div>
 
   <script>
-    /* --- 1. 計算ロジック --- */
-    const basePoints = [
-      { water: 150, beans: 10 },
-      { water: 300, beans: 20 },
-      { water: 450, beans: 28 },
-      { water: 600, beans: 36 },
-      { water: 750, beans: 44 }
-    ];
+    /* Logic (Same as V3.1) */
+    const basePoints = [{water:150,beans:10},{water:300,beans:20},{water:450,beans:28},{water:600,beans:36},{water:750,beans:44}];
     const waterPerCup = 150;
+    const cupsSelect=document.getElementById("cupsSelect"), waterSelect=document.getElementById("waterSelect"), rowCups=document.getElementById("row-cups"), rowWater=document.getElementById("row-water"), hintText=document.getElementById("hintText");
+    const sumBeans=document.getElementById("sumBeans"), sumWater=document.getElementById("sumWater"), sumIce=document.getElementById("sumIce"), iceRow=document.getElementById("iceRow"), sumTemp=document.getElementById("sumTemp");
+    const stepsBox=document.getElementById("stepsBox"), themeSelect=document.getElementById("themeSelect"), themeLabelText=document.getElementById("themeLabelText");
+    let inputMode="cups", styleMode="hot", roastMode="";
+    const roastTempMap={light:"90〜92℃",medium:"86〜88℃",meddark:"84〜86℃",dark:"82〜84℃"};
+    const themeNameMap={minimal:"Minimal",modest:"Modest",coffee:"Coffee",neon:"Neon",blueprint:"Blueprint",arcade:"Arcade",lovely:"Lovely",cyberpunk:"Cyberpunk"};
 
-    const cupsSelect  = document.getElementById("cupsSelect");
-    const waterSelect = document.getElementById("waterSelect");
-    const rowCups     = document.getElementById("row-cups");
-    const rowWater    = document.getElementById("row-water");
-    const hintText    = document.getElementById("hintText");
-
-    const sumBeans = document.getElementById("sumBeans");
-    const sumWater = document.getElementById("sumWater");
-    const sumIce   = document.getElementById("sumIce");
-    const iceRow   = document.getElementById("iceRow");
-    const sumTemp  = document.getElementById("sumTemp");
-
-    const stepsBox = document.getElementById("stepsBox");
-    const themeSelect = document.getElementById("themeSelect");
-    const themeLabelText = document.getElementById("themeLabelText");
-
-    let inputMode = "cups";
-    let styleMode = "hot";
-    let roastMode = "";
-
-    const roastTempMap = {
-      light:   "90〜92℃",
-      medium:  "86〜88℃",
-      meddark: "84〜86℃",
-      dark:    "82〜84℃"
-    };
+    function roundToHalf(v){return Math.round(v*2)/2;}
+    function formatNumber(v){if(Math.abs(v-Math.round(v))<0.001)return String(Math.round(v));return v.toFixed(1);}
+    function roundUpTo10ml(v){return Math.ceil(v/10)*10;}
+    (function fillWaterOptions(){for(let v=150;v<=1000;v+=10){const opt=document.createElement("option");opt.value=v;opt.textContent=v+" ml";waterSelect.appendChild(opt);}})();
+    function interpolateBeans(w){const pts=basePoints,n=pts.length;if(w<=pts[0].water){const t=(w-pts[0].water)/(pts[1].water-pts[0].water);return pts[0].beans+(pts[1].beans-pts[0].beans)*t;}if(w>=pts[n-1].water){const t=(w-pts[n-2].water)/(pts[n-1].water-pts[n-2].water);return pts[n-2].beans+(pts[n-1].beans-pts[n-2].beans)*t;}for(let i=1;i<n;i++){if(w>=pts[i-1].water&&w<=pts[i].water){const t=(w-pts[i-1].water)/(pts[i].water-pts[i-1].water);return pts[i-1].beans+(pts[i].beans-pts[i-1].beans)*t;}}return pts[n-1].beans;}
+    function calculate(){let tw,ca;if(inputMode==="cups"){const v=cupsSelect.value;if(!v)return null;ca=parseInt(v,10);tw=ca*waterPerCup;}else{const v=waterSelect.value;if(!v)return null;tw=parseInt(v,10);ca=tw/waterPerCup;}let bb=interpolateBeans(tw);bb=roundToHalf(bb);let bw=tw,b=bb,ice=0;if(styleMode==="ice"){b=roundToHalf(bb*1.5);bw=tw/2;ice=bw;}bw=Math.round(bw);let bl=roundUpTo10ml(b*1.5);if(bl>bw)bl=bw;let rem=bw-bl,pours=[];if(rem>0){const be=Math.floor(rem/3/10)*10;let p1=be,p2=be,p3=be,u=p1+p2+p3,r=rem-u;if(r>0)p2+=r;let acc=bl,arr=[p1,p2,p3];for(let i=0;i<arr.length;i++){acc+=arr[i];pours.push({name:(i+1)+"投目",pour:arr[i],total:acc});}}return {totalWater:Math.round(tw),cupsApprox:ca,beans:b,brewWater:bw,ice:Math.round(ice),bloom:bl,pours:pours};}
+    function updateView(){
+      const hasBase=(inputMode==="cups"&&cupsSelect.value)||(inputMode==="water"&&waterSelect.value);
+      if(!hasBase){sumBeans.textContent="-- g";sumWater.textContent="-- ml";sumIce.textContent="";iceRow.style.display="none";sumTemp.textContent="焙煎度を選択";sumTemp.classList.add("placeholder");stepsBox.innerHTML='<div class="placeholder">杯数または湯量を選択すると、ここにステップが表示されます。</div>';return;}
+      const d=calculate();if(!d)return;sumBeans.textContent=formatNumber(d.beans)+" g";sumWater.textContent=d.brewWater+" ml";if(styleMode==="ice"){iceRow.style.display="flex";sumIce.textContent=d.ice+" g";}else{iceRow.style.display="none";sumIce.textContent="";}if(!roastMode){sumTemp.textContent="焙煎度を選択";sumTemp.classList.add("placeholder");}else{sumTemp.textContent=roastTempMap[roastMode]||"";sumTemp.classList.remove("placeholder");}
+      let html=`<div class="step-row" id="step-bloom"><div class="step-info"><div class="step-name">蒸らし</div><div class="step-sub">※投入後30秒程待つ。</div></div><div class="step-amount"><span class="step-acc-label">積算量</span><span class="step-acc-value">${d.bloom} ml</span><span class="step-sub">（今回 ${d.bloom} ml）</span></div></div>`;
+      d.pours.forEach((p,i)=>{const isLast=i===d.pours.length-1;const note=isLast?"※2分30秒程で落ち切るように。":"";const sid="step-"+(i+1);html+=`<div class="step-row" id="${sid}"><div class="step-info"><div class="step-name">${p.name}</div>${note?`<div class="step-sub">${note}</div>`:""}</div><div class="step-amount"><span class="step-acc-label">積算量</span><span class="step-acc-value">${p.total} ml</span><span class="step-sub">（今回 +${p.pour} ml）</span></div></div>`;});
+      stepsBox.innerHTML=html;
+    }
+    cupsSelect.addEventListener("change",updateView);waterSelect.addEventListener("change",updateView);
+    document.querySelectorAll("#inputModeGroup .toggle-btn").forEach(b=>{b.addEventListener("click",()=>{document.querySelectorAll("#inputModeGroup .toggle-btn").forEach(x=>x.classList.remove("active"));b.classList.add("active");inputMode=b.dataset.mode;if(inputMode==="cups"){rowCups.style.display="block";rowWater.style.display="none";hintText.style.display="block";}else{rowCups.style.display="none";rowWater.style.display="block";hintText.style.display="none";}updateView();});});
+    document.querySelectorAll("#styleGroup .toggle-btn").forEach(b=>{b.addEventListener("click",()=>{document.querySelectorAll("#styleGroup .toggle-btn").forEach(x=>x.classList.remove("active"));b.classList.add("active");styleMode=b.dataset.style;document.body.classList.remove("hot-mode","ice-mode");document.body.classList.add(styleMode+"-mode");updateView();});});
+    document.querySelectorAll("#roastGroup .toggle-btn").forEach(b=>{b.addEventListener("click",()=>{const a=b.classList.contains("active");document.querySelectorAll("#roastGroup .toggle-btn").forEach(x=>x.classList.remove("active"));if(!a){b.classList.add("active");roastMode=b.dataset.roast;}else{roastMode="";}updateView();});});
     
-    const themeNameMap = {
-      minimal: "Minimal",
-      modest: "Modest",
-      coffee: "Coffee",
-      neon: "Neon",
-      blueprint: "Blueprint",
-      arcade: "Arcade",
-      lovely: "Lovely",
-      cyberpunk: "Cyberpunk"
-    };
+    /* StatusBar & Theme */
+    const modeToggleBtn=document.getElementById('modeToggleBtn');let isDarkMode=false;
+    const statusBarColors={minimal:{light:"#e8dfd8",dark:"#231e1b"},modest:{light:"#f3f4f6",dark:"#0f172a"},coffee:{light:"#261e1b",dark:"#000000"},neon:{light:"#f0f4f8",dark:"#050508"},blueprint:{light:"#003399",dark:"#1a1a1a"},arcade:{light:"#fff0f5",dark:"#202020"},lovely:{light:"#fff0f3",dark:"#2a1d2e"},cyberpunk:{light:"#000000",dark:"#000000"}};
+    function updateStatusBar(){const k=themeSelect.value;const m=statusBarColors[k]||statusBarColors.minimal;const c=isDarkMode?m.dark:m.light;const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.setAttribute("content",c);document.documentElement.style.backgroundColor=c;}
+    function applyTheme(k){document.body.classList.remove("theme-modest","theme-coffee","theme-neon","theme-blueprint","theme-arcade","theme-lovely","theme-cyberpunk");if(k!=="minimal")document.body.classList.add("theme-"+k);themeLabelText.textContent="テーマ: "+(themeNameMap[k]||"Minimal");updateStatusBar();}
+    themeSelect.addEventListener("change",e=>{applyTheme(e.target.value);updateView();});
+    const iconMoon=`<path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />`;
+    const iconSun=`<circle cx="12" cy="12" r="4" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1M5.6 5.6l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />`;
+    function updateModeIcon(){const s=modeToggleBtn.querySelector('svg');if(isDarkMode){s.innerHTML=iconMoon;s.style.fill="currentColor";s.style.stroke="none";}else{s.innerHTML=iconSun;s.style.fill="none";s.style.stroke="currentColor";s.style.strokeWidth="2";s.style.strokeLinecap="round";s.style.strokeLinejoin="round";}}
+    function toggleDarkMode(){isDarkMode=!isDarkMode;if(isDarkMode){document.body.classList.add('dark-mode');}else{document.body.classList.remove('dark-mode');}updateModeIcon();updateStatusBar();}
+    if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){isDarkMode=true;document.body.classList.add('dark-mode');}updateModeIcon();
+    modeToggleBtn.addEventListener('click',toggleDarkMode);
 
-    function roundToHalf(v) { return Math.round(v * 2) / 2; }
-    function formatNumber(v) {
-      if (Math.abs(v - Math.round(v)) < 0.001) return String(Math.round(v));
-      return v.toFixed(1);
-    }
-    function roundUpTo10ml(v) { return Math.ceil(v / 10) * 10; }
+    /* --- V4.0 TIMER LOGIC (Carafe & Over-Extraction) --- */
+    let timerInterval=null, startTime=0, elapsedTime=0, isRunning=false, audioCtx=null;
+    const timerDisplay=document.getElementById('timerDisplay'), timerStatus=document.getElementById('timerStatus'), startBtn=document.getElementById('startBtn'), resetBtn=document.getElementById('resetBtn'), liquid=document.getElementById('liquid');
 
-    (function fillWaterOptions() {
-      for (let v = 150; v <= 1000; v += 10) {
-        const opt = document.createElement("option");
-        opt.value = v;
-        opt.textContent = v + " ml";
-        waterSelect.appendChild(opt);
-      }
-    })();
+    function playBeep(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.setValueAtTime(880,audioCtx.currentTime);o.frequency.exponentialRampToValueAtTime(440,audioCtx.currentTime+0.1);g.gain.setValueAtTime(0.1,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,audioCtx.currentTime+0.1);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+0.1);}
+    
+    function highlightStep(id){document.querySelectorAll('.step-row').forEach(r=>r.classList.remove('active-step'));if(id){const r=document.getElementById(id);if(r)r.classList.add('active-step');}}
 
-    function interpolateBeans(water) {
-      const pts = basePoints;
-      const n = pts.length;
-      if (water <= pts[0].water) {
-        const p0 = pts[0], p1 = pts[1];
-        const t = (water - p0.water) / (p1.water - p0.water);
-        return p0.beans + (p1.beans - p0.beans) * t;
-      }
-      if (water >= pts[n - 1].water) {
-        const p0 = pts[n - 2], p1 = pts[n - 1];
-        const t = (water - p0.water) / (p1.water - p0.water);
-        return p0.beans + (p1.beans - p0.beans) * t;
-      }
-      for (let i = 1; i < n; i++) {
-        const p0 = pts[i - 1], p1 = pts[i];
-        if (water >= p0.water && water <= p1.water) {
-          const t = (water - p0.water) / (p1.water - p0.water);
-          return p0.beans + (p1.beans - p0.beans) * t;
-        }
-      }
-      return pts[n - 1].beans;
-    }
+    function updateTimerUI(){
+      const totalSeconds=Math.floor(elapsedTime/1000);
+      const mm=String(Math.floor(totalSeconds/60)).padStart(2,'0');
+      const ss=String(totalSeconds%60).padStart(2,'0');
+      timerDisplay.textContent=`${mm}:${ss}`;
 
-    function calculate() {
-      let totalWater;
-      let cupsApprox;
-
-      if (inputMode === "cups") {
-        const val = cupsSelect.value;
-        if (!val) return null;
-        cupsApprox = parseInt(val, 10);
-        totalWater = cupsApprox * waterPerCup;
-      } else {
-        const val = waterSelect.value;
-        if (!val) return null;
-        totalWater = parseInt(val, 10);
-        cupsApprox = totalWater / waterPerCup;
-      }
-
-      let baseBeans = interpolateBeans(totalWater);
-      baseBeans = roundToHalf(baseBeans);
-
-      let brewWater = totalWater;
-      let beans = baseBeans;
-      let ice = 0;
-
-      if (styleMode === "ice") {
-        beans = baseBeans * 1.5;
-        beans = roundToHalf(beans);
-        brewWater = totalWater / 2;
-        ice = brewWater;
-      }
-
-      brewWater = Math.round(brewWater);
-
-      let bloom = beans * 1.5;
-      bloom = roundUpTo10ml(bloom);
-      if (bloom > brewWater) bloom = brewWater;
-
-      let remaining = brewWater - bloom;
-      let pours = [];
-
-      if (remaining > 0) {
-        const baseEach = Math.floor(remaining / 3 / 10) * 10;
-        let p1 = baseEach;
-        let p2 = baseEach;
-        let p3 = baseEach;
-
-        let used = p1 + p2 + p3;
-        let rem = remaining - used;
-
-        if (rem > 0) {
-          p2 += rem;
-        }
-
-        let acc = bloom;
-        const arr = [p1, p2, p3];
-        for (let i = 0; i < arr.length; i++) {
-          acc += arr[i];
-          pours.push({
-            name: (i + 1) + "投目",
-            pour: arr[i],
-            total: acc
-          });
-        }
-      }
-
-      return {
-        totalWater: Math.round(totalWater),
-        cupsApprox,
-        beans,
-        brewWater,
-        ice: Math.round(ice),
-        bloom,
-        pours
-      };
-    }
-
-    function updateView() {
-      const hasBase =
-        (inputMode === "cups"  && cupsSelect.value) ||
-        (inputMode === "water" && waterSelect.value);
-
-      if (!hasBase) {
-        sumBeans.textContent = "-- g";
-        sumWater.textContent = "-- ml";
-        sumIce.textContent   = "";
-        iceRow.style.display = "none";
-        sumTemp.textContent  = "焙煎度を選択";
-        sumTemp.classList.add("placeholder");
-
-        stepsBox.innerHTML =
-          '<div class="placeholder">杯数または湯量を選択すると、ここにステップが表示されます。</div>';
-        return;
-      }
-
-      const data = calculate();
-      if (!data) return;
-
-      sumBeans.textContent = formatNumber(data.beans) + " g";
-      sumWater.textContent = data.brewWater + " ml";
-
-      if (styleMode === "ice") {
-        iceRow.style.display = "flex";
-        sumIce.textContent = data.ice + " g";
-      } else {
-        iceRow.style.display = "none";
-        sumIce.textContent = "";
-      }
-
-      if (!roastMode) {
-        sumTemp.textContent = "焙煎度を選択";
-        sumTemp.classList.add("placeholder");
-      } else {
-        sumTemp.textContent = roastTempMap[roastMode] || "";
-        sumTemp.classList.remove("placeholder");
-      }
-
-      let html = `
-        <div class="step-row" id="step-bloom">
-          <div class="step-info">
-            <div class="step-name">蒸らし</div>
-            <div class="step-sub">※投入後30秒程待つ。</div>
-          </div>
-          <div class="step-amount">
-            <span class="step-acc-label">積算量</span>
-            <span class="step-acc-value">${data.bloom} ml</span>
-            <span class="step-sub">（今回 ${data.bloom} ml）</span>
-          </div>
-        </div>
-      `;
-
-      data.pours.forEach((p, idx) => {
-        const isLast = idx === data.pours.length - 1;
-        const noteText = isLast
-          ? "※2分30秒程で落ち切るように。"
-          : "";
-        
-        const stepId = "step-" + (idx + 1);
-
-        html += `
-          <div class="step-row" id="${stepId}">
-            <div class="step-info">
-              <div class="step-name">${p.name}</div>
-              ${noteText ? `<div class="step-sub">${noteText}</div>` : ""}
-            </div>
-            <div class="step-amount">
-              <span class="step-acc-label">積算量</span>
-              <span class="step-acc-value">${p.total} ml</span>
-              <span class="step-sub">（今回 +${p.pour} ml）</span>
-            </div>
-          </div>
-        `;
-      });
-
-      stepsBox.innerHTML = html;
-    }
-
-    cupsSelect.addEventListener("change", updateView);
-    waterSelect.addEventListener("change", updateView);
-
-    /* --- 2. UI操作イベント --- */
-
-    document.querySelectorAll("#inputModeGroup .toggle-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll("#inputModeGroup .toggle-btn")
-          .forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        inputMode = btn.dataset.mode;
-
-        if (inputMode === "cups") {
-          rowCups.style.display = "block";
-          rowWater.style.display = "none";
-          hintText.style.display = "block";
-        } else {
-          rowCups.style.display = "none";
-          rowWater.style.display = "block";
-          hintText.style.display = "none";
-        }
-        updateView();
-      });
-    });
-
-    document.querySelectorAll("#styleGroup .toggle-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll("#styleGroup .toggle-btn")
-          .forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        styleMode = btn.dataset.style;
-
-        document.body.classList.remove("hot-mode", "ice-mode");
-        document.body.classList.add(styleMode + "-mode");
-
-        updateView();
-      });
-    });
-
-    document.querySelectorAll("#roastGroup .toggle-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const already = btn.classList.contains("active");
-        document.querySelectorAll("#roastGroup .toggle-btn")
-          .forEach(b => b.classList.remove("active"));
-        if (!already) {
-          btn.classList.add("active");
-          roastMode = btn.dataset.roast;
-        } else {
-          roastMode = "";
-        }
-        updateView();
-      });
-    });
-
-    /* --- 3. テーマ切り替え & ダークモード制御 & ステータスバー --- */
-
-    const modeToggleBtn = document.getElementById('modeToggleBtn');
-    let isDarkMode = false;
-
-    const statusBarColors = {
-      minimal:   { light: "#e8dfd8", dark: "#231e1b" },
-      modest:    { light: "#f3f4f6", dark: "#0f172a" },
-      coffee:    { light: "#261e1b", dark: "#000000" },
-      neon:      { light: "#f0f4f8", dark: "#050508" },
-      blueprint: { light: "#003399", dark: "#1a1a1a" },
-      arcade:    { light: "#fff0f5", dark: "#202020" },
-      lovely:    { light: "#fff0f3", dark: "#2a1d2e" },
-      cyberpunk: { light: "#000000", dark: "#000000" }
-    };
-
-    function updateStatusBar() {
-      const themeKey = themeSelect.value;
-      const colorMap = statusBarColors[themeKey] || statusBarColors.minimal;
-      const color = isDarkMode ? colorMap.dark : colorMap.light;
+      /* V4.0 Logic: 0% to 100% corresponds to 0s to 150s (2:30) */
+      const TOTAL_BREW_TIME = 150000; // 2:30 in ms
+      let percent = (elapsedTime / TOTAL_BREW_TIME) * 100;
       
-      const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) {
-        meta.setAttribute("content", color);
-      }
-      document.documentElement.style.backgroundColor = color;
-    }
-
-    function applyTheme(key) {
-      document.body.classList.remove(
-        "theme-modest", "theme-coffee", "theme-neon", "theme-blueprint", "theme-arcade", "theme-lovely", "theme-cyberpunk"
-      );
-      if (key !== "minimal") {
-        document.body.classList.add("theme-" + key);
-      }
-      themeLabelText.textContent = "テーマ: " + (themeNameMap[key] || "Minimal");
-      updateStatusBar();
-    }
-
-    themeSelect.addEventListener("change", (e) => {
-      applyTheme(e.target.value);
-      updateView();
-    });
-
-    const iconMoon = `<path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />`;
-    const iconSun  = `<circle cx="12" cy="12" r="4" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1M5.6 5.6l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />`;
-
-    function updateModeIcon() {
-      const svg = modeToggleBtn.querySelector('svg');
-      if (isDarkMode) {
-        svg.innerHTML = iconMoon;
-        svg.style.fill = "currentColor";
-        svg.style.stroke = "none";
+      // Over-extraction visual
+      if(percent > 100) {
+        percent = 100; 
+        liquid.classList.add('over-extracted');
       } else {
-        svg.innerHTML = iconSun;
-        svg.style.fill = "none";
-        svg.style.stroke = "currentColor";
-        svg.style.strokeWidth = "2";
-        svg.style.strokeLinecap = "round";
-        svg.style.strokeLinejoin = "round";
-      }
-    }
-
-    function toggleDarkMode() {
-      isDarkMode = !isDarkMode;
-      if (isDarkMode) {
-        document.body.classList.add('dark-mode');
-      } else {
-        document.body.classList.remove('dark-mode');
-      }
-      updateModeIcon();
-      updateStatusBar();
-    }
-
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      isDarkMode = true;
-      document.body.classList.add('dark-mode');
-    }
-    updateModeIcon();
-
-    modeToggleBtn.addEventListener('click', toggleDarkMode);
-
-    /* --- 4. V3.1 TIMER LOGIC (Sync Fluid) --- */
-    let timerInterval = null;
-    let startTime = 0;
-    let elapsedTime = 0;
-    let isRunning = false;
-    
-    let audioCtx = null;
-    function playBeep() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const oscillator = audioCtx.createOscillator();
-      const gainNode = audioCtx.createGain();
-      oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(880, audioCtx.currentTime); 
-      oscillator.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.1);
-      gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-      oscillator.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
-      oscillator.start();
-      oscillator.stop(audioCtx.currentTime + 0.1);
-    }
-
-    const timerDisplay = document.getElementById('timerDisplay');
-    const timerStatus = document.getElementById('timerStatus');
-    const startBtn = document.getElementById('startBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const liquidBox = document.getElementById('liquidBox');
-
-    // Visual progress: Height % of the liquid box
-    function setLiquidHeight(percent) {
-      liquidBox.style.height = percent + "%";
-    }
-
-    function highlightStep(stepId) {
-      document.querySelectorAll('.step-row').forEach(row => {
-        row.classList.remove('active-step');
-      });
-      if(stepId) {
-        const row = document.getElementById(stepId);
-        if(row) row.classList.add('active-step');
-      }
-    }
-
-    function updateTimerUI() {
-      const totalSeconds = Math.floor(elapsedTime / 1000);
-      const mm = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
-      const ss = String(totalSeconds % 60).padStart(2, '0');
-      timerDisplay.textContent = `${mm}:${ss}`;
-
-      let progress = 0;
-      let currentStepId = "";
-
-      // Logic Sync with V3.1 Liquid
-      if (totalSeconds < 45) {
-        timerStatus.textContent = "蒸らし (Bloom)";
-        // 0s -> 0%, 45s -> 100%
-        progress = (elapsedTime / 45000) * 100;
-        currentStepId = "step-bloom";
-      } else if (totalSeconds === 45) {
-        timerStatus.textContent = "1投目！ (Pour 1)";
-        progress = 0; // Reset to bottom for next pour
-        currentStepId = "step-1";
-        if (elapsedTime % 1000 < 100) playBeep();
-      } else if (totalSeconds < 80) {
-        timerStatus.textContent = "1投目抽出中...";
-        // 45s -> 0%, 80s -> 100% (Duration 35s)
-        progress = ((elapsedTime - 45000) / 35000) * 100;
-        currentStepId = "step-1";
-      } else if (totalSeconds === 80) {
-        timerStatus.textContent = "2投目！ (Pour 2)";
-        progress = 0;
-        currentStepId = "step-2";
-        if (elapsedTime % 1000 < 100) playBeep();
-      } else if (totalSeconds < 115) {
-        timerStatus.textContent = "2投目抽出中...";
-        // 80s -> 0%, 115s -> 100% (Duration 35s)
-        progress = ((elapsedTime - 80000) / 35000) * 100;
-        currentStepId = "step-2";
-      } else if (totalSeconds === 115) {
-        timerStatus.textContent = "3投目！ (Pour 3)";
-        progress = 0;
-        currentStepId = "step-3";
-        if (elapsedTime % 1000 < 100) playBeep();
-      } else {
-        timerStatus.textContent = "3投目〜落ち切りまで";
-        progress = 100; // Stay full
-        currentStepId = "step-3";
+        liquid.classList.remove('over-extracted');
       }
       
-      if (progress > 100) progress = 100;
-      setLiquidHeight(progress);
+      // Move liquid UP (transform translate Y)
+      // 100% translate means hidden below, 0% means full.
+      // So we map 0% progress -> 100% translate, 100% progress -> 0% translate
+      const translateVal = 100 - percent;
+      liquid.style.transform = `translate(-50%, ${translateVal}%) rotate(0deg)`;
+      // Allow CSS keyframes to handle the rotation part, so we set custom property
+      liquid.style.setProperty('--current-level', translateVal + '%');
+
+      let currentStepId="";
+      if(totalSeconds<45){timerStatus.textContent="蒸らし (Bloom)";currentStepId="step-bloom";}
+      else if(totalSeconds===45){timerStatus.textContent="1投目！";currentStepId="step-1";if(elapsedTime%1000<100)playBeep();}
+      else if(totalSeconds<80){timerStatus.textContent="1投目抽出中...";currentStepId="step-1";}
+      else if(totalSeconds===80){timerStatus.textContent="2投目！";currentStepId="step-2";if(elapsedTime%1000<100)playBeep();}
+      else if(totalSeconds<115){timerStatus.textContent="2投目抽出中...";currentStepId="step-2";}
+      else if(totalSeconds===115){timerStatus.textContent="3投目！";currentStepId="step-3";if(elapsedTime%1000<100)playBeep();}
+      else{timerStatus.textContent="3投目〜落ち切りまで";currentStepId="step-3";}
+      
       highlightStep(currentStepId);
     }
 
-    startBtn.addEventListener('click', () => {
-      if (isRunning) {
-        clearInterval(timerInterval);
-        isRunning = false;
-        startBtn.textContent = "RESUME";
-      } else {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        startTime = Date.now() - elapsedTime;
-        timerInterval = setInterval(() => {
-          elapsedTime = Date.now() - startTime;
-          updateTimerUI();
-        }, 50);
-        isRunning = true;
-        startBtn.textContent = "STOP";
-      }
-    });
+    startBtn.addEventListener('click',()=>{if(isRunning){clearInterval(timerInterval);isRunning=false;startBtn.textContent="RESUME";}else{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();startTime=Date.now()-elapsedTime;timerInterval=setInterval(()=>{elapsedTime=Date.now()-startTime;updateTimerUI();},50);isRunning=true;startBtn.textContent="STOP";}});
+    resetBtn.addEventListener('click',()=>{clearInterval(timerInterval);isRunning=false;elapsedTime=0;startBtn.textContent="START";timerDisplay.textContent="00:00";timerStatus.textContent="お湯投入と同時にスタート";liquid.style.transform=`translate(-50%, 100%) rotate(0deg)`;liquid.classList.remove('over-extracted');highlightStep(null);});
 
-    resetBtn.addEventListener('click', () => {
-      clearInterval(timerInterval);
-      isRunning = false;
-      elapsedTime = 0;
-      startBtn.textContent = "START";
-      timerDisplay.textContent = "00:00";
-      timerStatus.textContent = "お湯投入と同時にスタート";
-      setLiquidHeight(0);
-      highlightStep(null);
-    });
-
-
-    /* --- Init --- */
-    document.body.classList.add("hot-mode");
-    applyTheme(themeSelect.value); 
-    updateView();
+    document.body.classList.add("hot-mode");applyTheme(themeSelect.value);updateView();
   </script>
 </body>
 </html>
