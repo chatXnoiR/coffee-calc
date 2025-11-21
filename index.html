@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>コーヒー計算機 V5.0</title>
+  <title>コーヒー計算機 V5.1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 
   <meta name="theme-color" content="#e8dfd8">
@@ -47,10 +47,11 @@
       --bg-pattern: none;
       --bg-size: auto;
 
-      /* V5.0 New Variables */
+      /* V5.1 New Variables */
       --glass-tint: rgba(255,255,255,0.2);
       --glass-border: rgba(255,255,255,0.4);
-      --stand-color: #4b3621; /* Default stand color */
+      --dripper-color: #d4a373; /* Default ceramic color */
+      --handle-color: #a06845; /* Default wood color */
     }
 
     html {
@@ -100,42 +101,42 @@
       --shadow-card: 0 15px 35px -5px rgba(75, 54, 33, 0.08);
       --field-bg: #f3ece7; --steps-bg: #f3ece7; --steps-border: #dcd0c5;
       --btn-theme-bg: #fbf8f6; --btn-theme-text: #5d4037; --btn-theme-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      --stand-color: #6d4c41;
+      --dripper-color: #e0c0a0; --handle-color: #8d6e63;
     }
     body.dark-mode {
       --bg-solid: #231e1b; --bg-gradient: linear-gradient(180deg, #231e1b 0%, #1a1614 100%);
       --card-bg: #2f2926; --text-main: #ede0d4; --text-sub: #a89f99; --border-subtle: #423a36;
       --shadow-card: 0 20px 40px rgba(0,0,0,0.4); --field-bg: #1a1614; --steps-bg: #1a1614; --steps-border: #423a36;
       --btn-theme-bg: #3e3632; --btn-theme-text: #ede0d4;
-      --stand-color: #3e2723; --glass-tint: rgba(0,0,0,0.2); --glass-border: rgba(255,255,255,0.2);
+      --dripper-color: #5d4037; --handle-color: #4e342e; --glass-tint: rgba(0,0,0,0.2); --glass-border: rgba(255,255,255,0.2);
     }
 
     /* Modest */
-    body.theme-modest { --bg-solid: #f3f4f6; --bg-gradient: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%); --card-bg: #ffffff; --text-main: #1f2937; --text-sub: #6b7280; --border-subtle: #e5e7eb; --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.05); --field-bg: #f9fafb; --steps-bg: #fffbeb; --steps-border: #fde68a; --btn-theme-bg: #ffffff; --btn-theme-text: #374151; --stand-color: #4b5563; }
-    body.theme-modest.dark-mode { --bg-solid: #0f172a; --bg-gradient: linear-gradient(180deg, #0f172a 0%, #020617 100%); --card-bg: rgba(30, 41, 59, 0.6); --text-main: #f3f4f6; --text-sub: #9ca3af; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 40px -5px rgba(0,0,0,0.5); --field-bg: rgba(15,23,42, 0.5); --steps-bg: rgba(15,23,42, 0.7); --steps-border: #334155; --btn-theme-bg: #1e293b; --btn-theme-text: #e2e8f0; --stand-color: #1e293b; }
+    body.theme-modest { --bg-solid: #f3f4f6; --bg-gradient: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%); --card-bg: #ffffff; --text-main: #1f2937; --text-sub: #6b7280; --border-subtle: #e5e7eb; --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.05); --field-bg: #f9fafb; --steps-bg: #fffbeb; --steps-border: #fde68a; --btn-theme-bg: #ffffff; --btn-theme-text: #374151; --dripper-color: #fde68a; --handle-color: #d1d5db; }
+    body.theme-modest.dark-mode { --bg-solid: #0f172a; --bg-gradient: linear-gradient(180deg, #0f172a 0%, #020617 100%); --card-bg: rgba(30, 41, 59, 0.6); --text-main: #f3f4f6; --text-sub: #9ca3af; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 40px -5px rgba(0,0,0,0.5); --field-bg: rgba(15,23,42, 0.5); --steps-bg: rgba(15,23,42, 0.7); --steps-border: #334155; --btn-theme-bg: #1e293b; --btn-theme-text: #e2e8f0; --dripper-color: #1e293b; --handle-color: #374151; }
 
     /* Coffee */
-    body.theme-coffee { --bg-solid: #261e1b; --bg-gradient: linear-gradient(180deg, #261e1b 0%, #1f1816 100%); --card-bg: #2e2522; --text-main: #e7e5e4; --text-sub: #a8a29e; --border-subtle: #57534e; --shadow-card: 0 20px 50px rgba(0,0,0,0.5); --field-bg: #1a1513; --steps-bg: #1a1513; --steps-border: #57534e; --btn-theme-bg: #44403c; --btn-theme-text: #e7e5e4; --stand-color: #3e2723; }
-    body.theme-coffee.dark-mode { --bg-solid: #000000; --bg-gradient: linear-gradient(180deg, #000000 0%, #0c0a09 100%); --card-bg: #141211; --border-subtle: #333; --stand-color: #1a1a1a; }
+    body.theme-coffee { --bg-solid: #261e1b; --bg-gradient: linear-gradient(180deg, #261e1b 0%, #1f1816 100%); --card-bg: #2e2522; --text-main: #e7e5e4; --text-sub: #a8a29e; --border-subtle: #57534e; --shadow-card: 0 20px 50px rgba(0,0,0,0.5); --field-bg: #1a1513; --steps-bg: #1a1513; --steps-border: #57534e; --btn-theme-bg: #44403c; --btn-theme-text: #e7e5e4; --dripper-color: #3e2723; --handle-color: #5d4037; }
+    body.theme-coffee.dark-mode { --bg-solid: #000000; --bg-gradient: linear-gradient(180deg, #000000 0%, #0c0a09 100%); --card-bg: #141211; --border-subtle: #333; --dripper-color: #261e1b; --handle-color: #3e2723; }
 
     /* Neon */
-    body.theme-neon { --bg-solid: #f0f4f8; --bg-gradient: linear-gradient(180deg, #f0f4f8 0%, #e2e8f0 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #0f172a; --text-sub: #64748b; --border-subtle: #e2e8f0; --shadow-card: 0 10px 40px rgba(0,0,0,0.1); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #cbd5e1; --btn-theme-bg: #ffffff; --btn-theme-text: #0f172a; --roast-light: #f59e0b; --roast-medium: #ea580c; --roast-meddark: #b91c1c; --roast-dark: #7f1d1d; --stand-color: #64748b; }
-    body.theme-neon.dark-mode { --bg-solid: #050508; --bg-gradient: linear-gradient(180deg, #050508 0%, #020204 100%); --card-bg: rgba(15, 17, 26, 0.9); --text-main: #f1f5f9; --text-sub: #94a3b8; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 50px rgba(0,0,0,0.8); --field-bg: rgba(0, 0, 0, 0.5); --steps-bg: rgba(0, 0, 0, 0.6); --steps-border: rgba(255,255,255,0.15); --btn-theme-bg: #1e293b; --btn-theme-text: #f1f5f9; --roast-light: #fbbf24; --roast-medium: #fb923c; --roast-meddark: #f87171; --roast-dark: #ef4444; --stand-color: #1e293b; }
+    body.theme-neon { --bg-solid: #f0f4f8; --bg-gradient: linear-gradient(180deg, #f0f4f8 0%, #e2e8f0 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #0f172a; --text-sub: #64748b; --border-subtle: #e2e8f0; --shadow-card: 0 10px 40px rgba(0,0,0,0.1); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #cbd5e1; --btn-theme-bg: #ffffff; --btn-theme-text: #0f172a; --roast-light: #f59e0b; --roast-medium: #ea580c; --roast-meddark: #b91c1c; --roast-dark: #7f1d1d; --dripper-color: #cbd5e1; --handle-color: #64748b; }
+    body.theme-neon.dark-mode { --bg-solid: #050508; --bg-gradient: linear-gradient(180deg, #050508 0%, #020204 100%); --card-bg: rgba(15, 17, 26, 0.9); --text-main: #f1f5f9; --text-sub: #94a3b8; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 50px rgba(0,0,0,0.8); --field-bg: rgba(0, 0, 0, 0.5); --steps-bg: rgba(0, 0, 0, 0.6); --steps-border: rgba(255,255,255,0.15); --btn-theme-bg: #1e293b; --btn-theme-text: #f1f5f9; --roast-light: #fbbf24; --roast-medium: #fb923c; --roast-meddark: #f87171; --roast-dark: #ef4444; --dripper-color: #334155; --handle-color: #1e293b; }
 
     /* Blueprint */
-    body.theme-blueprint { --bg-solid: #003399; --bg-gradient: linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(#003399, #003399); --bg-size: 20px 20px; --card-bg: #003399; --text-main: #ffffff; --text-sub: #abc4ff; --border-subtle: #ffffff; --shadow-card: 10px 10px 0px rgba(0,0,0,0.2); --field-bg: rgba(0,0,0,0.1); --steps-bg: rgba(0,0,0,0.1); --steps-border: #ffffff; --btn-theme-bg: #002266; --btn-theme-text: #ffffff; --radius-card: 0px; --radius-btn: 0px; --radius-pill: 0px; font-family: "Courier New", Courier, monospace; letter-spacing: 0.05em; --stand-color: #ffffff; --glass-tint: transparent; --glass-border: #ffffff; }
-    body.theme-blueprint.dark-mode { --bg-solid: #1a1a1a; --bg-gradient: linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(#1a1a1a, #1a1a1a); --card-bg: #1a1a1a; --text-main: #00ff00; --text-sub: #00cc00; --border-subtle: #00ff00; --shadow-card: 8px 8px 0px rgba(0,50,0,0.5); --field-bg: #000000; --steps-bg: #000000; --steps-border: #00ff00; --btn-theme-bg: #000000; --btn-theme-text: #00ff00; --stand-color: #00ff00; --glass-border: #00ff00; }
+    body.theme-blueprint { --bg-solid: #003399; --bg-gradient: linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(#003399, #003399); --bg-size: 20px 20px; --card-bg: #003399; --text-main: #ffffff; --text-sub: #abc4ff; --border-subtle: #ffffff; --shadow-card: 10px 10px 0px rgba(0,0,0,0.2); --field-bg: rgba(0,0,0,0.1); --steps-bg: rgba(0,0,0,0.1); --steps-border: #ffffff; --btn-theme-bg: #002266; --btn-theme-text: #ffffff; --radius-card: 0px; --radius-btn: 0px; --radius-pill: 0px; font-family: "Courier New", Courier, monospace; letter-spacing: 0.05em; --dripper-color: transparent; --handle-color: #002266; --glass-tint: transparent; --glass-border: #ffffff; }
+    body.theme-blueprint.dark-mode { --bg-solid: #1a1a1a; --bg-gradient: linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(#1a1a1a, #1a1a1a); --card-bg: #1a1a1a; --text-main: #00ff00; --text-sub: #00cc00; --border-subtle: #00ff00; --shadow-card: 8px 8px 0px rgba(0,50,0,0.5); --field-bg: #000000; --steps-bg: #000000; --steps-border: #00ff00; --btn-theme-bg: #000000; --btn-theme-text: #00ff00; --dripper-color: transparent; --handle-color: #000000; --glass-border: #00ff00; }
 
     /* Arcade */
-    body.theme-arcade { --bg-solid: #fff0f5; --bg-gradient: radial-gradient(#ff69b4 2px, transparent 2px), radial-gradient(#ff69b4 2px, transparent 2px); --bg-size: 20px 20px; --card-bg: #ffffff; --text-main: #2d2d2d; --text-sub: #555555; --border-subtle: #000000; --shadow-card: 8px 8px 0px #000000; --field-bg: #ffffff; --steps-bg: #f0f0f0; --steps-border: #000000; --btn-theme-bg: #ffffff; --btn-theme-text: #000000; --radius-card: 8px; --radius-btn: 4px; --radius-pill: 8px; --font-digital: "VT323", monospace; font-family: "VT323", monospace; font-size: 18px; --trans-speed: 0s; --stand-color: #000000; --glass-tint: #ffffff; --glass-border: #000000; }
-    body.theme-arcade.dark-mode { --bg-solid: #202020; --bg-gradient: radial-gradient(#444 2px, transparent 2px), radial-gradient(#444 2px, transparent 2px); --card-bg: #2d2d2d; --text-main: #ffffff; --text-sub: #cccccc; --border-subtle: #ffffff; --shadow-card: 8px 8px 0px #000000; --field-bg: #000000; --steps-bg: #404040; --steps-border: #ffffff; --btn-theme-bg: #000000; --btn-theme-text: #ffffff; --stand-color: #ffffff; --glass-tint: #2d2d2d; --glass-border: #ffffff; }
+    body.theme-arcade { --bg-solid: #fff0f5; --bg-gradient: radial-gradient(#ff69b4 2px, transparent 2px), radial-gradient(#ff69b4 2px, transparent 2px); --bg-size: 20px 20px; --card-bg: #ffffff; --text-main: #2d2d2d; --text-sub: #555555; --border-subtle: #000000; --shadow-card: 8px 8px 0px #000000; --field-bg: #ffffff; --steps-bg: #f0f0f0; --steps-border: #000000; --btn-theme-bg: #ffffff; --btn-theme-text: #000000; --radius-card: 8px; --radius-btn: 4px; --radius-pill: 8px; --font-digital: "VT323", monospace; font-family: "VT323", monospace; font-size: 18px; --trans-speed: 0s; --dripper-color: #ff69b4; --handle-color: #000000; --glass-tint: #ffffff; --glass-border: #000000; }
+    body.theme-arcade.dark-mode { --bg-solid: #202020; --bg-gradient: radial-gradient(#444 2px, transparent 2px), radial-gradient(#444 2px, transparent 2px); --card-bg: #2d2d2d; --text-main: #ffffff; --text-sub: #cccccc; --border-subtle: #ffffff; --shadow-card: 8px 8px 0px #000000; --field-bg: #000000; --steps-bg: #404040; --steps-border: #ffffff; --btn-theme-bg: #000000; --btn-theme-text: #ffffff; --dripper-color: #444; --handle-color: #ffffff; --glass-tint: #2d2d2d; --glass-border: #ffffff; }
 
     /* Lovely */
-    body.theme-lovely { --bg-solid: #fff0f3; --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #e6e6fa 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #5d4b5d; --text-sub: #9c8a9c; --border-subtle: #ffffff; --shadow-card: 0 10px 30px rgba(255, 105, 180, 0.15); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #ffb7b2; --btn-theme-bg: #ffffff; --btn-theme-text: #ff69b4; --radius-card: 32px; --radius-btn: 20px; --radius-pill: 99px; font-family: "Kiwi Maru", "M PLUS Rounded 1c", var(--font-base); --stand-color: #ffb7b2; --glass-border: #ffffff; }
-    body.theme-lovely.dark-mode { --bg-solid: #2a1d2e; --bg-gradient: linear-gradient(135deg, #2a1d2e 0%, #1a0d20 100%); --card-bg: #3e2a42; --text-main: #ffd1dc; --text-sub: #e6c0e6; --border-subtle: #704875; --shadow-card: 0 15px 40px rgba(0,0,0,0.4); --field-bg: #2a1d2e; --steps-bg: #2a1d2e; --steps-border: #ff8da1; --btn-theme-bg: #503555; --btn-theme-text: #ffd1dc; --stand-color: #704875; --glass-border: #704875; }
+    body.theme-lovely { --bg-solid: #fff0f3; --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #e6e6fa 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #5d4b5d; --text-sub: #9c8a9c; --border-subtle: #ffffff; --shadow-card: 0 10px 30px rgba(255, 105, 180, 0.15); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #ffb7b2; --btn-theme-bg: #ffffff; --btn-theme-text: #ff69b4; --radius-card: 32px; --radius-btn: 20px; --radius-pill: 99px; font-family: "Kiwi Maru", "M PLUS Rounded 1c", var(--font-base); --dripper-color: #ffb7b2; --handle-color: #ff9eb5; --glass-border: #ffffff; }
+    body.theme-lovely.dark-mode { --bg-solid: #2a1d2e; --bg-gradient: linear-gradient(135deg, #2a1d2e 0%, #1a0d20 100%); --card-bg: #3e2a42; --text-main: #ffd1dc; --text-sub: #e6c0e6; --border-subtle: #704875; --shadow-card: 0 15px 40px rgba(0,0,0,0.4); --field-bg: #2a1d2e; --steps-bg: #2a1d2e; --steps-border: #ff8da1; --btn-theme-bg: #503555; --btn-theme-text: #ffd1dc; --dripper-color: #704875; --handle-color: #ff8da1; --glass-border: #704875; }
 
     /* Cyberpunk */
-    body.theme-cyberpunk { --bg-solid: #050010; --bg-gradient: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px), linear-gradient(180deg, #0a0015 0%, #000000 100%); --bg-size: auto; --card-bg: rgba(15, 10, 25, 0.95); --text-main: #e0ffff; --text-sub: #00e5ff; --border-subtle: #ff00ff; --shadow-card: 0 0 20px rgba(255, 0, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1); --field-bg: rgba(0, 20, 40, 0.8); --steps-bg: rgba(20, 0, 40, 0.8); --steps-border: #00e5ff; --btn-theme-bg: #000000; --btn-theme-text: #00e5ff; --radius-card: 4px; --radius-btn: 0px; --radius-pill: 0px; --glow-text: 2px 0 #ff00ff, -2px 0 #00e5ff; --glow-box: 0 0 10px #ff00ff; font-family: "Share Tech Mono", monospace; letter-spacing: 0.05em; --stand-color: #00e5ff; --glass-tint: rgba(0,0,0,0.5); --glass-border: #00e5ff; }
+    body.theme-cyberpunk { --bg-solid: #050010; --bg-gradient: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px), linear-gradient(180deg, #0a0015 0%, #000000 100%); --bg-size: auto; --card-bg: rgba(15, 10, 25, 0.95); --text-main: #e0ffff; --text-sub: #00e5ff; --border-subtle: #ff00ff; --shadow-card: 0 0 20px rgba(255, 0, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1); --field-bg: rgba(0, 20, 40, 0.8); --steps-bg: rgba(20, 0, 40, 0.8); --steps-border: #00e5ff; --btn-theme-bg: #000000; --btn-theme-text: #00e5ff; --radius-card: 4px; --radius-btn: 0px; --radius-pill: 0px; --glow-text: 2px 0 #ff00ff, -2px 0 #00e5ff; --glow-box: 0 0 10px #ff00ff; font-family: "Share Tech Mono", monospace; letter-spacing: 0.05em; --dripper-color: #00e5ff; --handle-color: #ff00ff; --glass-tint: rgba(0,0,0,0.5); --glass-border: #00e5ff; }
     body.theme-cyberpunk.dark-mode { --bg-solid: #000000; --card-bg: #050505; --shadow-card: 0 0 30px rgba(255, 0, 255, 0.15); }
 
     /* ===== Accents ===== */
@@ -143,11 +144,11 @@
     body.ice-mode { --accent: #0ea5e9; --accent-soft: rgba(14,165,233,0.12); --accent-soft-border: rgba(14,165,233,0.45); --summary-strong: #0284c7; }
 
     /* Theme Specific Overrides */
-    body.theme-neon.hot-mode { --accent: #ff5500; --accent-soft: rgba(255, 85, 0, 0.15); --accent-soft-border: #ff5500; --summary-strong: #ff5500; --glow-text: 0 0 10px rgba(255, 85, 0, 0.6); --glow-box: 0 0 15px rgba(255, 85, 0, 0.25); --border-subtle: rgba(255, 85, 0, 0.3); --stand-color: #ff5500; }
-    body.theme-neon.ice-mode { --accent: #00ddff; --accent-soft: rgba(0, 221, 255, 0.15); --accent-soft-border: #00ddff; --summary-strong: #00ddff; --glow-text: 0 0 10px rgba(0, 221, 255, 0.6); --glow-box: 0 0 15px rgba(0, 221, 255, 0.25); --border-subtle: rgba(0, 221, 255, 0.3); --stand-color: #00ddff; }
+    body.theme-neon.hot-mode { --accent: #ff5500; --accent-soft: rgba(255, 85, 0, 0.15); --accent-soft-border: #ff5500; --summary-strong: #ff5500; --glow-text: 0 0 10px rgba(255, 85, 0, 0.6); --glow-box: 0 0 15px rgba(255, 85, 0, 0.25); --border-subtle: rgba(255, 85, 0, 0.3); --dripper-color: #ff5500; --handle-color: #ff5500; }
+    body.theme-neon.ice-mode { --accent: #00ddff; --accent-soft: rgba(0, 221, 255, 0.15); --accent-soft-border: #00ddff; --summary-strong: #00ddff; --glow-text: 0 0 10px rgba(0, 221, 255, 0.6); --glow-box: 0 0 15px rgba(0, 221, 255, 0.25); --border-subtle: rgba(0, 221, 255, 0.3); --dripper-color: #00ddff; --handle-color: #00ddff; }
     body.theme-blueprint.hot-mode { --accent: #ffffff; --accent-soft: rgba(255,255,255,0.1); --accent-soft-border: #ffffff; --summary-strong: #ffcc00; }
     body.theme-blueprint.ice-mode { --accent: #ffffff; --accent-soft: rgba(255,255,255,0.1); --accent-soft-border: #ffffff; --summary-strong: #66ccff; }
-    body.theme-blueprint.dark-mode.hot-mode { --accent: #00ff00; --accent-soft: rgba(0,255,0,0.1); --accent-soft-border: #00ff00; --summary-strong: #ffff00; --stand-color: #00ff00; }
+    body.theme-blueprint.dark-mode.hot-mode { --accent: #00ff00; --accent-soft: rgba(0,255,0,0.1); --accent-soft-border: #00ff00; --summary-strong: #ffff00; --dripper-color: #00ff00; --handle-color: #00ff00; }
     body.theme-blueprint.dark-mode.ice-mode { --summary-strong: #00ffff; }
     body.theme-arcade.hot-mode { --accent: #ff4500; --accent-soft: #ffe4e1; --accent-soft-border: #000000; --summary-strong: #ff4500; }
     body.theme-arcade.ice-mode { --accent: #1e90ff; --accent-soft: #e0ffff; --accent-soft-border: #000000; --summary-strong: #1e90ff; }
@@ -157,8 +158,8 @@
     body.theme-lovely.ice-mode { --accent: #93a5cf; --accent-soft: #f0f4ff; --accent-soft-border: #bccce8; --summary-strong: #7388b9; }
     body.theme-lovely.dark-mode.hot-mode { --accent: #ff9eb5; --accent-soft: rgba(255, 133, 162, 0.2); --accent-soft-border: #ff6b81; --summary-strong: #ff9eb5; }
     body.theme-lovely.dark-mode.ice-mode { --accent: #aaccff; --accent-soft: rgba(147, 165, 207, 0.2); --accent-soft-border: #93a5cf; --summary-strong: #aaccff; }
-    body.theme-cyberpunk.hot-mode { --accent: #ff0055; --accent-soft: rgba(255, 0, 85, 0.2); --accent-soft-border: #ff0055; --summary-strong: #ffff00; --glow-text: 2px 0 #ff0055, -2px 0 #ffff00; --glow-box: 0 0 15px #ff0055; --stand-color: #ff0055; }
-    body.theme-cyberpunk.ice-mode { --accent: #00ffff; --accent-soft: rgba(0, 255, 255, 0.2); --accent-soft-border: #00ffff; --summary-strong: #ffffff; --glow-text: 2px 0 #00ffff, -2px 0 #ff00ff; --glow-box: 0 0 15px #00ffff; --stand-color: #00ffff; }
+    body.theme-cyberpunk.hot-mode { --accent: #ff0055; --accent-soft: rgba(255, 0, 85, 0.2); --accent-soft-border: #ff0055; --summary-strong: #ffff00; --glow-text: 2px 0 #ff0055, -2px 0 #ffff00; --glow-box: 0 0 15px #ff0055; --dripper-color: #ff0055; --handle-color: #ff0055; }
+    body.theme-cyberpunk.ice-mode { --accent: #00ffff; --accent-soft: rgba(0, 255, 255, 0.2); --accent-soft-border: #00ffff; --summary-strong: #ffffff; --glow-text: 2px 0 #00ffff, -2px 0 #ff00ff; --glow-box: 0 0 15px #00ffff; --dripper-color: #00ffff; --handle-color: #00ffff; }
 
     /* ===== UI Components ===== */
     .app { width: 100%; max-width: 440px; position: relative; }
@@ -329,14 +330,14 @@
     #themeSelect { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; appearance: none; }
 
     /* =========================================
-       V5.0: Realistic Drip Stand & Server
+       V5.1: Realistic Dripper & Server (No Stand)
        ========================================= */
-    .drip-stand-wrapper {
+    .drip-assembly-wrapper {
       position: relative;
-      margin-top: 40px;
+      margin-top: 50px;
       width: 100%;
       max-width: 280px;
-      height: 340px;
+      height: 300px;
       margin-left: auto;
       margin-right: auto;
       display: flex;
@@ -345,63 +346,52 @@
       z-index: 1;
     }
 
-    /* Dripper */
-    .dripper-assembly {
+    /* ORIGAMI-style Dripper */
+    .dripper-origami {
       position: relative;
-      width: 120px;
+      width: 140px;
       height: 100px;
       z-index: 10;
-    }
-    .dripper-cone {
-      width: 0; height: 0;
-      border-left: 60px solid transparent;
-      border-right: 60px solid transparent;
-      border-top: 90px solid var(--stand-color);
+      /* Create folded paper look using conic gradient and clip-path */
+      background: repeating-conic-gradient(
+        from 0deg at 50% 100%,
+        var(--dripper-color) 0deg 10deg,
+        rgba(0,0,0,0.1) 10deg 20deg /* Shadow for fold */
+      );
+      clip-path: polygon(0 0, 100% 0, 50% 100%); /* Cone shape */
       filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
-      position: relative;
     }
-    /* Stand Parts */
-    .dripper-holder {
-      position: absolute; top: 25px; left: -20px; width: 160px; height: 12px;
-      background: var(--stand-color); border-radius: 6px;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
-    }
-    .stand-pole {
-      position: absolute; top: 25px; left: -40px; width: 14px; height: 300px;
-      background: var(--stand-color); border-radius: 7px;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
-    }
-    .stand-base {
-      position: absolute; bottom: -20px; left: -60px; width: 200px; height: 16px;
-      background: var(--stand-color); border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1), inset 0 2px 4px rgba(0,0,0,0.2);
-    }
+    body.theme-blueprint .dripper-origami { background: var(--border-subtle); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+    body.theme-arcade .dripper-origami { border-bottom: 4px solid #000; clip-path: none; background: var(--dripper-color); height: 0; border-left: 70px solid transparent; border-right: 70px solid transparent; border-top: 100px solid var(--dripper-color); }
 
-    /* Server */
-    .server-wrapper {
+    /* Realistic Carafe Server */
+    .server-carafe {
       position: relative;
-      width: 200px;
-      height: 220px;
-      margin-top: -30px; /* Overlap with dripper */
+      width: 180px;
+      height: 160px;
+      margin-top: -20px; /* Overlap with dripper */
       z-index: 5;
     }
-    .server-body {
+    .server-body-carafe {
       position: relative;
       width: 100%; height: 100%;
       background: var(--glass-tint);
-      border: 3px solid var(--glass-border);
-      /* Realistic Carafe Shape */
-      border-radius: 15% 15% 45% 45% / 20% 20% 50% 50%;
+      border: 2px solid var(--glass-border);
+      /* Realistic Carafe Shape: Narrow top, wide bulging bottom */
+      border-radius: 50% 50% 40% 40% / 60% 60% 30% 30%;
       overflow: hidden;
       box-shadow: inset 0 0 30px rgba(255,255,255,0.3), 0 8px 16px rgba(0,0,0,0.1);
       backdrop-filter: blur(2px);
     }
-    .server-handle {
-      position: absolute; top: 20%; right: -25px; width: 50px; height: 110px;
-      border: 5px solid var(--glass-border); border-left: none;
-      border-radius: 0 40% 60% 0;
-      box-shadow: inset 4px 0 8px rgba(0,0,0,0.05);
+    .server-handle-carafe {
+      position: absolute; top: 20px; right: -35px; width: 60px; height: 100px;
+      /* Wooden handle look: blocky and angled */
+      background-color: var(--handle-color);
+      clip-path: polygon(0 0, 100% 20%, 80% 100%, 0 80%);
+      border-radius: 4px;
+      box-shadow: inset 2px 2px 4px rgba(0,0,0,0.2);
     }
+    body.theme-blueprint .server-handle-carafe { background-color: transparent; border: 2px solid var(--handle-color); clip-path: none; border-left: none; width: 40px; right: -40px; }
 
     /* Liquid Stage (Max 80% height for Finish Line) */
     .liquid-stage {
@@ -410,7 +400,7 @@
       border-top: 2px dotted var(--accent-soft-border); /* Finish Line */
     }
     .liquid-stage::after {
-      content: "Finish"; position: absolute; right: 10px; top: -1.4em;
+      content: "Finish"; position: absolute; right: 15px; top: -1.4em;
       font-size: 0.7rem; font-weight: 700; color: var(--text-sub);
     }
 
@@ -446,7 +436,7 @@
 
     /* Markers & Labels (Relative to liquid-stage height) */
     .marker-line {
-      position: absolute; left: 8%; width: 84%;
+      position: absolute; left: 10%; width: 80%;
       border-top: 1px dashed var(--text-sub); opacity: 0.5;
     }
     .marker-label {
@@ -463,23 +453,23 @@
 
     /* Animated Drip Drop */
     .drip-drop {
-      position: absolute; top: 90px; left: 50%; width: 8px; height: 8px;
+      position: absolute; top: 80px; left: 50%; width: 8px; height: 8px;
       border-radius: 0 50% 50% 50%; background: var(--accent);
       transform: translateX(-50%) rotate(45deg); opacity: 0; z-index: 20;
     }
-    .drip-active .drip-drop { animation: drip-fall 1s infinite ease-in; }
+    .drip-active .drip-drop { animation: drip-fall 0.8s infinite ease-in; }
     @keyframes drip-fall {
-      0% { top: 90px; opacity: 0; transform: translateX(-50%) rotate(45deg) scale(0.5); }
-      20% { opacity: 1; transform: translateX(-50%) rotate(45deg) scale(1); }
-      90% { opacity: 1; }
-      100% { top: 200px; opacity: 0; transform: translateX(-50%) rotate(45deg) scale(0.8); }
+      0% { top: 80px; opacity: 0; transform: translateX(-50%) rotate(45deg) scale(0.5); }
+      30% { opacity: 1; transform: translateX(-50%) rotate(45deg) scale(1); }
+      80% { opacity: 1; }
+      100% { top: 180px; opacity: 0; transform: translateX(-50%) rotate(45deg) scale(0.5); }
     }
 
     /* Timer Text Overlay */
     .timer-overlay {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-      padding-top: 30px; z-index: 15; pointer-events: none;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding-top: 20px; z-index: 15; pointer-events: none;
     }
     .timer-display {
       font-family: var(--font-digital); font-size: 2.8rem; font-weight: 700;
@@ -594,17 +584,11 @@
       </div>
 
       <div class="section-title">ドリップタイマー</div>
-      <div class="drip-stand-wrapper" id="dripApparatus">
-        <div class="dripper-assembly">
-          <div class="dripper-cone"></div>
-          <div class="dripper-holder"></div>
-          <div class="drip-drop"></div> </div>
-        <div class="stand-pole"></div>
-        <div class="stand-base"></div>
-
-        <div class="server-wrapper">
-          <div class="server-handle"></div>
-          <div class="server-body">
+      <div class="drip-assembly-wrapper" id="dripApparatus">
+        <div class="dripper-origami"></div>
+        <div class="drip-drop"></div> <div class="server-carafe">
+          <div class="server-handle-carafe"></div>
+          <div class="server-body-carafe">
             <div class="liquid-stage">
               <div class="liquid" id="liquid"></div>
               <div class="marker-line marker-bloom"><span class="marker-label">蒸らし</span></div>
@@ -695,7 +679,7 @@
     if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){isDarkMode=true;document.body.classList.add('dark-mode');}updateModeIcon();
     modeToggleBtn.addEventListener('click',toggleDarkMode);
 
-    /* --- V5.0 TIMER LOGIC (Drip Animation & Level Fix) --- */
+    /* --- V5.1 TIMER LOGIC (Drip Animation & Level Fix) --- */
     let timerInterval=null, startTime=0, elapsedTime=0, isRunning=false, audioCtx=null;
     const timerDisplay=document.getElementById('timerDisplay'), timerStatus=document.getElementById('timerStatus'), startBtn=document.getElementById('startBtn'), resetBtn=document.getElementById('resetBtn'), liquid=document.getElementById('liquid');
     const dripApparatus=document.getElementById('dripApparatus');
@@ -709,7 +693,7 @@
       const ss=String(totalSeconds%60).padStart(2,'0');
       timerDisplay.textContent=`${mm}:${ss}`;
 
-      /* V5.0 Logic: 150s (2:30) で liquid-stage の 100% に達する */
+      /* V5.1 Logic: 150s (2:30) で liquid-stage の 100% に達する */
       const TOTAL_BREW_TIME = 150000;
       let percent = (elapsedTime / TOTAL_BREW_TIME) * 100;
       
