@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>コーヒー計算機 V4.0</title>
+  <title>コーヒー計算機 V5.0</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 
   <meta name="theme-color" content="#e8dfd8">
@@ -46,6 +46,11 @@
       
       --bg-pattern: none;
       --bg-size: auto;
+
+      /* V5.0 New Variables */
+      --glass-tint: rgba(255,255,255,0.2);
+      --glass-border: rgba(255,255,255,0.4);
+      --stand-color: #4b3621; /* Default stand color */
     }
 
     html {
@@ -95,40 +100,42 @@
       --shadow-card: 0 15px 35px -5px rgba(75, 54, 33, 0.08);
       --field-bg: #f3ece7; --steps-bg: #f3ece7; --steps-border: #dcd0c5;
       --btn-theme-bg: #fbf8f6; --btn-theme-text: #5d4037; --btn-theme-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --stand-color: #6d4c41;
     }
     body.dark-mode {
       --bg-solid: #231e1b; --bg-gradient: linear-gradient(180deg, #231e1b 0%, #1a1614 100%);
       --card-bg: #2f2926; --text-main: #ede0d4; --text-sub: #a89f99; --border-subtle: #423a36;
       --shadow-card: 0 20px 40px rgba(0,0,0,0.4); --field-bg: #1a1614; --steps-bg: #1a1614; --steps-border: #423a36;
       --btn-theme-bg: #3e3632; --btn-theme-text: #ede0d4;
+      --stand-color: #3e2723; --glass-tint: rgba(0,0,0,0.2); --glass-border: rgba(255,255,255,0.2);
     }
 
     /* Modest */
-    body.theme-modest { --bg-solid: #f3f4f6; --bg-gradient: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%); --card-bg: #ffffff; --text-main: #1f2937; --text-sub: #6b7280; --border-subtle: #e5e7eb; --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.05); --field-bg: #f9fafb; --steps-bg: #fffbeb; --steps-border: #fde68a; --btn-theme-bg: #ffffff; --btn-theme-text: #374151; }
-    body.theme-modest.dark-mode { --bg-solid: #0f172a; --bg-gradient: linear-gradient(180deg, #0f172a 0%, #020617 100%); --card-bg: rgba(30, 41, 59, 0.6); --text-main: #f3f4f6; --text-sub: #9ca3af; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 40px -5px rgba(0,0,0,0.5); --field-bg: rgba(15,23,42, 0.5); --steps-bg: rgba(15,23,42, 0.7); --steps-border: #334155; --btn-theme-bg: #1e293b; --btn-theme-text: #e2e8f0; }
+    body.theme-modest { --bg-solid: #f3f4f6; --bg-gradient: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%); --card-bg: #ffffff; --text-main: #1f2937; --text-sub: #6b7280; --border-subtle: #e5e7eb; --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.05); --field-bg: #f9fafb; --steps-bg: #fffbeb; --steps-border: #fde68a; --btn-theme-bg: #ffffff; --btn-theme-text: #374151; --stand-color: #4b5563; }
+    body.theme-modest.dark-mode { --bg-solid: #0f172a; --bg-gradient: linear-gradient(180deg, #0f172a 0%, #020617 100%); --card-bg: rgba(30, 41, 59, 0.6); --text-main: #f3f4f6; --text-sub: #9ca3af; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 40px -5px rgba(0,0,0,0.5); --field-bg: rgba(15,23,42, 0.5); --steps-bg: rgba(15,23,42, 0.7); --steps-border: #334155; --btn-theme-bg: #1e293b; --btn-theme-text: #e2e8f0; --stand-color: #1e293b; }
 
     /* Coffee */
-    body.theme-coffee { --bg-solid: #261e1b; --bg-gradient: linear-gradient(180deg, #261e1b 0%, #1f1816 100%); --card-bg: #2e2522; --text-main: #e7e5e4; --text-sub: #a8a29e; --border-subtle: #57534e; --shadow-card: 0 20px 50px rgba(0,0,0,0.5); --field-bg: #1a1513; --steps-bg: #1a1513; --steps-border: #57534e; --btn-theme-bg: #44403c; --btn-theme-text: #e7e5e4; }
-    body.theme-coffee.dark-mode { --bg-solid: #000000; --bg-gradient: linear-gradient(180deg, #000000 0%, #0c0a09 100%); --card-bg: #141211; --border-subtle: #333; }
+    body.theme-coffee { --bg-solid: #261e1b; --bg-gradient: linear-gradient(180deg, #261e1b 0%, #1f1816 100%); --card-bg: #2e2522; --text-main: #e7e5e4; --text-sub: #a8a29e; --border-subtle: #57534e; --shadow-card: 0 20px 50px rgba(0,0,0,0.5); --field-bg: #1a1513; --steps-bg: #1a1513; --steps-border: #57534e; --btn-theme-bg: #44403c; --btn-theme-text: #e7e5e4; --stand-color: #3e2723; }
+    body.theme-coffee.dark-mode { --bg-solid: #000000; --bg-gradient: linear-gradient(180deg, #000000 0%, #0c0a09 100%); --card-bg: #141211; --border-subtle: #333; --stand-color: #1a1a1a; }
 
     /* Neon */
-    body.theme-neon { --bg-solid: #f0f4f8; --bg-gradient: linear-gradient(180deg, #f0f4f8 0%, #e2e8f0 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #0f172a; --text-sub: #64748b; --border-subtle: #e2e8f0; --shadow-card: 0 10px 40px rgba(0,0,0,0.1); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #cbd5e1; --btn-theme-bg: #ffffff; --btn-theme-text: #0f172a; --roast-light: #f59e0b; --roast-medium: #ea580c; --roast-meddark: #b91c1c; --roast-dark: #7f1d1d; }
-    body.theme-neon.dark-mode { --bg-solid: #050508; --bg-gradient: linear-gradient(180deg, #050508 0%, #020204 100%); --card-bg: rgba(15, 17, 26, 0.9); --text-main: #f1f5f9; --text-sub: #94a3b8; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 50px rgba(0,0,0,0.8); --field-bg: rgba(0, 0, 0, 0.5); --steps-bg: rgba(0, 0, 0, 0.6); --steps-border: rgba(255,255,255,0.15); --btn-theme-bg: #1e293b; --btn-theme-text: #f1f5f9; --roast-light: #fbbf24; --roast-medium: #fb923c; --roast-meddark: #f87171; --roast-dark: #ef4444; }
+    body.theme-neon { --bg-solid: #f0f4f8; --bg-gradient: linear-gradient(180deg, #f0f4f8 0%, #e2e8f0 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #0f172a; --text-sub: #64748b; --border-subtle: #e2e8f0; --shadow-card: 0 10px 40px rgba(0,0,0,0.1); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #cbd5e1; --btn-theme-bg: #ffffff; --btn-theme-text: #0f172a; --roast-light: #f59e0b; --roast-medium: #ea580c; --roast-meddark: #b91c1c; --roast-dark: #7f1d1d; --stand-color: #64748b; }
+    body.theme-neon.dark-mode { --bg-solid: #050508; --bg-gradient: linear-gradient(180deg, #050508 0%, #020204 100%); --card-bg: rgba(15, 17, 26, 0.9); --text-main: #f1f5f9; --text-sub: #94a3b8; --border-subtle: rgba(255,255,255,0.1); --shadow-card: 0 20px 50px rgba(0,0,0,0.8); --field-bg: rgba(0, 0, 0, 0.5); --steps-bg: rgba(0, 0, 0, 0.6); --steps-border: rgba(255,255,255,0.15); --btn-theme-bg: #1e293b; --btn-theme-text: #f1f5f9; --roast-light: #fbbf24; --roast-medium: #fb923c; --roast-meddark: #f87171; --roast-dark: #ef4444; --stand-color: #1e293b; }
 
     /* Blueprint */
-    body.theme-blueprint { --bg-solid: #003399; --bg-gradient: linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(#003399, #003399); --bg-size: 20px 20px; --card-bg: #003399; --text-main: #ffffff; --text-sub: #abc4ff; --border-subtle: #ffffff; --shadow-card: 10px 10px 0px rgba(0,0,0,0.2); --field-bg: rgba(0,0,0,0.1); --steps-bg: rgba(0,0,0,0.1); --steps-border: #ffffff; --btn-theme-bg: #002266; --btn-theme-text: #ffffff; --radius-card: 0px; --radius-btn: 0px; --radius-pill: 0px; font-family: "Courier New", Courier, monospace; letter-spacing: 0.05em; }
-    body.theme-blueprint.dark-mode { --bg-solid: #1a1a1a; --bg-gradient: linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(#1a1a1a, #1a1a1a); --card-bg: #1a1a1a; --text-main: #00ff00; --text-sub: #00cc00; --border-subtle: #00ff00; --shadow-card: 8px 8px 0px rgba(0,50,0,0.5); --field-bg: #000000; --steps-bg: #000000; --steps-border: #00ff00; --btn-theme-bg: #000000; --btn-theme-text: #00ff00; }
+    body.theme-blueprint { --bg-solid: #003399; --bg-gradient: linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(#003399, #003399); --bg-size: 20px 20px; --card-bg: #003399; --text-main: #ffffff; --text-sub: #abc4ff; --border-subtle: #ffffff; --shadow-card: 10px 10px 0px rgba(0,0,0,0.2); --field-bg: rgba(0,0,0,0.1); --steps-bg: rgba(0,0,0,0.1); --steps-border: #ffffff; --btn-theme-bg: #002266; --btn-theme-text: #ffffff; --radius-card: 0px; --radius-btn: 0px; --radius-pill: 0px; font-family: "Courier New", Courier, monospace; letter-spacing: 0.05em; --stand-color: #ffffff; --glass-tint: transparent; --glass-border: #ffffff; }
+    body.theme-blueprint.dark-mode { --bg-solid: #1a1a1a; --bg-gradient: linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px), linear-gradient(#1a1a1a, #1a1a1a); --card-bg: #1a1a1a; --text-main: #00ff00; --text-sub: #00cc00; --border-subtle: #00ff00; --shadow-card: 8px 8px 0px rgba(0,50,0,0.5); --field-bg: #000000; --steps-bg: #000000; --steps-border: #00ff00; --btn-theme-bg: #000000; --btn-theme-text: #00ff00; --stand-color: #00ff00; --glass-border: #00ff00; }
 
     /* Arcade */
-    body.theme-arcade { --bg-solid: #fff0f5; --bg-gradient: radial-gradient(#ff69b4 2px, transparent 2px), radial-gradient(#ff69b4 2px, transparent 2px); --bg-size: 20px 20px; --card-bg: #ffffff; --text-main: #2d2d2d; --text-sub: #555555; --border-subtle: #000000; --shadow-card: 8px 8px 0px #000000; --field-bg: #ffffff; --steps-bg: #f0f0f0; --steps-border: #000000; --btn-theme-bg: #ffffff; --btn-theme-text: #000000; --radius-card: 8px; --radius-btn: 4px; --radius-pill: 8px; --font-digital: "VT323", monospace; font-family: "VT323", monospace; font-size: 18px; --trans-speed: 0s; }
-    body.theme-arcade.dark-mode { --bg-solid: #202020; --bg-gradient: radial-gradient(#444 2px, transparent 2px), radial-gradient(#444 2px, transparent 2px); --card-bg: #2d2d2d; --text-main: #ffffff; --text-sub: #cccccc; --border-subtle: #ffffff; --shadow-card: 8px 8px 0px #000000; --field-bg: #000000; --steps-bg: #404040; --steps-border: #ffffff; --btn-theme-bg: #000000; --btn-theme-text: #ffffff; }
+    body.theme-arcade { --bg-solid: #fff0f5; --bg-gradient: radial-gradient(#ff69b4 2px, transparent 2px), radial-gradient(#ff69b4 2px, transparent 2px); --bg-size: 20px 20px; --card-bg: #ffffff; --text-main: #2d2d2d; --text-sub: #555555; --border-subtle: #000000; --shadow-card: 8px 8px 0px #000000; --field-bg: #ffffff; --steps-bg: #f0f0f0; --steps-border: #000000; --btn-theme-bg: #ffffff; --btn-theme-text: #000000; --radius-card: 8px; --radius-btn: 4px; --radius-pill: 8px; --font-digital: "VT323", monospace; font-family: "VT323", monospace; font-size: 18px; --trans-speed: 0s; --stand-color: #000000; --glass-tint: #ffffff; --glass-border: #000000; }
+    body.theme-arcade.dark-mode { --bg-solid: #202020; --bg-gradient: radial-gradient(#444 2px, transparent 2px), radial-gradient(#444 2px, transparent 2px); --card-bg: #2d2d2d; --text-main: #ffffff; --text-sub: #cccccc; --border-subtle: #ffffff; --shadow-card: 8px 8px 0px #000000; --field-bg: #000000; --steps-bg: #404040; --steps-border: #ffffff; --btn-theme-bg: #000000; --btn-theme-text: #ffffff; --stand-color: #ffffff; --glass-tint: #2d2d2d; --glass-border: #ffffff; }
 
     /* Lovely */
-    body.theme-lovely { --bg-solid: #fff0f3; --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #e6e6fa 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #5d4b5d; --text-sub: #9c8a9c; --border-subtle: #ffffff; --shadow-card: 0 10px 30px rgba(255, 105, 180, 0.15); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #ffb7b2; --btn-theme-bg: #ffffff; --btn-theme-text: #ff69b4; --radius-card: 32px; --radius-btn: 20px; --radius-pill: 99px; font-family: "Kiwi Maru", "M PLUS Rounded 1c", var(--font-base); }
-    body.theme-lovely.dark-mode { --bg-solid: #2a1d2e; --bg-gradient: linear-gradient(135deg, #2a1d2e 0%, #1a0d20 100%); --card-bg: #3e2a42; --text-main: #ffd1dc; --text-sub: #e6c0e6; --border-subtle: #704875; --shadow-card: 0 15px 40px rgba(0,0,0,0.4); --field-bg: #2a1d2e; --steps-bg: #2a1d2e; --steps-border: #ff8da1; --btn-theme-bg: #503555; --btn-theme-text: #ffd1dc; }
+    body.theme-lovely { --bg-solid: #fff0f3; --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #e6e6fa 100%); --card-bg: rgba(255, 255, 255, 0.9); --text-main: #5d4b5d; --text-sub: #9c8a9c; --border-subtle: #ffffff; --shadow-card: 0 10px 30px rgba(255, 105, 180, 0.15); --field-bg: #ffffff; --steps-bg: #ffffff; --steps-border: #ffb7b2; --btn-theme-bg: #ffffff; --btn-theme-text: #ff69b4; --radius-card: 32px; --radius-btn: 20px; --radius-pill: 99px; font-family: "Kiwi Maru", "M PLUS Rounded 1c", var(--font-base); --stand-color: #ffb7b2; --glass-border: #ffffff; }
+    body.theme-lovely.dark-mode { --bg-solid: #2a1d2e; --bg-gradient: linear-gradient(135deg, #2a1d2e 0%, #1a0d20 100%); --card-bg: #3e2a42; --text-main: #ffd1dc; --text-sub: #e6c0e6; --border-subtle: #704875; --shadow-card: 0 15px 40px rgba(0,0,0,0.4); --field-bg: #2a1d2e; --steps-bg: #2a1d2e; --steps-border: #ff8da1; --btn-theme-bg: #503555; --btn-theme-text: #ffd1dc; --stand-color: #704875; --glass-border: #704875; }
 
     /* Cyberpunk */
-    body.theme-cyberpunk { --bg-solid: #050010; --bg-gradient: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px), linear-gradient(180deg, #0a0015 0%, #000000 100%); --bg-size: auto; --card-bg: rgba(15, 10, 25, 0.95); --text-main: #e0ffff; --text-sub: #00e5ff; --border-subtle: #ff00ff; --shadow-card: 0 0 20px rgba(255, 0, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1); --field-bg: rgba(0, 20, 40, 0.8); --steps-bg: rgba(20, 0, 40, 0.8); --steps-border: #00e5ff; --btn-theme-bg: #000000; --btn-theme-text: #00e5ff; --radius-card: 4px; --radius-btn: 0px; --radius-pill: 0px; --glow-text: 2px 0 #ff00ff, -2px 0 #00e5ff; --glow-box: 0 0 10px #ff00ff; font-family: "Share Tech Mono", monospace; letter-spacing: 0.05em; }
+    body.theme-cyberpunk { --bg-solid: #050010; --bg-gradient: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px), linear-gradient(180deg, #0a0015 0%, #000000 100%); --bg-size: auto; --card-bg: rgba(15, 10, 25, 0.95); --text-main: #e0ffff; --text-sub: #00e5ff; --border-subtle: #ff00ff; --shadow-card: 0 0 20px rgba(255, 0, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1); --field-bg: rgba(0, 20, 40, 0.8); --steps-bg: rgba(20, 0, 40, 0.8); --steps-border: #00e5ff; --btn-theme-bg: #000000; --btn-theme-text: #00e5ff; --radius-card: 4px; --radius-btn: 0px; --radius-pill: 0px; --glow-text: 2px 0 #ff00ff, -2px 0 #00e5ff; --glow-box: 0 0 10px #ff00ff; font-family: "Share Tech Mono", monospace; letter-spacing: 0.05em; --stand-color: #00e5ff; --glass-tint: rgba(0,0,0,0.5); --glass-border: #00e5ff; }
     body.theme-cyberpunk.dark-mode { --bg-solid: #000000; --card-bg: #050505; --shadow-card: 0 0 30px rgba(255, 0, 255, 0.15); }
 
     /* ===== Accents ===== */
@@ -136,11 +143,11 @@
     body.ice-mode { --accent: #0ea5e9; --accent-soft: rgba(14,165,233,0.12); --accent-soft-border: rgba(14,165,233,0.45); --summary-strong: #0284c7; }
 
     /* Theme Specific Overrides */
-    body.theme-neon.hot-mode { --accent: #ff5500; --accent-soft: rgba(255, 85, 0, 0.15); --accent-soft-border: #ff5500; --summary-strong: #ff5500; --glow-text: 0 0 10px rgba(255, 85, 0, 0.6); --glow-box: 0 0 15px rgba(255, 85, 0, 0.25); --border-subtle: rgba(255, 85, 0, 0.3); }
-    body.theme-neon.ice-mode { --accent: #00ddff; --accent-soft: rgba(0, 221, 255, 0.15); --accent-soft-border: #00ddff; --summary-strong: #00ddff; --glow-text: 0 0 10px rgba(0, 221, 255, 0.6); --glow-box: 0 0 15px rgba(0, 221, 255, 0.25); --border-subtle: rgba(0, 221, 255, 0.3); }
+    body.theme-neon.hot-mode { --accent: #ff5500; --accent-soft: rgba(255, 85, 0, 0.15); --accent-soft-border: #ff5500; --summary-strong: #ff5500; --glow-text: 0 0 10px rgba(255, 85, 0, 0.6); --glow-box: 0 0 15px rgba(255, 85, 0, 0.25); --border-subtle: rgba(255, 85, 0, 0.3); --stand-color: #ff5500; }
+    body.theme-neon.ice-mode { --accent: #00ddff; --accent-soft: rgba(0, 221, 255, 0.15); --accent-soft-border: #00ddff; --summary-strong: #00ddff; --glow-text: 0 0 10px rgba(0, 221, 255, 0.6); --glow-box: 0 0 15px rgba(0, 221, 255, 0.25); --border-subtle: rgba(0, 221, 255, 0.3); --stand-color: #00ddff; }
     body.theme-blueprint.hot-mode { --accent: #ffffff; --accent-soft: rgba(255,255,255,0.1); --accent-soft-border: #ffffff; --summary-strong: #ffcc00; }
     body.theme-blueprint.ice-mode { --accent: #ffffff; --accent-soft: rgba(255,255,255,0.1); --accent-soft-border: #ffffff; --summary-strong: #66ccff; }
-    body.theme-blueprint.dark-mode.hot-mode { --accent: #00ff00; --accent-soft: rgba(0,255,0,0.1); --accent-soft-border: #00ff00; --summary-strong: #ffff00; }
+    body.theme-blueprint.dark-mode.hot-mode { --accent: #00ff00; --accent-soft: rgba(0,255,0,0.1); --accent-soft-border: #00ff00; --summary-strong: #ffff00; --stand-color: #00ff00; }
     body.theme-blueprint.dark-mode.ice-mode { --summary-strong: #00ffff; }
     body.theme-arcade.hot-mode { --accent: #ff4500; --accent-soft: #ffe4e1; --accent-soft-border: #000000; --summary-strong: #ff4500; }
     body.theme-arcade.ice-mode { --accent: #1e90ff; --accent-soft: #e0ffff; --accent-soft-border: #000000; --summary-strong: #1e90ff; }
@@ -150,8 +157,8 @@
     body.theme-lovely.ice-mode { --accent: #93a5cf; --accent-soft: #f0f4ff; --accent-soft-border: #bccce8; --summary-strong: #7388b9; }
     body.theme-lovely.dark-mode.hot-mode { --accent: #ff9eb5; --accent-soft: rgba(255, 133, 162, 0.2); --accent-soft-border: #ff6b81; --summary-strong: #ff9eb5; }
     body.theme-lovely.dark-mode.ice-mode { --accent: #aaccff; --accent-soft: rgba(147, 165, 207, 0.2); --accent-soft-border: #93a5cf; --summary-strong: #aaccff; }
-    body.theme-cyberpunk.hot-mode { --accent: #ff0055; --accent-soft: rgba(255, 0, 85, 0.2); --accent-soft-border: #ff0055; --summary-strong: #ffff00; --glow-text: 2px 0 #ff0055, -2px 0 #ffff00; --glow-box: 0 0 15px #ff0055; }
-    body.theme-cyberpunk.ice-mode { --accent: #00ffff; --accent-soft: rgba(0, 255, 255, 0.2); --accent-soft-border: #00ffff; --summary-strong: #ffffff; --glow-text: 2px 0 #00ffff, -2px 0 #ff00ff; --glow-box: 0 0 15px #00ffff; }
+    body.theme-cyberpunk.hot-mode { --accent: #ff0055; --accent-soft: rgba(255, 0, 85, 0.2); --accent-soft-border: #ff0055; --summary-strong: #ffff00; --glow-text: 2px 0 #ff0055, -2px 0 #ffff00; --glow-box: 0 0 15px #ff0055; --stand-color: #ff0055; }
+    body.theme-cyberpunk.ice-mode { --accent: #00ffff; --accent-soft: rgba(0, 255, 255, 0.2); --accent-soft-border: #00ffff; --summary-strong: #ffffff; --glow-text: 2px 0 #00ffff, -2px 0 #ff00ff; --glow-box: 0 0 15px #00ffff; --stand-color: #00ffff; }
 
     /* ===== UI Components ===== */
     .app { width: 100%; max-width: 440px; position: relative; }
@@ -161,7 +168,7 @@
     body.theme-arcade .card { backdrop-filter: none; -webkit-backdrop-filter: none; border-width: 4px; }
     body.theme-lovely .card { border: 3px solid #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
     body.theme-lovely.dark-mode .card { border: 2px solid var(--accent); }
-    body.theme-cyberpunk .card { border: 1px solid var(--border-subtle); clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
+    body.theme-cyberpunk .card { border: 1px solid var(--border-subtle); clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
 
     .app-header { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; position: relative; padding-right: 40px; }
     .title-main { font-size: 1.2rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-sub); text-shadow: var(--glow-text); opacity: 0.8; }
@@ -322,113 +329,114 @@
     #themeSelect { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; appearance: none; }
 
     /* =========================================
-       V4.0: Carafe & Organic Liquid
+       V5.0: Realistic Drip Stand & Server
        ========================================= */
-    
-    /* The "Glass" Container */
-    .carafe-wrapper {
+    .drip-stand-wrapper {
       position: relative;
-      margin-top: 30px;
+      margin-top: 40px;
       width: 100%;
-      max-width: 240px;
-      height: 240px;
+      max-width: 280px;
+      height: 340px;
       margin-left: auto;
       margin-right: auto;
-      /* Handle positioning context */
-    }
-
-    /* The Handle (Pseudo-element or separate div) */
-    .carafe-handle {
-      position: absolute;
-      top: 30px;
-      right: -25px;
-      width: 50px;
-      height: 100px;
-      border: 6px solid var(--text-sub);
-      border-left: none; /* Attach to glass */
-      border-radius: 0 30px 30px 0;
-      z-index: 0;
-    }
-    body.theme-cyberpunk .carafe-handle { border-color: var(--border-subtle); border-style: solid; box-shadow: var(--glow-box); }
-    body.theme-arcade .carafe-handle { border: 6px solid #000; border-left: none; }
-
-    /* The Server Body */
-    .carafe-body {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: rgba(255,255,255,0.1); /* Glass tint */
-      border: 2px solid var(--border-subtle);
-      /* Coffee Server Shape: Tapered top, wide bottom */
-      border-radius: 20px 20px 50px 50px;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       z-index: 1;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
-    body.theme-cyberpunk .carafe-body { border: 1px solid var(--accent); box-shadow: var(--glow-box); border-radius: 0; clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px); }
-    body.theme-arcade .carafe-body { border: 4px solid #000; border-radius: 12px; }
-    body.theme-lovely .carafe-body { border: 4px solid #fff; background: rgba(255,255,255,0.5); }
 
-    /* Markers (Dotted lines) */
-    .carafe-marker {
-      position: absolute;
-      left: 10%;
-      width: 80%;
-      height: 1px;
-      border-top: 2px dashed var(--text-sub);
-      opacity: 0.5;
+    /* Dripper */
+    .dripper-assembly {
+      position: relative;
+      width: 120px;
+      height: 100px;
+      z-index: 10;
+    }
+    .dripper-cone {
+      width: 0; height: 0;
+      border-left: 60px solid transparent;
+      border-right: 60px solid transparent;
+      border-top: 90px solid var(--stand-color);
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+      position: relative;
+    }
+    /* Stand Parts */
+    .dripper-holder {
+      position: absolute; top: 25px; left: -20px; width: 160px; height: 12px;
+      background: var(--stand-color); border-radius: 6px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .stand-pole {
+      position: absolute; top: 25px; left: -40px; width: 14px; height: 300px;
+      background: var(--stand-color); border-radius: 7px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .stand-base {
+      position: absolute; bottom: -20px; left: -60px; width: 200px; height: 16px;
+      background: var(--stand-color); border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1), inset 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    /* Server */
+    .server-wrapper {
+      position: relative;
+      width: 200px;
+      height: 220px;
+      margin-top: -30px; /* Overlap with dripper */
       z-index: 5;
     }
-    .marker-bloom { bottom: 30%; } /* 45/150 */
-    .marker-pour1 { bottom: 53%; } /* 80/150 */
-    .marker-pour2 { bottom: 76%; } /* 115/150 */
-    .marker-finish { top: 0; width: 100%; left: 0; border-top: 3px solid var(--accent); opacity: 0.8; }
+    .server-body {
+      position: relative;
+      width: 100%; height: 100%;
+      background: var(--glass-tint);
+      border: 3px solid var(--glass-border);
+      /* Realistic Carafe Shape */
+      border-radius: 15% 15% 45% 45% / 20% 20% 50% 50%;
+      overflow: hidden;
+      box-shadow: inset 0 0 30px rgba(255,255,255,0.3), 0 8px 16px rgba(0,0,0,0.1);
+      backdrop-filter: blur(2px);
+    }
+    .server-handle {
+      position: absolute; top: 20%; right: -25px; width: 50px; height: 110px;
+      border: 5px solid var(--glass-border); border-left: none;
+      border-radius: 0 40% 60% 0;
+      box-shadow: inset 4px 0 8px rgba(0,0,0,0.05);
+    }
 
-    /* Organic Liquid Animation */
+    /* Liquid Stage (Max 80% height for Finish Line) */
+    .liquid-stage {
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 80%;
+      overflow: hidden;
+      border-top: 2px dotted var(--accent-soft-border); /* Finish Line */
+    }
+    .liquid-stage::after {
+      content: "Finish"; position: absolute; right: 10px; top: -1.4em;
+      font-size: 0.7rem; font-weight: 700; color: var(--text-sub);
+    }
+
+    /* Organic Liquid Animation (Reused from V4.0) */
     .liquid {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 200%; /* Wider than container for rotation coverage */
-      height: 200%;
-      background: var(--accent);
-      opacity: 0.8;
-      border-radius: 40%; /* Soft blob shape */
-      transform: translate(-50%, 100%) rotate(0deg); /* Start hidden below */
-      /* We animate the 'bottom' via JS for fill level */
+      position: absolute; bottom: 0; left: 50%; width: 200%; height: 200%;
+      background: var(--accent); opacity: 0.85;
+      border-radius: 40%;
+      transform: translate(-50%, 100%) rotate(0deg); /* Start empty */
       transition: transform 0.2s linear, background-color 0.5s; 
       z-index: 2;
     }
-    /* The rotating wave effect */
     .liquid::before, .liquid::after {
-      content: "";
-      position: absolute;
-      top: -10%;
-      left: -10%;
-      width: 120%;
-      height: 120%;
-      border-radius: 45%;
-      background: rgba(255,255,255,0.2); /* Shine/Highlight */
+      content: ""; position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
+      border-radius: 45%; background: rgba(255,255,255,0.25);
       animation: rotate-liquid 6s linear infinite;
     }
     .liquid::after {
-      border-radius: 40%;
-      background: rgba(255,255,255,0.1);
+      border-radius: 40%; background: rgba(255,255,255,0.15);
       animation: rotate-liquid 10s linear infinite reverse;
     }
-
-    @keyframes rotate-liquid {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+    @keyframes rotate-liquid { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     /* Over-extraction State */
-    .liquid.over-extracted {
-      background: #5c1c1c !important; /* Burnt color */
-      animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both infinite;
-    }
+    .liquid.over-extracted { background: #5c1c1c !important; animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both infinite; }
     body.theme-cyberpunk .liquid.over-extracted { background: #ff0000 !important; box-shadow: 0 0 30px #ff0000; }
-    
     @keyframes shake {
       10%, 90% { transform: translate(-51%, var(--current-level)) rotate(1deg); }
       20%, 80% { transform: translate(-49%, var(--current-level)) rotate(-1deg); }
@@ -436,68 +444,69 @@
       40%, 60% { transform: translate(-48%, var(--current-level)) rotate(-2deg); }
     }
 
+    /* Markers & Labels (Relative to liquid-stage height) */
+    .marker-line {
+      position: absolute; left: 8%; width: 84%;
+      border-top: 1px dashed var(--text-sub); opacity: 0.5;
+    }
+    .marker-label {
+      position: absolute; right: 0; top: -1.3em;
+      font-size: 0.65rem; color: var(--text-sub); font-weight: 600; opacity: 0.9;
+    }
+    /* Positions based on 150s total vs 80% stage height */
+    /* Bloom: 45s / 150s = 30% */
+    .marker-bloom { bottom: 30%; }
+    /* Pour1: 80s / 150s = 53.3% */
+    .marker-pour1 { bottom: 53.3%; }
+    /* Pour2: 115s / 150s = 76.6% */
+    .marker-pour2 { bottom: 76.6%; }
+
+    /* Animated Drip Drop */
+    .drip-drop {
+      position: absolute; top: 90px; left: 50%; width: 8px; height: 8px;
+      border-radius: 0 50% 50% 50%; background: var(--accent);
+      transform: translateX(-50%) rotate(45deg); opacity: 0; z-index: 20;
+    }
+    .drip-active .drip-drop { animation: drip-fall 1s infinite ease-in; }
+    @keyframes drip-fall {
+      0% { top: 90px; opacity: 0; transform: translateX(-50%) rotate(45deg) scale(0.5); }
+      20% { opacity: 1; transform: translateX(-50%) rotate(45deg) scale(1); }
+      90% { opacity: 1; }
+      100% { top: 200px; opacity: 0; transform: translateX(-50%) rotate(45deg) scale(0.8); }
+    }
+
     /* Timer Text Overlay */
     .timer-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      pointer-events: none;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      padding-top: 30px; z-index: 15; pointer-events: none;
     }
-
     .timer-display {
-      font-family: var(--font-digital);
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--text-main); /* Adaptive color */
-      text-shadow: 0 2px 4px rgba(255,255,255,0.8); /* Outline effect for readability */
-      line-height: 1;
-      font-variant-numeric: tabular-nums;
-      margin-bottom: 4px;
-      mix-blend-mode: difference; /* High contrast against liquid */
-      color: #fff; /* Difference mode works best with white */
+      font-family: var(--font-digital); font-size: 2.8rem; font-weight: 700;
+      color: var(--text-main); text-shadow: 0 2px 8px rgba(255,255,255,0.9), 0 0 2px rgba(0,0,0,0.5);
+      line-height: 1; font-variant-numeric: tabular-nums; margin-bottom: 6px;
     }
+    body.dark-mode .timer-display { color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
     body.theme-lovely .timer-display { font-family: "M PLUS Rounded 1c", sans-serif; letter-spacing: 0.05em; }
-
     .timer-status {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-main);
-      padding: 4px 8px;
-      background: rgba(255,255,255,0.7);
-      border-radius: 12px;
-      backdrop-filter: blur(4px);
+      font-size: 0.8rem; font-weight: 700; color: var(--text-main);
+      padding: 4px 10px; background: rgba(255,255,255,0.8); border-radius: 12px;
+      backdrop-filter: blur(4px); box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
-    body.dark-mode .timer-status { background: rgba(0,0,0,0.6); color: #fff; }
+    body.dark-mode .timer-status { background: rgba(0,0,0,0.7); color: #fff; }
 
     .timer-controls {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 12px;
+      display: flex; gap: 12px; justify-content: center; margin-top: 24px;
     }
-
     .timer-btn {
-      border: none;
-      padding: 12px 24px;
-      border-radius: var(--radius-btn);
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      min-width: 80px;
-      position: relative;
-      z-index: 3;
+      border: none; padding: 12px 24px; border-radius: var(--radius-btn);
+      font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+      min-width: 80px; position: relative; z-index: 3;
     }
     .btn-start { background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .btn-stop { background: var(--field-bg); color: var(--text-sub); border: 1px solid var(--border-subtle); }
     
+    /* Theme Specific Control Overrides (kept compact) */
     body.theme-neon .btn-start { box-shadow: 0 0 15px var(--accent); color: #000; }
     body.theme-blueprint .timer-btn { border-radius: 0; box-shadow: 4px 4px 0 rgba(0,0,0,0.2); border: 2px solid transparent; }
     body.theme-blueprint .btn-stop { border-color: var(--border-subtle); }
@@ -585,17 +594,28 @@
       </div>
 
       <div class="section-title">ドリップタイマー</div>
-      <div class="carafe-wrapper">
-        <div class="carafe-handle"></div>
-        <div class="carafe-body">
-          <div class="liquid" id="liquid"></div>
-          <div class="carafe-marker marker-bloom"></div>
-          <div class="carafe-marker marker-pour1"></div>
-          <div class="carafe-marker marker-pour2"></div>
-          <div class="carafe-marker marker-finish"></div>
-          <div class="timer-overlay">
-            <div class="timer-display" id="timerDisplay">00:00</div>
-            <div class="timer-status" id="timerStatus">お湯投入と同時にスタート</div>
+      <div class="drip-stand-wrapper" id="dripApparatus">
+        <div class="dripper-assembly">
+          <div class="dripper-cone"></div>
+          <div class="dripper-holder"></div>
+          <div class="drip-drop"></div> </div>
+        <div class="stand-pole"></div>
+        <div class="stand-base"></div>
+
+        <div class="server-wrapper">
+          <div class="server-handle"></div>
+          <div class="server-body">
+            <div class="liquid-stage">
+              <div class="liquid" id="liquid"></div>
+              <div class="marker-line marker-bloom"><span class="marker-label">蒸らし</span></div>
+              <div class="marker-line marker-pour1"><span class="marker-label">1投目</span></div>
+              <div class="marker-line marker-pour2"><span class="marker-label">2投目</span></div>
+            </div>
+            
+            <div class="timer-overlay">
+              <div class="timer-display" id="timerDisplay">00:00</div>
+              <div class="timer-status" id="timerStatus">お湯投入と同時にスタート</div>
+            </div>
           </div>
         </div>
       </div>
@@ -675,12 +695,12 @@
     if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){isDarkMode=true;document.body.classList.add('dark-mode');}updateModeIcon();
     modeToggleBtn.addEventListener('click',toggleDarkMode);
 
-    /* --- V4.0 TIMER LOGIC (Carafe & Over-Extraction) --- */
+    /* --- V5.0 TIMER LOGIC (Drip Animation & Level Fix) --- */
     let timerInterval=null, startTime=0, elapsedTime=0, isRunning=false, audioCtx=null;
     const timerDisplay=document.getElementById('timerDisplay'), timerStatus=document.getElementById('timerStatus'), startBtn=document.getElementById('startBtn'), resetBtn=document.getElementById('resetBtn'), liquid=document.getElementById('liquid');
+    const dripApparatus=document.getElementById('dripApparatus');
 
     function playBeep(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.setValueAtTime(880,audioCtx.currentTime);o.frequency.exponentialRampToValueAtTime(440,audioCtx.currentTime+0.1);g.gain.setValueAtTime(0.1,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,audioCtx.currentTime+0.1);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+0.1);}
-    
     function highlightStep(id){document.querySelectorAll('.step-row').forEach(r=>r.classList.remove('active-step'));if(id){const r=document.getElementById(id);if(r)r.classList.add('active-step');}}
 
     function updateTimerUI(){
@@ -689,28 +709,28 @@
       const ss=String(totalSeconds%60).padStart(2,'0');
       timerDisplay.textContent=`${mm}:${ss}`;
 
-      /* V4.0 Logic: 0% to 100% corresponds to 0s to 150s (2:30) */
-      const TOTAL_BREW_TIME = 150000; // 2:30 in ms
+      /* V5.0 Logic: 150s (2:30) で liquid-stage の 100% に達する */
+      const TOTAL_BREW_TIME = 150000;
       let percent = (elapsedTime / TOTAL_BREW_TIME) * 100;
       
-      // Over-extraction visual
-      if(percent > 100) {
-        percent = 100; 
-        liquid.classList.add('over-extracted');
-      } else {
-        liquid.classList.remove('over-extracted');
-      }
+      // 過抽出表現
+      if(percent > 100) { percent = 100; liquid.classList.add('over-extracted'); }
+      else { liquid.classList.remove('over-extracted'); }
       
-      // Move liquid UP (transform translate Y)
-      // 100% translate means hidden below, 0% means full.
-      // So we map 0% progress -> 100% translate, 100% progress -> 0% translate
+      // 液体の高さ制御 (translateY within liquid-stage)
       const translateVal = 100 - percent;
       liquid.style.transform = `translate(-50%, ${translateVal}%) rotate(0deg)`;
-      // Allow CSS keyframes to handle the rotation part, so we set custom property
       liquid.style.setProperty('--current-level', translateVal + '%');
 
+      // しずくアニメーション制御
+      if(isRunning && percent < 100 && !dripApparatus.classList.contains('drip-active')){
+        dripApparatus.classList.add('drip-active');
+      } else if(!isRunning || percent >= 100){
+        dripApparatus.classList.remove('drip-active');
+      }
+
       let currentStepId="";
-      if(totalSeconds<45){timerStatus.textContent="蒸らし (Bloom)";currentStepId="step-bloom";}
+      if(totalSeconds<45){timerStatus.textContent="蒸らし";currentStepId="step-bloom";}
       else if(totalSeconds===45){timerStatus.textContent="1投目！";currentStepId="step-1";if(elapsedTime%1000<100)playBeep();}
       else if(totalSeconds<80){timerStatus.textContent="1投目抽出中...";currentStepId="step-1";}
       else if(totalSeconds===80){timerStatus.textContent="2投目！";currentStepId="step-2";if(elapsedTime%1000<100)playBeep();}
@@ -721,8 +741,8 @@
       highlightStep(currentStepId);
     }
 
-    startBtn.addEventListener('click',()=>{if(isRunning){clearInterval(timerInterval);isRunning=false;startBtn.textContent="RESUME";}else{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();startTime=Date.now()-elapsedTime;timerInterval=setInterval(()=>{elapsedTime=Date.now()-startTime;updateTimerUI();},50);isRunning=true;startBtn.textContent="STOP";}});
-    resetBtn.addEventListener('click',()=>{clearInterval(timerInterval);isRunning=false;elapsedTime=0;startBtn.textContent="START";timerDisplay.textContent="00:00";timerStatus.textContent="お湯投入と同時にスタート";liquid.style.transform=`translate(-50%, 100%) rotate(0deg)`;liquid.classList.remove('over-extracted');highlightStep(null);});
+    startBtn.addEventListener('click',()=>{if(isRunning){clearInterval(timerInterval);isRunning=false;startBtn.textContent="RESUME";dripApparatus.classList.remove('drip-active');}else{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();startTime=Date.now()-elapsedTime;timerInterval=setInterval(()=>{elapsedTime=Date.now()-startTime;updateTimerUI();},50);isRunning=true;startBtn.textContent="STOP";}});
+    resetBtn.addEventListener('click',()=>{clearInterval(timerInterval);isRunning=false;elapsedTime=0;startBtn.textContent="START";timerDisplay.textContent="00:00";timerStatus.textContent="お湯投入と同時にスタート";liquid.style.transform=`translate(-50%, 100%) rotate(0deg)`;liquid.classList.remove('over-extracted');highlightStep(null);dripApparatus.classList.remove('drip-active');});
 
     document.body.classList.add("hot-mode");applyTheme(themeSelect.value);updateView();
   </script>
